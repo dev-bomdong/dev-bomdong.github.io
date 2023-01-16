@@ -43,6 +43,7 @@ function BlogTemplate({ data }) {
   );
 }
 
+
 export default BlogTemplate;
 
 export const pageQuery = graphql`

@@ -1,26 +1,26 @@
 module.exports = {
-  title: `zoomkoding.com`,
-  description: `줌코딩의 개발일기`,
+  title: `bomdong.log`,
+  description: `봄동의 일상 속 개발록`,
   language: `ko`, // `ko`, `en` => currently support versions for Korean and English
-  siteUrl: `https://www.zoomkoding.com`,
+  siteUrl: `https://www.bomdong.com`,
   ogImage: `/og-image.png`, // Path to your in the 'static' folder
   comments: {
     utterances: {
-      repo: ``, // `zoomkoding/zoomkoding-gatsby-blog`,
+      repo: `dev-bomdong/dev-bomdong.github.io`, // `zoomkoding/zoomkoding-gatsby-blog`,
     },
   },
-  ga: '0', // Google Analytics Tracking ID
+  ga: 'G-WG7KM0PV1F', // Google Analytics Tracking ID
   author: {
-    name: `정진혁`,
+    name: `김동희`,
     bio: {
       role: `개발자`,
-      description: ['사람에 가치를 두는', '능동적으로 일하는', '이로운 것을 만드는'],
-      thumbnail: 'sample.png', // Path to the image in the 'asset' folder
+      description: ['기록과 공유를 좋아하는', '함께 일하는 법을 고민하는'],
+      thumbnail: 'profile.png' //'sample.png', // Path to the image in the 'asset' folder
     },
     social: {
-      github: ``, // `https://github.com/zoomKoding`,
+      github: 'https://github.com/dev-bomdong',
       linkedIn: ``, // `https://www.linkedin.com/in/jinhyeok-jeong-800871192`,
-      email: ``, // `zoomkoding@gmail.com`,
+      email: 'dongdh02076@gmail.com',
     },
   },
 
@@ -33,7 +33,7 @@ module.exports = {
         date: '',
         activity: '',
         links: {
-          github: '',
+          github: 'https://github.com/dev-bomdong',
           post: '',
           googlePlay: '',
           appStore: '',
@@ -43,8 +43,17 @@ module.exports = {
       // ========================================================
       // ========================================================
       {
-        date: '2021.02 ~',
-        activity: '개인 블로그 개발 및 운영',
+        date: '2022.08 ~',
+        activity: '샤플앤컴퍼니',
+        links: {
+          post: '/gatsby-starter-zoomkoding-introduction',
+          github: 'https://github.com/zoomkoding/zoomkoding-gatsby-blog',
+          demo: 'https://www.zoomkoding.com',
+        },
+      },
+      {
+        date: '2021.12 - 2022.07',
+        activity: '하우스텝 | (주)두번째',
         links: {
           post: '/gatsby-starter-zoomkoding-introduction',
           github: 'https://github.com/zoomkoding/zoomkoding-gatsby-blog',
