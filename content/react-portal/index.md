@@ -1,7 +1,7 @@
 ---
 emoji: 🌀
 title: React Portal을 이용한 Modal 구현하기
-date: '2023-01-20'
+date: '2021-11-05'
 author: Bomdong
 tags: Portal React
 categories: React
