@@ -1,5 +1,5 @@
 module.exports = {
-  title: `bomdong.log`,
+  title: `Bomdong.log`,
   description: `봄동의 일상 속 개발록`,
   language: `ko`, // `ko`, `en` => currently support versions for Korean and English
   siteUrl: `https://www.bomdong.com`,
