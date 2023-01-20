@@ -1,1 +1,1 @@
-{"data":{"allMarkdownRemark":{"edges":[{"node":{"frontmatter":{"title":"React Portal을 이용한 Modal 구현하기","categories":"React"},"fields":{"slug":"/react-portal/"}}}]}}}
+{"data":{"allMarkdownRemark":{"edges":[{"node":{"frontmatter":{"title":"2022년 상반기 회고","categories":"회고록"},"fields":{"slug":"/journal-the-first-half-2022/"}}},{"node":{"frontmatter":{"title":"React Portal을 이용한 Modal 구현하기","categories":"React"},"fields":{"slug":"/react-portal/"}}},{"node":{"frontmatter":{"title":"4년차 로펌비서였던 내가 개발자가 되기로 한 이유","categories":"사유록"},"fields":{"slug":"/journal-career/"}}}]}}}

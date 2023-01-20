@@ -1,0 +1,5 @@
+{
+    "componentChunkName": "component---src-templates-category-template-js",
+    "path": "/posts/회고록",
+    "result": {"pageContext":{"currentCategory":"회고록","categories":["All","회고록","React","사유록"],"edges":[{"node":{"id":"76d6bb7d-5b6a-54a3-a939-32a17523ed17","excerpt":"2022년 상반기에는 사내 팀 이동이 있었고, 좋은 기회로 개발자 채용 과정에 참여해보았고, 또 나름의 기준을 정해 이직에 성공하기도 했다.\n팀 이동, 채용 참여, 이직 등의 키워드만 보아도 알 수 있듯이 꽤나 역동적이였던 시간이였다.\n그 흐름이 이제야 일단락되어 다소 늦었지만 상반기 중 배우고 깨달은 것들을 정리해본다. 사내 팀 이동으로 배운 스스로의 힘 회사 내부 사정으로 어드민을 개발하던 팀에서 랜딩페이지를 다루는 팀으로 이동하게 되었다. \n이동한 팀에서 새로운 스택인 Next.JS, emotion을 접했고, 실제 사용자가 존재하는 서비스의 유지보수 작업도 해보았다.\n자신의 의견을 자유롭게 개진해볼 수 있는 환경 덕분에 아래의 경험들도 해볼 수 있었다. 사용자 관점에서 스스로 개선점을 찾아내 고쳐본 경험 사용자의 액션을 불러일으켜야 하는 UI에 애니메이션을 더할 것을 제안하거나, 데이터 로딩을 개선하기 위해 lazy loading을 고민하고 skeleton UI를 도입하는 등…","fields":{"slug":"/journal-the-first-half-2022/"},"frontmatter":{"categories":"회고록","title":"2022년 상반기 회고","date":"July 30, 2022"}},"next":{"fields":{"slug":"/react-portal/"}},"previous":null}]}},
+    "staticQueryHashes": ["1073350324","1956554647","2938748437"]}
