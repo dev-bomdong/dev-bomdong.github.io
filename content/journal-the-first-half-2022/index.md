@@ -3,7 +3,7 @@ emoji: 📓
 title: 2022년 상반기 회고
 date: '2022-07-30'
 author: Bomdong
-tags: journal career
+tags: journal
 categories: 회고록
 ---
 
