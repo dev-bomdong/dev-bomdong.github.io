@@ -3,7 +3,7 @@ emoji: 📓
 title: 부트캠프 수료 후 내게 남겨진 것들
 date: '2021-11-05'
 author: Bomdong
-tags: journal bootcamp
+tags: journal
 categories: 회고록
 ---
 
