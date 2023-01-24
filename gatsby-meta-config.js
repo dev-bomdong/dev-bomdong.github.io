@@ -9,7 +9,7 @@ module.exports = {
       repo: `dev-bomdong/dev-bomdong.github.io`, // `zoomkoding/zoomkoding-gatsby-blog`,
     },
   },
-  ga: 'G-ZZQWRB4MK9', // Google Analytics Tracking ID
+  ga: 'G-ZZQWRB4MK9', //  Google Analytics Tracking ID
   author: {
     name: `김동희`,
     bio: {
