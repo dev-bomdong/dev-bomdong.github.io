@@ -3,13 +3,13 @@ module.exports = {
   description: `봄동의 일상 속 개발록`,
   language: `ko`, // `ko`, `en` => currently support versions for Korean and English
   siteUrl: `https://www.bomdong.com`,
-  ogImage: `/og-image.png`, // Path to your in the 'static' folder
+  ogImage: `/blog-thumbnail.png`, // Path to your in the 'static' folder
   comments: {
     utterances: {
       repo: `dev-bomdong/dev-bomdong.github.io`, // `zoomkoding/zoomkoding-gatsby-blog`,
     },
   },
-  ga: 'G-WG7KM0PV1F', // Google Analytics Tracking ID
+  ga: 'G-ZZQWRB4MK9', // Google Analytics Tracking ID
   author: {
     name: `김동희`,
     bio: {
