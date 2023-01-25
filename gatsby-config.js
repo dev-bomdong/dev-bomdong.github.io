@@ -7,6 +7,63 @@ module.exports = {
 
   plugins: [
     {
+      resolve: `gatsby-plugin-feed`,
+      options: {
+        query: `
+          {
+            site {
+              siteMetadata {
+                title
+                description
+                siteUrl
+                site_url: siteUrl
+              }
+            }
+          }
+        `,
+        feeds: [
+          {
+            serialize: ({ query: { site, allMarkdownRemark } }) => {
+              return allMarkdownRemark.nodes.map(node => {
+                const url = `${site.siteMetadata?.siteUrl ?? ''}${
+                    node.fields?.slug ?? ''
+                }`;
+
+                return Object.assign({}, node.frontmatter, {
+                  description: node.excerpt,
+                  date: node.frontmatter.date,
+                  url,
+                  guid: site.siteMetadata.siteUrl + node.fields.slug,
+                  custom_elements: [{ "content:encoded": node.html }],
+                })
+              })
+            },
+            query: `
+              {
+                allMarkdownRemark(
+                  sort: {frontmatter: {date: DESC}}
+                ) {
+                  nodes {
+                    excerpt
+                    html
+                    fields {
+                      slug
+                    }
+                    frontmatter {
+                      title
+                      date
+                    }
+                  }
+                }
+              }
+            `,
+            output: "/rss.xml",
+            title: "Bomdong.log",
+          },
+        ],
+      },
+    },
+    {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `assets`,
@@ -76,7 +133,6 @@ module.exports = {
           {
             resolve: `gatsby-plugin-google-gtag`,
             options: {
-              // You can add multiple tracking ids and a pageview event will be fired for all of them.
               trackingIds: [
                 metaConfig.ga, // 설정 Google Analytics / GA
                 // "AW-CONVERSION_ID", // Google Ads / Adwords / AW

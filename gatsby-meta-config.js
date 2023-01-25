@@ -2,7 +2,7 @@ module.exports = {
   title: `Bomdong.log`,
   description: `봄동의 일상 속 개발록`,
   language: `ko`, // `ko`, `en` => currently support versions for Korean and English
-  siteUrl: `https://www.bomdong.com`,
+  siteUrl: `https://dev-bomdong.github.io/`,
   ogImage: `/blog-thumbnail.png`, // Path to your in the 'static' folder
   comments: {
     utterances: {
