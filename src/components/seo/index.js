@@ -51,11 +51,14 @@ function Seo({ description, title }) {
           property: 'og:image',
           content: site.siteMetadata.ogImage,
         },
-
         {
           property: `og:type`,
           content: `website`,
         },
+          {
+              name: 'google-site-verification',
+              content: 'T9AqlijEtj6OYjv4W5YS4fPIinlLIBu0dmSaF6LpgoY',
+          },
       ]}
     />
   );
