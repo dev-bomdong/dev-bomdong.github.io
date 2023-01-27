@@ -26,16 +26,16 @@ categories: 회고록
 모두 긍정적인 의견을 가지고 계셔서 본격적으로 Slack 채널과 GitHub Repo를 꾸려 시작하게 되었다.
 
 ## 스터디 진행 방식
-### ☑️ 모임 방식
+### 모임 방식
 Google Meet를 활용한 주 1회 비대면, 사다리타기를 통해 랜덤으로 배정된 문제를 풀이하는 강의 형태
 
-### ☑️ 커뮤니케이션 도구
+### 커뮤니케이션 도구
 Slack으로 출석체크 및 기타 커뮤니케이션을 진행했다.
 
 ![algorithm-img-2.png](./algorithm-img-2.png)
 *매주 스터디날 오전, slack 채널에서 진행한 출석 체크*
 
-### ☑️ 풀이 공유
+### 풀이 공유
 GitHub Organization을 만들어 Repository에 풀이 코드를 공유했다.
 
 ![algorithm-img-3.png](./algorithm-img-3.png)

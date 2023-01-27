@@ -11,17 +11,17 @@ categories: Git
 최근 작은 부분부터 팀문화를 개선하는 데에 관심이 생겼고, 1순위로 눈에 들어온 건 Commit Convention이였다. 
 Commit Convention을 정하고, 앞으로도 계속 지켜나가기 위해 소소한 시스템을 구축한 이야기를 적어보는 글.
 
-### ☑️ 문제점
+### 문제점
 1. 팀원별로 commit style이 통일되지 않았다.
    (각자 다른 기준으로 정해진 commit Header를 사용했고, 첫글자를 대문자로/소문자로 작성하는지도 차이가 있었다.)
 2. commit convention을 정하는 것보다 꾸준히, 혼선없이 지키는 게 어렵다.
 
-### ☑️ 해결방안
+### 해결방안
 1. commit의 목적별로 Header를 정해 commit만 봐도 어떤 작업인지 예상가도록 하자.
 2. commitizen을 이용해 Header 입력을 반자동화하고, 상세 작업만 직접 작성하는 시스템을 구축해보자.
    (commitizen은 팀원분과 이야기를 해보다가 힌트를 얻었다.)
 
-### ☑️ Commit Convention 정하기
+### Commit Convention 정하기
 금방 끝날거라 생각했지만 생각보다 세세한 범위까지 협의하며 꽤 시간이 걸렸던 convention 정하기.
 몇 가지 경우만 예를 들어보자면,
 
