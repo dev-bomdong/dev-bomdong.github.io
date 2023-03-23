@@ -385,6 +385,37 @@ regExp<span class="token punctuation">.</span><span class="token function">test<
 regExp<span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span><span class="token string">'  example'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//true</span>
 regExp<span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span><span class="token string">'example'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//false</span></code></pre></div>
 <h3 id="특수문자-포함-여부-검사" style="position:relative;"><a href="#%ED%8A%B9%EC%88%98%EB%AC%B8%EC%9E%90-%ED%8F%AC%ED%95%A8-%EC%97%AC%EB%B6%80-%EA%B2%80%EC%82%AC" aria-label="특수문자 포함 여부 검사 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>특수문자 포함 여부 검사</h3>
+<p>특수문자의 범위에 따라 두 가지 방법을 사용해 검사할 수 있다.</p>
+<h4 id="1-특정-특수문자를-검사" style="position:relative;"><a href="#1-%ED%8A%B9%EC%A0%95-%ED%8A%B9%EC%88%98%EB%AC%B8%EC%9E%90%EB%A5%BC-%EA%B2%80%EC%82%AC" aria-label="1 특정 특수문자를 검사 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1. 특정 특수문자를 검사</h4>
+<p><code class="language-text">/[\특수문자\특수문자2...]/gi</code>의 형태로 검사하고 싶은 특수문자를 <code class="language-text">\</code>와 함께 정규표현식에 넣어준다.</p>
+<div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> regExp1 <span class="token operator">=</span> <span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">[\!\?\@\[\]\{\}\-]</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">;</span> <span class="token comment">//-포함</span>
+<span class="token keyword">const</span> regExp2 <span class="token operator">=</span> <span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">[\!\?\@\[\]\{\}]</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">;</span> <span class="token comment">//-미포함</span>
+
+<span class="token keyword">const</span> example <span class="token operator">=</span> <span class="token string">'010-0000-'</span><span class="token punctuation">;</span>
+regExp1<span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>example<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//true</span>
+regExp2<span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>example<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//false</span></code></pre></div>
+<h4 id="2-한글-영어-숫자를-제외한-다른-문자를-특수문자로-규정하고-검사" style="position:relative;"><a href="#2-%ED%95%9C%EA%B8%80-%EC%98%81%EC%96%B4-%EC%88%AB%EC%9E%90%EB%A5%BC-%EC%A0%9C%EC%99%B8%ED%95%9C-%EB%8B%A4%EB%A5%B8-%EB%AC%B8%EC%9E%90%EB%A5%BC-%ED%8A%B9%EC%88%98%EB%AC%B8%EC%9E%90%EB%A1%9C-%EA%B7%9C%EC%A0%95%ED%95%98%EA%B3%A0-%EA%B2%80%EC%82%AC" aria-label="2 한글 영어 숫자를 제외한 다른 문자를 특수문자로 규정하고 검사 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2. 한글, 영어, 숫자를 제외한 다른 문자를 특수문자로 규정하고 검사</h4>
+<div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> regExp1 <span class="token operator">=</span> <span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">[^A-Za-z0-9ㄱ-ㅎㅏ-ㅣ가-힣]</span><span class="token regex-delimiter">/</span><span class="token regex-flags">g</span></span><span class="token punctuation">;</span> <span class="token comment">//영어 대소문자,숫자,한글 제외</span>
+<span class="token keyword">const</span> regExp2 <span class="token operator">=</span> <span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">[\!\?\@\[\]\{\}]</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">;</span> <span class="token comment">// !,?,@,[,],{,}</span>
+
+<span class="token keyword">const</span> example <span class="token operator">=</span> <span class="token string">'비밀번호****'</span><span class="token punctuation">;</span>
+
+regExp1<span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>example<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//true</span>
+regExp2<span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>example<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//false</span>
+
+<span class="token keyword">const</span> example2 <span class="token operator">=</span> <span class="token string">'#hello'</span><span class="token punctuation">;</span>
+
+regExp1<span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>example2<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//true </span>
+regExp2<span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>example2<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//false</span></code></pre></div>
+<br/>
+<p>단순히 true/false의 결과값을 얻는 검사가 아니라 특수문자를 지워주고 싶다면 아래의 방법으로 특수문자를 <code class="language-text">''</code>(공백)으로 바꿔줄 수 있다.</p>
+<div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> regExp <span class="token operator">=</span> <span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">[^A-Za-z0-9ㄱ-ㅎㅏ-ㅣ가-힣]</span><span class="token regex-delimiter">/</span><span class="token regex-flags">g</span></span><span class="token punctuation">;</span> <span class="token comment">//영어 대소문자,숫자,한글 제외</span>
+
+<span class="token keyword">const</span> example <span class="token operator">=</span> <span class="token string">'비밀번호****'</span><span class="token punctuation">;</span>
+example<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span>regExp<span class="token punctuation">,</span><span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//비밀번호</span>
+ 
+<span class="token keyword">const</span> example2 <span class="token operator">=</span> <span class="token string">'#hello'</span><span class="token punctuation">;</span>
+example2<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span>regExp<span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//hello</span></code></pre></div>
 <h2 id="참고-자료" style="position:relative;"><a href="#%EC%B0%B8%EA%B3%A0-%EC%9E%90%EB%A3%8C" aria-label="참고 자료 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>참고 자료</h2>
 <ul>
 <li>RegExp - 모던 자바스크립트 Deep Dive</li>
@@ -427,10 +458,22 @@ regExp<span class="token punctuation">.</span><span class="token function">test<
 <li>
 <p><a href="#%EC%9E%90%EC%A3%BC-%EC%82%AC%EC%9A%A9%ED%95%98%EB%8A%94-%EC%A0%95%EA%B7%9C%ED%91%9C%ED%98%84%EC%8B%9D">자주 사용하는 정규표현식</a></p>
 <ul>
-<li><a href="#%EC%88%AB%EC%9E%90%EB%A7%8C%EC%9C%BC%EB%A1%9C-%EC%9D%B4%EB%A3%A8%EC%96%B4%EC%A7%84-%EB%AC%B8%EC%9E%90%EC%97%B4%EC%9D%B8%EC%A7%80-%EA%B2%80%EC%82%AC">숫자만으로 이루어진 문자열인지 검사</a></li>
-<li><a href="#%ED%9C%B4%EB%8C%80%ED%8F%B0-%EB%B2%88%ED%98%B8-%ED%98%95%EC%8B%9D-%EA%B2%80%EC%82%AC">휴대폰 번호 형식 검사</a></li>
-<li><a href="#%EB%AC%B8%EC%9E%90%EC%97%B4%EC%9D%B4-%ED%95%98%EB%82%98-%EC%9D%B4%EC%83%81%EC%9D%98-%EA%B3%B5%EB%B0%B1%EC%9C%BC%EB%A1%9C-%EC%8B%9C%EC%9E%91%ED%95%98%EB%8A%94%EC%A7%80-%EA%B2%80%EC%82%AC">문자열이 하나 이상의 공백으로 시작하는지 검사</a></li>
-<li><a href="#%ED%8A%B9%EC%88%98%EB%AC%B8%EC%9E%90-%ED%8F%AC%ED%95%A8-%EC%97%AC%EB%B6%80-%EA%B2%80%EC%82%AC">특수문자 포함 여부 검사</a></li>
+<li>
+<p><a href="#%EC%88%AB%EC%9E%90%EB%A7%8C%EC%9C%BC%EB%A1%9C-%EC%9D%B4%EB%A3%A8%EC%96%B4%EC%A7%84-%EB%AC%B8%EC%9E%90%EC%97%B4%EC%9D%B8%EC%A7%80-%EA%B2%80%EC%82%AC">숫자만으로 이루어진 문자열인지 검사</a></p>
+</li>
+<li>
+<p><a href="#%ED%9C%B4%EB%8C%80%ED%8F%B0-%EB%B2%88%ED%98%B8-%ED%98%95%EC%8B%9D-%EA%B2%80%EC%82%AC">휴대폰 번호 형식 검사</a></p>
+</li>
+<li>
+<p><a href="#%EB%AC%B8%EC%9E%90%EC%97%B4%EC%9D%B4-%ED%95%98%EB%82%98-%EC%9D%B4%EC%83%81%EC%9D%98-%EA%B3%B5%EB%B0%B1%EC%9C%BC%EB%A1%9C-%EC%8B%9C%EC%9E%91%ED%95%98%EB%8A%94%EC%A7%80-%EA%B2%80%EC%82%AC">문자열이 하나 이상의 공백으로 시작하는지 검사</a></p>
+</li>
+<li>
+<p><a href="#%ED%8A%B9%EC%88%98%EB%AC%B8%EC%9E%90-%ED%8F%AC%ED%95%A8-%EC%97%AC%EB%B6%80-%EA%B2%80%EC%82%AC">특수문자 포함 여부 검사</a></p>
+<ul>
+<li><a href="#1-%ED%8A%B9%EC%A0%95-%ED%8A%B9%EC%88%98%EB%AC%B8%EC%9E%90%EB%A5%BC-%EA%B2%80%EC%82%AC">1. 특정 특수문자를 검사</a></li>
+<li><a href="#2-%ED%95%9C%EA%B8%80-%EC%98%81%EC%96%B4-%EC%88%AB%EC%9E%90%EB%A5%BC-%EC%A0%9C%EC%99%B8%ED%95%9C-%EB%8B%A4%EB%A5%B8-%EB%AC%B8%EC%9E%90%EB%A5%BC-%ED%8A%B9%EC%88%98%EB%AC%B8%EC%9E%90%EB%A1%9C-%EA%B7%9C%EC%A0%95%ED%95%98%EA%B3%A0-%EA%B2%80%EC%82%AC">2. 한글, 영어, 숫자를 제외한 다른 문자를 특수문자로 규정하고 검사</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li>
