@@ -216,8 +216,50 @@ regExp.test('example'); //false
 ```
 
 ### 특수문자 포함 여부 검사
+특수문자의 범위에 따라 두 가지 방법을 사용해 검사할 수 있다.
 
+#### 1. 특정 특수문자를 검사
+`/[\특수문자\특수문자2...]/gi`의 형태로 검사하고 싶은 특수문자를 `\`와 함께 정규표현식에 넣어준다. 
 
+```javascript
+const regExp1 = /[\!\?\@\[\]\{\}\-]/gi; //-포함
+const regExp2 = /[\!\?\@\[\]\{\}]/gi; //-미포함
+
+const example = '010-0000-';
+regExp1.test(example); //true
+regExp2.test(example); //false
+```
+
+#### 2. 한글, 영어, 숫자를 제외한 다른 문자를 특수문자로 규정하고 검사
+
+```javascript
+const regExp1 = /[^A-Za-z0-9ㄱ-ㅎㅏ-ㅣ가-힣]/g; //영어 대소문자,숫자,한글 제외
+const regExp2 = /[\!\?\@\[\]\{\}]/gi; // !,?,@,[,],{,}
+
+const example = '비밀번호****';
+
+regExp1.test(example); //true
+regExp2.test(example); //false
+
+const example2 = '#hello';
+
+regExp1.test(example2); //true 
+regExp2.test(example2); //false
+```
+
+<br/>
+
+단순히 true/false의 결과값을 얻는 검사가 아니라 특수문자를 지워주고 싶다면 아래의 방법으로 특수문자를 `''`(공백)으로 바꿔줄 수 있다.
+
+```javascript
+const regExp = /[^A-Za-z0-9ㄱ-ㅎㅏ-ㅣ가-힣]/g; //영어 대소문자,숫자,한글 제외
+
+const example = '비밀번호****';
+example.replace(regExp,''); //비밀번호
+ 
+const example2 = '#hello';
+example2.replace(regExp, ''); //hello
+```
 ## 참고 자료
 - RegExp - 모던 자바스크립트 Deep Dive
 - [정규 표현식 - MDN](https://developer.mozilla.org/ko/docs/Web/JavaScript/Guide/Regular_Expressions)
