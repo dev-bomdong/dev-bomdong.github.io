@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Bomdong.log]]></title><description><![CDATA[봄동의 일상 속 개발록]]></description><link>https://dev-bomdong.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Sun, 07 May 2023 12:12:16 GMT</lastBuildDate><item><title><![CDATA[가깝고도 먼 ReactNode, ReactElement 그리고 JSX.Element]]></title><description><![CDATA[들어가며 Typescript로 개발을 하다보면 자주 마주치는 타입 ReactNode, JSX.Element 그리고 ReactElement…]]></description><link>https://dev-bomdong.github.io/reactnode-react-element-jsx-element/</link><guid isPermaLink="false">https://dev-bomdong.github.io/reactnode-react-element-jsx-element/</guid><pubDate>Sun, 07 May 2023 00:00:00 GMT</pubDate><content:encoded>&lt;h2 id=&quot;들어가며&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%93%A4%EC%96%B4%EA%B0%80%EB%A9%B0&quot; aria-label=&quot;들어가며 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;들어가며&lt;/h2&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Bomdong.log]]></title><description><![CDATA[봄동의 일상 속 개발록]]></description><link>https://dev-bomdong.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Sun, 07 May 2023 12:45:08 GMT</lastBuildDate><item><title><![CDATA[가깝고도 먼 ReactNode, ReactElement 그리고 JSX.Element]]></title><description><![CDATA[들어가며 Typescript로 개발을 하다보면 자주 마주치는 타입 ReactNode, JSX.Element 그리고 ReactElement…]]></description><link>https://dev-bomdong.github.io/reactnode-react-element-jsx-element/</link><guid isPermaLink="false">https://dev-bomdong.github.io/reactnode-react-element-jsx-element/</guid><pubDate>Sun, 07 May 2023 00:00:00 GMT</pubDate><content:encoded>&lt;h2 id=&quot;들어가며&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%93%A4%EC%96%B4%EA%B0%80%EB%A9%B0&quot; aria-label=&quot;들어가며 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;들어가며&lt;/h2&gt;
 &lt;p&gt;Typescript로 개발을 하다보면 자주 마주치는 타입 ReactNode, JSX.Element 그리고 ReactElement. &lt;br/&gt;
 어느 날 문득 나는 각 타입의 차이를 명확히 설명할 수 있나라는 의문이 들었고, 그 대답은 아니다였기에 정리해본다.&lt;/p&gt;
 &lt;h2 id=&quot;reactnode&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#reactnode&quot; aria-label=&quot;reactnode permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;ReactNode&lt;/h2&gt;
@@ -82,10 +82,7 @@ type, props, key, ref 등 createElement()의 리턴 형태를 갖추고 있다.&
   _owner&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;any&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
 
   &lt;span class=&quot;token comment&quot;&gt;// __DEV__&lt;/span&gt;
-  _store&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;validated&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;boolean&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-  _self&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; React$Element&lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;any&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-  _shadowChildren&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;any&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-  _source&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Source&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;//  ...&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;br/&gt;
 &lt;p&gt;&lt;a href=&quot;https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/react/index.d.ts#L146&quot;&gt;DefinitelyTyped&lt;/a&gt;의 타입 정의도 살펴보자.&lt;/p&gt;
@@ -117,6 +114,33 @@ JSX를 import하지 않은 상태에서 바로 사용할 수 있다. 또 사용�
 &lt;blockquote&gt;
 &lt;p&gt;namespace는 서로 구분이 가능하도록 정해둔 영역, 범위를 뜻한다.&lt;/p&gt;
 &lt;/blockquote&gt;
+&lt;h2 id=&quot;한눈에-정리하기&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%ED%95%9C%EB%88%88%EC%97%90-%EC%A0%95%EB%A6%AC%ED%95%98%EA%B8%B0&quot; aria-label=&quot;한눈에 정리하기 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;한눈에 정리하기&lt;/h2&gt;
+&lt;p&gt;세 타입의 관계를 한눈에 정리하면 아래의 형태와 같다.
+(JSX.Element는 결국 ReactElement의 type, props속성을 any로 받은 타입이기 때문에 속한다고 볼 수 있다.)&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 720px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 88.88888888888889%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAASCAYAAABb0P4QAAAACXBIWXMAABYlAAAWJQFJUiTwAAAC80lEQVQ4y4WUCW/bOBBG8/9/zwIBuklbZLFpnKSxHd/yqYMiJdnyJVun/Rak68bJBugA1EiC+PTNDGeujscjemm7vD8/F1VBVuXkVU55qLi0j99qu7qEnS0/FCyLDTKfEx5iZDlHVQtzHxYx23LH4RMR2l9dwrRflRvcvUKUIQN/xPW3L3x7uOOv22tu778z23g4mUJmEekh/x/0ncKoWGKnEpGH+GWEtwvo+0OG0ZSeHDNQE5ydxE0D7FThpopdtf885LhYn2BZyHAxpR+NsXc+slogqzmLUrFIJsxXFpFeiY3IFG4WkF0oNSFr6c6vP3pZgLWY0vb7TNYuogiZyQ6PtS80G3fc/3vN0+MNz483TOw63l4Q5LGmnRTqy7xY4uq8lHNG8YxXt0tb9LH3Cn81xnN+Uqvd8Pj0lVrtlh8Pf/NQu2U2eUZGXZxU/s7nVXU8IPOI8cpmtLRNuL1wdAo58ZBBCykbRFGbZDOjKiLyVBIv+kjVRPoN3M2MZbk9AYtDaYrQkRYNu01XWTRmbfNsr2Yo2USIF3ZbB8gAXYQcDiuUaiFFHS+2mJfrN6DOnQ5Xq9OgXjCkF46xl1OjIAhaWP06tR93vDzf81T7h9fGE0p1kX4dbzEgOgOrY2Uqq6G6CBrWkYOTwo2DVK9I2UQKC98dIRzLrMCfEgY9pHjBXU2IzyHrS5jHJrF+ERmV9VmLtj/A3kn82EJ4P1mvJkDyK+SUMg+Nel+1cPY+uyp9AybV3gD1kdGha990u0y3ApEq/KBjoGHQYb2cslwM8UUd32/gbWz8fM7heHgD6gOpe3SWCPrBiJbo03Q6TDcuXh7i7iUiHiJkE0/UEVpZ1EMkpzZMLrrld6foXHr7gI6y6KmhAduJMGpds0K8VCF2ArGX5p2dKTNELvv53XDQ0Hm1witC0yEa5qXBO69B565al8mfx5f2ejypbG4gOre6x7XXEH0iFsXKjLhPx9fHF5emN+nqbau9yVNaZSaKS1Uf9/4HapVRmWtU4ccAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;summary&quot;
+        title=&quot;summary&quot;
+        src=&quot;/static/460e6e560d56c4da6e71caf8c1b063f6/37523/summary.png&quot;
+        srcset=&quot;/static/460e6e560d56c4da6e71caf8c1b063f6/e9ff0/summary.png 180w,
+/static/460e6e560d56c4da6e71caf8c1b063f6/f21e7/summary.png 360w,
+/static/460e6e560d56c4da6e71caf8c1b063f6/37523/summary.png 720w,
+/static/460e6e560d56c4da6e71caf8c1b063f6/302a4/summary.png 1080w,
+/static/460e6e560d56c4da6e71caf8c1b063f6/bc3ae/summary.png 1268w&quot;
+        sizes=&quot;(max-width: 720px) 100vw, 720px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
 &lt;h3 id=&quot;참고-자료&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%B0%B8%EA%B3%A0-%EC%9E%90%EB%A3%8C&quot; aria-label=&quot;참고 자료 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;참고 자료&lt;/h3&gt;
 &lt;a target=&quot;_blank&quot; href=&quot;https://react.dev/learn/writing-markup-with-jsx&quot;&gt;
 [React Reference] Writing Markup with JSX - React&lt;/a&gt; &lt;br/&gt;
@@ -141,6 +165,9 @@ JSX를 import하지 않은 상태에서 바로 사용할 수 있다. 또 사용�
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;a href=&quot;#jsxelement&quot;&gt;JSX.Element&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;#%ED%95%9C%EB%88%88%EC%97%90-%EC%A0%95%EB%A6%AC%ED%95%98%EA%B8%B0&quot;&gt;한눈에 정리하기&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;#%EC%B0%B8%EA%B3%A0-%EC%9E%90%EB%A3%8C&quot;&gt;참고 자료&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
