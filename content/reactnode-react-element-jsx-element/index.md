@@ -1,6 +1,6 @@
 ---
 emoji: 👩‍👧‍👦
-title: 가깝고도 먼 ReactNode, ReactElement 그리고 JSX.Element
+title: ReactNode, ReactElement 그리고 JSX.Element
 date: '2023-05-07'
 author: Bomdong
 tags: React
@@ -160,8 +160,8 @@ JSX를 import하지 않은 상태에서 바로 사용할 수 있다. 또 사용�
 
 
 ## 한눈에 정리하기
-세 타입의 관계를 한눈에 정리하면 아래의 형태와 같다.
-(JSX.Element는 결국 ReactElement의 type, props속성을 any로 받은 타입이기 때문에 속한다고 볼 수 있다.)
+세 타입의 관계를 한눈에 정리하면 아래의 형태와 같다. <br/>
+> JSX.Element는 ReactNode의 타입으로 명시되어 있지는 않지만 ReactNode 하위의 ReactElement의 type, props를 any로 받아 확장한 타입이기 때문에 결과적으로 ReactNode의 하위로 정리했다.
 
 ![summary](./summary.png)
 
