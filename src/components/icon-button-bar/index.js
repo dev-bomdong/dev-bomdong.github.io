@@ -24,8 +24,8 @@ function IconButtonBar({ links = {} }) {
         return <AndroidIcon {...props} />;
       case 'appStore':
         return <AppleIcon {...props} />;
-      case 'email':
-        return <EmailIcon {...props} />;
+      // case 'email':
+      //   return <EmailIcon {...props} />;
       case 'linkedIn':
         return <LinkedInIcon {...props} />;
       default:
@@ -39,7 +39,7 @@ function IconButtonBar({ links = {} }) {
         return (
           links[link] && (
             <Tooltip key={index} title={link} arrow className="icon-tooltip">
-              <IconButton size="small" href={`${link === 'email' ? `mailto:` : ``}${links[link]}`}>
+              <IconButton size="smaill" href={`${link === 'email' ? `mailto:` : ``}${links[link]}`}>
                 {IconPicker(link)}
               </IconButton>
             </Tooltip>
