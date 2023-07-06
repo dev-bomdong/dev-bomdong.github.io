@@ -20,7 +20,7 @@ function Bio({ author, language = 'ko' }) {
             <div className="bio-title">Bomdong</div>
             <IconButtonBar links={social} />
           </div>
-          <div className="bio-desc">Front-end developers who love to record</div>
+          <div className="bio-desc">Front-end developer who love recording and networking</div>
         </div>
       </div>
     </div>

@@ -20,16 +20,18 @@
   align-items: center;
 }
 
+
+
 .bio {
   display: flex;
   width: 100%;
-  margin: 20px 0;
-  padding: 15px;
+  margin-top: 20px ;
+  margin-bottom: 30px;
   justify-content: flex-start;
   gap: 13px;
+  background-color: #F7F9FD;
+  padding: 15px;
   border-radius: 16px;
-  background-color: #fafafa;
-
   color: var(--primary-text-color);
 
   @include md {
@@ -46,10 +48,13 @@
   }
 }
 
+
 .bio-title {
   font-size: 17px;
   font-weight: bold;
   color: var(--tab-hover-text-color);
+  //background-color: #F9F9F9;
+
 }
 
 .bio-desc {
