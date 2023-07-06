@@ -15,7 +15,7 @@ module.exports = {
     bio: {
       role: `프론트엔드 개발자`,
       description: ['성실함을 중요시하는', '기록과 공유를 좋아하는', '함께 일하는 법을 고민하는'],
-      thumbnail: 'profile.png' //'sample.png', // Path to the image in the 'asset' folder
+      thumbnail: 'profile.png', //'sample.png', // Path to the image in the 'asset' folder
     },
     social: {
       github: 'https://github.com/dev-bomdong',

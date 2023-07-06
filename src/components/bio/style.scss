@@ -14,13 +14,21 @@
   }
 }
 
+.bio-wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
 .bio {
   display: flex;
-  flex-direction: column;
-  //justify-content: space-between;
   width: 100%;
-  margin-top: 30px;
-  margin-bottom: 30px;
+  margin: 20px 0;
+  padding: 15px;
+  justify-content: flex-start;
+  gap: 13px;
+  border-radius: 16px;
+  background-color: #fafafa;
 
   color: var(--primary-text-color);
 
@@ -29,77 +37,6 @@
     align-items: center;
   }
 
-  //.introduction {
-  //  display: flex;
-  //  flex-direction: column;
-  //  word-break: keep-all;
-  //
-  //  .react-rotating-text-cursor {
-  //    animation: blinking-cursor 0.8s cubic-bezier(0.68, 0.01, 0.01, 0.99) 0s infinite;
-  //  }
-  //
-  //  strong {
-  //    display: inline-block;
-  //    font-weight: 600;
-  //  }
-  //
-  //  &.korean {
-  //    font-weight: 300;
-  //    font-size: 36px;
-  //    line-height: 1.4;
-  //
-  //    .title {
-  //      .react-rotating-text-cursor {
-  //        font-size: 35px;
-  //        line-height: 35px;
-  //      }
-  //    }
-  //
-  //    @include md {
-  //      font-size: 36px;
-  //
-  //      .title {
-  //        .react-rotating-text-cursor {
-  //          font-size: 45px;
-  //          line-height: 45px;
-  //        }
-  //      }
-  //    }
-  //
-  //
-  //  }
-  //
-  //  &.english {
-  //    font-family: 'montserrat';
-  //    font-size: 25px;
-  //    line-height: 1.2;
-  //
-  //    @include md {
-  //      font-size: 45px;
-  //    }
-  //
-  //    .name {
-  //      font-size: 35px;
-  //      font-weight: 600;
-  //    }
-  //
-  //    .job {
-  //      font-size: 35px;
-  //    }
-  //
-  //    .description {
-  //      font-weight: 200;
-  //      margin-top: 8px;
-  //      font-size: 20px;
-  //    }
-  //
-  //    .social-links {
-  //      margin-top: 20px;
-  //      display: flex;
-  //    }
-  //  }
-  //}
-
   .thumbnail-wrapper {
     display: none;
 
@@ -107,4 +44,21 @@
       display: block;
     }
   }
+}
+
+.bio-title {
+  font-size: 17px;
+  font-weight: bold;
+  color: var(--tab-hover-text-color);
+}
+
+.bio-desc {
+  font-size: 15px;
+  font-style: italic;
+  color: var(--button-text-color);
+}
+
+.vertical-stack {
+  display: flex;
+  flex-direction: column;
 }

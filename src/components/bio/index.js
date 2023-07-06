@@ -8,12 +8,21 @@ function Bio({ author, language = 'ko' }) {
   if (!author) return null;
   const { bio, social, name } = author;
   return (
-    <div className="bio">
-            <Image style={{ width: 90, height: 90 }} src={bio.thumbnail} alt="thumbnail" />
-        <h2>dev-bomdong</h2>
-          <div className="social-links">
+    <div className="bio-wrapper">
+      <div className="bio">
+        <Image
+          style={{ width: 70, height: 70, borderRadius: 50 }}
+          src={bio.thumbnail}
+          alt="thumbnail"
+        />
+        <div className="vertical-stack">
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <div className="bio-title">Bomdong</div>
             <IconButtonBar links={social} />
           </div>
+          <div className="bio-desc">Front-end developers who love to record</div>
+        </div>
+      </div>
     </div>
   );
 }
