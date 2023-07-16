@@ -1,4 +1,82 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Bomdong.log]]></title><description><![CDATA[봄동의 일상 속 개발록]]></description><link>https://dev-bomdong.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Thu, 06 Jul 2023 09:50:13 GMT</lastBuildDate><item><title><![CDATA[Next.js에서 yarn start를 실행하면 어떻게 될까]]></title><description><![CDATA[들어가며 흔히 local 환경에서 Next.js 프로젝트를 만들고 를 실행하면 command line에 아래의 흐름대로 표기된다. 그렇다면 뒷편에선 코드가 어떻게 돌아가고 있을까? package.json Next.js…]]></description><link>https://dev-bomdong.github.io/next-js-yarn-start/</link><guid isPermaLink="false">https://dev-bomdong.github.io/next-js-yarn-start/</guid><pubDate>Sun, 02 Jul 2023 00:00:00 GMT</pubDate><content:encoded>&lt;h2 id=&quot;들어가며&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%93%A4%EC%96%B4%EA%B0%80%EB%A9%B0&quot; aria-label=&quot;들어가며 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;들어가며&lt;/h2&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Bomdong.log]]></title><description><![CDATA[봄동의 일상 속 개발록]]></description><link>https://dev-bomdong.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Sun, 16 Jul 2023 11:28:06 GMT</lastBuildDate><item><title><![CDATA[글또 8기를 마무리하며]]></title><description><![CDATA[올해 2월부터 7월까지, 6개월동안 진행한 글또 8기 활동이 마무리되었다. 글또 
+개발 직군에 속한 회원들이 일정 금액을 예치하고…]]></description><link>https://dev-bomdong.github.io/journal-the-first-half-2023/</link><guid isPermaLink="false">https://dev-bomdong.github.io/journal-the-first-half-2023/</guid><pubDate>Sun, 16 Jul 2023 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;올해 2월부터 7월까지, 6개월동안 진행한 글또 8기 활동이 마무리되었다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;글또&lt;/strong&gt; &lt;br/&gt;
+개발 직군에 속한 회원들이 일정 금액을 예치하고 2주에 한 번씩 블로그 포스팅 + 인증을 하는 형태로 운영되는 커뮤니티.
+직군별로 자체 컨퍼런스, 랜덤 오프라인 만남도 진행된다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;처음엔 기술블로그에 주기적으로 글쓰는 습관을 길러보자라는 패기 반,
+6개월이란 시간동안 2주에 한 번씩 꾸준히 포스팅 할 수 있을까란 걱정 반으로 시작했는데 어느새 6개월이 지났다.
+그 기간동안 느낀 좋았던 점과 아쉬웠던 점, 그리고 앞으로의 실행 계획에 대해서 적어보는 글.&lt;/p&gt;
+&lt;h2 id=&quot;만족한-점&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%A7%8C%EC%A1%B1%ED%95%9C-%EC%A0%90&quot; aria-label=&quot;만족한 점 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;만족한 점&lt;/h2&gt;
+&lt;h3 id=&quot;꾸준히-다양한-주제로-글쓰기&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EA%BE%B8%EC%A4%80%ED%9E%88-%EB%8B%A4%EC%96%91%ED%95%9C-%EC%A3%BC%EC%A0%9C%EB%A1%9C-%EA%B8%80%EC%93%B0%EA%B8%B0&quot; aria-label=&quot;꾸준히 다양한 주제로 글쓰기 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;꾸준히 다양한 주제로 글쓰기&lt;/h3&gt;
+&lt;p&gt;앞서 적었듯이 활동을 시작할 때부터 걱정했던 격주 포스팅. &lt;br/&gt;
+다행히 과거의 나는 2주 간격으로 꾸준히 포스팅을 해나갔고 예치금 차감없이 활동을 마무리지을 수 있게 되었다 🥳(물론 주어진 패스권 2회도 야무지게 활용했다.)&lt;/p&gt;
+&lt;h4 id=&quot;글또-활동을-하며-작성한-글&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EA%B8%80%EB%98%90-%ED%99%9C%EB%8F%99%EC%9D%84-%ED%95%98%EB%A9%B0-%EC%9E%91%EC%84%B1%ED%95%9C-%EA%B8%80&quot; aria-label=&quot;글또 활동을 하며 작성한 글 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;글또 활동을 하며 작성한 글&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://dev-bomdong.github.io/css-unicode-range/&quot;&gt;unicode-range로 언어(문자)에 따라 다른 폰트 적용하기&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://dev-bomdong.github.io/regexp/&quot;&gt;정규 표현식 톺아보기&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://dev-bomdong.github.io/functional-programming-concept/&quot;&gt;함수형 프로그래밍 | 액션, 계산, 데이터&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://dev-bomdong.github.io/functional-programming-refactoring/&quot;&gt;함수형 프로그래밍 | 액션 리팩토링하기&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://dev-bomdong.github.io/js-function-invocation-and-this/&quot;&gt;[번역] 자바스크립트 함수 호출과 “this” 이해하기&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://dev-bomdong.github.io/reactnode-react-element-jsx-element/&quot;&gt;ReactNode, ReactElement 그리고 JSX.Element&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://dev-bomdong.github.io/permutation-and-combination/&quot;&gt;순열과 조합 Javascript로 구현하기&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://dev-bomdong.github.io/journal-slip-up-sprint/&quot;&gt;망쳐버린 스프린트를 마주하며&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://dev-bomdong.github.io/next-js-yarn-start/&quot;&gt;Next.js에서 yarn start를 실행하면 어떻게 될까&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;글감을 찾는게 마냥 쉽지는 않았는데, 일/스터디 등 일상 속에서 떠오르는 주제를 개인 노션에 적어두고 하나씩 골라 쓰고는 했다.
+예를 들어 함수형 프로그래밍은 사내 스터디를 할 때, 순열과 조합은 알고리즘 스터디를 할 때, unicode-range나 정규표현식 등은 업무 중 떠올린 주제들이였다.
+너무 비슷한 주제/형태로만 글을 작성하지않도록 신경썼는데, 이렇게 모아보니 꽤나 반영이 된 것 같아 뿌듯하다.&lt;/p&gt;
+&lt;h3 id=&quot;커피드백으로-시야-넓히기&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%BB%A4%ED%94%BC%EB%93%9C%EB%B0%B1%EC%9C%BC%EB%A1%9C-%EC%8B%9C%EC%95%BC-%EB%84%93%ED%9E%88%EA%B8%B0&quot; aria-label=&quot;커피드백으로 시야 넓히기 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;커피드백으로 시야 넓히기&lt;/h3&gt;
+&lt;p&gt;처음엔 단순히 글쓰기 커뮤니티인줄로만 알았는데 커피드백이라는 신기한 활동도 있었다. &lt;br/&gt;
+같은 직군에 종사하시는 분들끼리 랜덤으로 조를 짜서 만나는 오프라인 모임!&lt;/p&gt;
+&lt;p&gt;커피드백 덕분에 다른 회사는 어떤 개발 문화를 가지고 어떻게 일하는지 들으며 업계를 바라보는 시야를 넓히기도 하고,
+동일한 직군으로 일하는 분들이 어떤 생각과 고민을 가지고 있는지 대화하며 깊은 공감도, 위로도 나눴다.&lt;/p&gt;
+&lt;p&gt;특히 최근 (거센 비를 뚫고 평일 저녁에) 이루어진 커피드백에선 요즘 가지고 있던 고민을 털어놓고 조언을 듣기도 하고, 책을 추천받기도 해서 참 귀한 시간이였다.&lt;/p&gt;
+&lt;h2 id=&quot;다소-아쉬운-점&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%8B%A4%EC%86%8C-%EC%95%84%EC%89%AC%EC%9A%B4-%EC%A0%90&quot; aria-label=&quot;다소 아쉬운 점 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;다소 아쉬운 점&lt;/h2&gt;
+&lt;h3 id=&quot;벼락치기-업로드&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%B2%BC%EB%9D%BD%EC%B9%98%EA%B8%B0-%EC%97%85%EB%A1%9C%EB%93%9C&quot; aria-label=&quot;벼락치기 업로드 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;벼락치기 업로드&lt;/h3&gt;
+&lt;p&gt;사실 6개월 동안 2주에 한 포스팅을 업로드한다고 했을 때 첫 번째 주엔 글감 디벨롭+초안 작성,
+두 번째 주엔 초안을 다듬어 여유롭게 완성하는 습관을 차차 가지게 될 줄 알았는데 내 착각이였다.
+여전히 두 번째 주에 후다닥 시작해 일요일에 업로드하는 벼락치기임을..&lt;/p&gt;
+&lt;h2 id=&quot;앞으로의-실행-계획&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%95%9E%EC%9C%BC%EB%A1%9C%EC%9D%98-%EC%8B%A4%ED%96%89-%EA%B3%84%ED%9A%8D&quot; aria-label=&quot;앞으로의 실행 계획 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;앞으로의 실행 계획&lt;/h2&gt;
+&lt;h3 id=&quot;글또-9기---업로드-습관-신경쓰기&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EA%B8%80%EB%98%90-9%EA%B8%B0---%EC%97%85%EB%A1%9C%EB%93%9C-%EC%8A%B5%EA%B4%80-%EC%8B%A0%EA%B2%BD%EC%93%B0%EA%B8%B0&quot; aria-label=&quot;글또 9기   업로드 습관 신경쓰기 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;글또 9기 - 업로드 습관 신경쓰기&lt;/h3&gt;
+&lt;p&gt;6개월간의 활동에서 얻은게 많아 곧 진행될 글또 9기에도 참여하려 한다.
+이 땐 업로드 습관 신경쓰기! 1주만에 후루룩 쓰기보다 조금 더 여유로운 호흡으로 작성하는 습관을 들이고 싶다.&lt;/p&gt;
+&lt;h3 id=&quot;기술블로그-리뉴얼&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EA%B8%B0%EC%88%A0%EB%B8%94%EB%A1%9C%EA%B7%B8-%EB%A6%AC%EB%89%B4%EC%96%BC&quot; aria-label=&quot;기술블로그 리뉴얼 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;기술블로그 리뉴얼&lt;/h3&gt;
+&lt;p&gt;Tistory에서 보다 커스텀이 용이한 gatsby로 플랫폼을 변경한 이후 블로그를 들어올 때마다 이래저래 아쉬운 점이 보였다.
+또 다른 분들의 다양한 블로그를 방문하다보니 나도 이런 식으로 고쳐보고싶다는 자극도 들었다.
+사실 지금도 UI요소를 조금씩 바꿔나가고 있지만, 올해 하반기 중에 본격적으로 기술블로그 리뉴얼 해볼것!&lt;/p&gt;
+&lt;div class=&quot;table-of-contents&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;#%EB%A7%8C%EC%A1%B1%ED%95%9C-%EC%A0%90&quot;&gt;만족한 점&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;#%EA%BE%B8%EC%A4%80%ED%9E%88-%EB%8B%A4%EC%96%91%ED%95%9C-%EC%A3%BC%EC%A0%9C%EB%A1%9C-%EA%B8%80%EC%93%B0%EA%B8%B0&quot;&gt;꾸준히 다양한 주제로 글쓰기&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#%EA%B8%80%EB%98%90-%ED%99%9C%EB%8F%99%EC%9D%84-%ED%95%98%EB%A9%B0-%EC%9E%91%EC%84%B1%ED%95%9C-%EA%B8%80&quot;&gt;글또 활동을 하며 작성한 글&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;#%EC%BB%A4%ED%94%BC%EB%93%9C%EB%B0%B1%EC%9C%BC%EB%A1%9C-%EC%8B%9C%EC%95%BC-%EB%84%93%ED%9E%88%EA%B8%B0&quot;&gt;커피드백으로 시야 넓히기&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;#%EB%8B%A4%EC%86%8C-%EC%95%84%EC%89%AC%EC%9A%B4-%EC%A0%90&quot;&gt;다소 아쉬운 점&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#%EB%B2%BC%EB%9D%BD%EC%B9%98%EA%B8%B0-%EC%97%85%EB%A1%9C%EB%93%9C&quot;&gt;벼락치기 업로드&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;#%EC%95%9E%EC%9C%BC%EB%A1%9C%EC%9D%98-%EC%8B%A4%ED%96%89-%EA%B3%84%ED%9A%8D&quot;&gt;앞으로의 실행 계획&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#%EA%B8%80%EB%98%90-9%EA%B8%B0---%EC%97%85%EB%A1%9C%EB%93%9C-%EC%8A%B5%EA%B4%80-%EC%8B%A0%EA%B2%BD%EC%93%B0%EA%B8%B0&quot;&gt;글또 9기 - 업로드 습관 신경쓰기&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#%EA%B8%B0%EC%88%A0%EB%B8%94%EB%A1%9C%EA%B7%B8-%EB%A6%AC%EB%89%B4%EC%96%BC&quot;&gt;기술블로그 리뉴얼&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;</content:encoded></item><item><title><![CDATA[Next.js에서 yarn start를 실행하면 어떻게 될까]]></title><description><![CDATA[들어가며 흔히 local 환경에서 Next.js 프로젝트를 만들고 를 실행하면 command line에 아래의 흐름대로 표기된다. 그렇다면 뒷편에선 코드가 어떻게 돌아가고 있을까? package.json Next.js…]]></description><link>https://dev-bomdong.github.io/next-js-yarn-start/</link><guid isPermaLink="false">https://dev-bomdong.github.io/next-js-yarn-start/</guid><pubDate>Sun, 02 Jul 2023 00:00:00 GMT</pubDate><content:encoded>&lt;h2 id=&quot;들어가며&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%93%A4%EC%96%B4%EA%B0%80%EB%A9%B0&quot; aria-label=&quot;들어가며 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;들어가며&lt;/h2&gt;
 &lt;p&gt;흔히 local 환경에서 Next.js 프로젝트를 만들고 &lt;code class=&quot;language-text&quot;&gt;yarn start&lt;/code&gt;를 실행하면 command line에 아래의 흐름대로 표기된다.&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;&gt; yarn start
 yarn run v1.22.19
