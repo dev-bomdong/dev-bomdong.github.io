@@ -4,7 +4,7 @@ title: 4년차 로펌비서였던 내가 개발자가 되기로 한 이유
 date: '2023-01-15'
 author: Bomdong
 tags: journal
-categories: 사유록
+categories: 회고록
 ---
 
 ![kiki.png](./kiki.png)
