@@ -26,11 +26,10 @@
   display: flex;
   width: 100%;
   margin-top: 20px ;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   justify-content: flex-start;
-  gap: 13px;
-  background-color: #F7F9FD;
-  padding: 15px;
+  gap: 16px;
+  padding: 20px 15px;
   border-radius: 16px;
   color: var(--primary-text-color);
 
@@ -48,12 +47,17 @@
   }
 }
 
+.bio-image-wrapper {
+  width: 106px;
+  height: 106px;
+  border: 3px solid #D8D3CD;
+  border-radius: 50%;
+}
 
 .bio-title {
   font-size: 17px;
   font-weight: bold;
-  color: var(--tab-hover-text-color);
-  //background-color: #F9F9F9;
+  color: #232326;
 
 }
 
@@ -61,9 +65,11 @@
   font-size: 15px;
   font-style: italic;
   color: var(--button-text-color);
+  line-height: 1.5;
 }
 
 .vertical-stack {
   display: flex;
   flex-direction: column;
+  gap: 0.3rem;
 }

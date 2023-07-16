@@ -10,14 +10,16 @@ function Bio({ author, language = 'ko' }) {
   return (
     <div className="bio-wrapper">
       <div className="bio">
+        <div className="bio-image-wrapper" >
         <Image
-          style={{ width: 70, height: 70, borderRadius: 50 }}
+          style={{ width: '100px', height: '100px', borderRadius: '50%' }}
           src={bio.thumbnail}
           alt="thumbnail"
         />
+        </div>
         <div className="vertical-stack">
           <div style={{ display: 'flex', alignItems: 'center' }}>
-            <div className="bio-title">Bomdong</div>
+            <div className="bio-title">@Dong_Hee</div>
             <IconButtonBar links={social} />
           </div>
           <div className="bio-desc">Front-end developer who love recording and networking</div>

@@ -12,35 +12,30 @@
   .post-tabs {
     display: flex;
     justify-content: center;
-    height: 40px;
     width: 100%;
     max-width: $content-max-width + 40px;
     margin-bottom: 5px;
 
     .mui-tabs {
       .MuiTab-root {
-        height: 35px;
+        height: 30px;
         min-height: auto;
         min-width: auto;
-        padding: 4px 8px;
-        color: #777777;
-        font-weight: 500;
-        font-size: 15px;
+        padding: 4px 10px;
+        color: #4E3636;
+        font-weight: 400;
+        font-size: 13px;
         transition: all 200ms ease;
-        border-radius: 10px;
-        margin-right:3px;
+        border-radius: 6px;
+        margin-right:10px;
+        background: #FBF8F1;
 
-
-        :hover {
-          color: var(--tab-hover-text-color);
-          transition: all 200ms ease;
-        }
       }
 
       .Mui-selected {
         transition: all 200ms ease;
         color: #222222;
-        background-color: #F1F4F6;
+        background-color: #D8D3CD;
       }
 
       .MuiTabScrollButton-root {
