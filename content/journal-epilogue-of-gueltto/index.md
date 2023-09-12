@@ -30,7 +30,6 @@ categories: 회고록
 - [[번역] 자바스크립트 함수 호출과 "this" 이해하기](https://dev-bomdong.github.io/js-function-invocation-and-this/)
 - [ReactNode, ReactElement 그리고 JSX.Element](https://dev-bomdong.github.io/reactnode-react-element-jsx-element/)
 - [순열과 조합 Javascript로 구현하기](https://dev-bomdong.github.io/permutation-and-combination/)
-- [망쳐버린 스프린트를 마주하며](https://dev-bomdong.github.io/journal-slip-up-sprint/)
 - [Next.js에서 yarn start를 실행하면 어떻게 될까](https://dev-bomdong.github.io/next-js-yarn-start/)
 
 글감을 찾는게 마냥 쉽지는 않았는데, 일/스터디 등 일상 속에서 떠오르는 주제를 개인 노션에 적어두고 하나씩 골라 쓰고는 했다.
