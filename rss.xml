@@ -1,4 +1,127 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Bomdong.log]]></title><description><![CDATA[봄동의 일상 속 개발록]]></description><link>https://dev-bomdong.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 12 Sep 2023 03:59:32 GMT</lastBuildDate><item><title><![CDATA[글또 8기를 마무리하며]]></title><description><![CDATA[올해 2월부터 7월까지, 6개월동안 진행한 글또 8기 활동이 마무리되었다. 글또 
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Bomdong.log]]></title><description><![CDATA[봄동의 일상 속 개발록]]></description><link>https://dev-bomdong.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Thu, 12 Oct 2023 15:04:55 GMT</lastBuildDate><item><title><![CDATA[fork한 repository 자동 최신화하기 (feat. github action)]]></title><description><![CDATA[들어가며 사이드 프로젝트 결과물을 vercel에 배포하려는데,
+organization 내부의 팀 repository는 vercel에 배포할 때 과금이 되어 내 개인 계정으로 fork하고 그 repo를 vercel에 올렸다.
+그러다보니 팀 repo…]]></description><link>https://dev-bomdong.github.io/git-action-push-to-another-repo/</link><guid isPermaLink="false">https://dev-bomdong.github.io/git-action-push-to-another-repo/</guid><pubDate>Tue, 26 Sep 2023 00:00:00 GMT</pubDate><content:encoded>&lt;h2 id=&quot;들어가며&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%93%A4%EC%96%B4%EA%B0%80%EB%A9%B0&quot; aria-label=&quot;들어가며 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;들어가며&lt;/h2&gt;
+&lt;p&gt;사이드 프로젝트 결과물을 vercel에 배포하려는데,
+organization 내부의 팀 repository는 vercel에 배포할 때 과금이 되어 내 개인 계정으로 fork하고 그 repo를 vercel에 올렸다.
+그러다보니 팀 repo에 변경사항이 생길 때마다 fork한 내 개인 repo도 fetch해야해서 참으로 번거로웠다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;수익성있는 팀 프로젝트는 과금되는 플랜을 사용해야 하지만,
+Frontend &amp;#x26; Server repo를 묶어두려 organization을 만든거고 말 그대로 hobby project이긴 하니까요..😇&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;fork한 repo에서 fetch하는 작업을 github action으로 해결할 수 있지 않을까싶어 기웃거리다 자동화에 성공했다. 누군가가 (혹은 미래의 내가 또) 비슷한 고민을 할 수 있다고 생각되어 방법을 정리해보는 글.&lt;/p&gt;
+&lt;p&gt;편의상 organization repository를 &lt;code class=&quot;language-text&quot;&gt;팀 repo&lt;/code&gt;로, 이를 fork한 개인 계정의 repository를 &lt;code class=&quot;language-text&quot;&gt;개인 repo&lt;/code&gt;로 표기했다.&lt;/p&gt;
+&lt;h2 id=&quot;환경-변수-설정&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%ED%99%98%EA%B2%BD-%EB%B3%80%EC%88%98-%EC%84%A4%EC%A0%95&quot; aria-label=&quot;환경 변수 설정 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;환경 변수 설정&lt;/h2&gt;
+&lt;p&gt;본격적으로 action을 설정하기 전, 우선 workflow script에서 환경 변수를 설정해야 한다. &lt;br/&gt;
+action에서 사용할 환경 변수는 팀 repo의 Settings &gt; Secrets and variables &gt; Actions 에서 설정한다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 720px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 90.55555555555556%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAASCAYAAABb0P4QAAAACXBIWXMAABYlAAAWJQFJUiTwAAADB0lEQVQ4y2WUS2/jNhSF9eO762pWXbS7/oECfWEwQAsUaFdFi6KYTDKxndiWrSclkqJI6mF9AzJRxmkvcE1bJI/vOfceJbrrEE3DOI4swGUJn3C5LOR5QZblFEXJ+ZyR5XnMw/HI6XRmeT67RviVWOcYhuH1xrLEVErRti1SStpW0kqFUhohGkTTMs0z8zwxTyPzPIaLJFIqaiHiQa11BFgB98czu33Kx+2e9zcf2O127B8f47rdbLi7u+PDZs/tLuNml9G5iUTrLtIoyypmqDiAzfPMPmt5v824P5TsTxWbY8U2FfH55iioRIvSBql7tHFcFkh6azF9T9AyfF8pXy4XhKjJs+wpi4qqURR1Sykkx3NBJRpqUVNUZVyddyRSqSh6K2UEudZx9/DI7d1HttsH7u83bLdbNpsNh8OBqizphcaKjr7WLGaM9xJ1pdt1Q0L4YcA5H+kPw8g0zZ//dJz57eZ3fvznHW///YXv/v6Zv27/JGmalqqqX8CuQa21scPjOCGVjusaXnV88+u3fPn2K968+5ovfnrD93/8EChryrKMc3gNNl/RXyPMZqgy7E29h/8fIalFw+mcxQ6vdNZK60bysE85nnL26RnV9dhhorce2xiKumF/ykjzgjQv6b0nKas6usEYE7VaKwyYzg/orkfpLmZvHW4YsbrHSoOxLj7XnYl74zSTeD8wPNN9Re/Fghf63uKco4sXLV3ZoJWOMxv2Qq7MIuXQmFBhdIqUL1b8r1djzBeWoN9q3it9I2CYwzzPqWsRG+O9Z5qeutn1lkZqZHBDZ3DjhGsNzgTqE86PUYI1I+VQYZqe4nDnRRE9vVJtheTwmJKlOUVWRiB7Ejg3MEwzfpzwATjoGqWbSJTqOBxP8U0i1ZPA1nkGN2CLBl01yLymycqYIs3xskMbgzF9lMcEJq1inCaS0Nkw2F3XvXqvLfMFrwx2HOidwzhLP3ic94yhy85HFwWQ4KjQoICVhEENbgjd+zwyS2gzJqtpTwXimFE/p8nrCHhdYRiZRqqo/SfaJWRZvv9IlwAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;image01.png&quot;
+        title=&quot;image01.png&quot;
+        src=&quot;/static/58c915ff0938c278102756a99a14e3fc/37523/image01.png&quot;
+        srcset=&quot;/static/58c915ff0938c278102756a99a14e3fc/e9ff0/image01.png 180w,
+/static/58c915ff0938c278102756a99a14e3fc/f21e7/image01.png 360w,
+/static/58c915ff0938c278102756a99a14e3fc/37523/image01.png 720w,
+/static/58c915ff0938c278102756a99a14e3fc/302a4/image01.png 1080w,
+/static/58c915ff0938c278102756a99a14e3fc/07a9c/image01.png 1440w,
+/static/58c915ff0938c278102756a99a14e3fc/21cdd/image01.png 1680w&quot;
+        sizes=&quot;(max-width: 720px) 100vw, 720px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;위의 New repository secret 버튼을 클릭하면 환경 변수를 설정하는 페이지로 넘어가는데, 작성을 완료하면 아래의 Repository secrets에서 확인할 수 있다.&lt;/p&gt;
+&lt;p&gt;설정해야 할 환경 변수는 아래 두 개로, 환경 변수명은 변경해도 상관없다.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;DEPLOY_EMAIL_ACCOUNT&lt;/code&gt; : &lt;strong&gt;fork한 개인 계정 email 주소&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;DEPLOY_EMAIL_TOKEN&lt;/code&gt; : &lt;strong&gt;fork한 개인 계정 token&lt;/strong&gt; &lt;br/&gt;(Settings &gt; Developer Settings &gt; Personal access tokens에서 발급할 수 있다.)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;github-action-설정하기&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#github-action-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0&quot; aria-label=&quot;github action 설정하기 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;github action 설정하기&lt;/h2&gt;
+&lt;p&gt;이제 팀 repo에 action을 설정할 차례.&lt;/p&gt;
+&lt;p&gt;팀 repo의 root directory에 &lt;code class=&quot;language-text&quot;&gt;.githun/workflows&lt;/code&gt; 폴더를 만들고, yml 파일을 생성한다.&lt;/p&gt;
+&lt;p&gt;파일에는 아래와 같이 workflow를 작성해주면 되는데,
+&lt;a href=&quot;https://cpina.github.io/push-to-another-repository-docs/&quot;&gt;push-to-another-repository-docs&lt;/a&gt; 플러그인을 기반으로 &lt;strong&gt;main 브랜치에 어떤 commit이 push되면 또다른 repository에도 push&lt;/strong&gt;하는 작업을 수행한다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;yaml&quot;&gt;&lt;pre class=&quot;language-yaml&quot;&gt;&lt;code class=&quot;language-yaml&quot;&gt;&lt;span class=&quot;token key atrule&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; update a forked repository
+
+&lt;span class=&quot;token comment&quot;&gt;# main branch에 push하면 실행&lt;/span&gt;
+&lt;span class=&quot;token key atrule&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;token key atrule&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;token key atrule&quot;&gt;branches&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;main&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+
+&lt;span class=&quot;token key atrule&quot;&gt;jobs&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;token key atrule&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;token key atrule&quot;&gt;runs-on&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; ubuntu&lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt;latest
+    &lt;span class=&quot;token key atrule&quot;&gt;container&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; pandoc/latex
+    &lt;span class=&quot;token key atrule&quot;&gt;steps&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;token key atrule&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; actions/checkout@v4
+      &lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;token key atrule&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; ruby와 mustache를 설치하고 있어요
+        &lt;span class=&quot;token key atrule&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;token scalar string&quot;&gt;
+          apk add ruby
+          gem install mustache&lt;/span&gt;
+
+      &lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;token key atrule&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; output을 생성하고 있어요
+        &lt;span class=&quot;token key atrule&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; sh ./build.sh
+
+      &lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;token key atrule&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; 설정한 repository에 push하고 있어요
+        &lt;span class=&quot;token key atrule&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; push_directory
+        &lt;span class=&quot;token key atrule&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; cpina/github&lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt;action&lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt;push&lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt;to&lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt;another&lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt;repository@main
+        &lt;span class=&quot;token key atrule&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;token comment&quot;&gt;# 개인 계정 token&lt;/span&gt;
+          &lt;span class=&quot;token key atrule&quot;&gt;API_TOKEN_GITHUB&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; $&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; secrets.DEPLOY_EMAIL_TOKEN &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;token key atrule&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;token comment&quot;&gt;# GitHub Action will push files from&lt;/span&gt;
+          &lt;span class=&quot;token key atrule&quot;&gt;source-directory&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;output&apos;&lt;/span&gt;
+          &lt;span class=&quot;token comment&quot;&gt;# 개인 계정 user/repository name&lt;/span&gt;
+          &lt;span class=&quot;token key atrule&quot;&gt;destination-github-username&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; 개인계정 username
+          &lt;span class=&quot;token key atrule&quot;&gt;destination-repository-name&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; 개인계정 repository name
+          &lt;span class=&quot;token comment&quot;&gt;# 원본 commit message를 그대로 사용해 commit (optional)&lt;/span&gt;
+          &lt;span class=&quot;token key atrule&quot;&gt;commit-message&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; $&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; github.event.commits&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;.message &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+          &lt;span class=&quot;token key atrule&quot;&gt;target-branch&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; main&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;br/&gt;
+&lt;p&gt;위 단계까지 마치면 팀 repo의 Actions 탭에서 &lt;code class=&quot;language-text&quot;&gt;update a forked repository main&lt;/code&gt; (혹은 수정한 workflow name)을 확인할 수 있다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 720px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 99.44444444444443%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAABYlAAAWJQFJUiTwAAACRUlEQVQ4y31U2XLaQBDUl8QOCHSgE923AROn7FTlJf//K53q2V0hYeyHqdHq6O1jVtZ4fsPH339wDik2ToitG8H2YjhhBlcXr53g+LB2fgLbU9/svBhW0U44/fqDrJ7mF/aHFNV4xXB5R395x3D5QNFfkJQD0mpcVZDWCNIKcd4iKTpYbpgjylrEeScPvCgXlgTdB0fpju6PSpj5sXSWxY/9pMRBF0Ep00hXtbx+XFTGsrjImgl5M6FoX1D1Z2H5ZPvYOAF+7m91vzb1vDvMSizunpYDjvWIrB5xrAYBbaarbFJ2J7nPzfiM67I/yzO+Vw8XuWdsEck0NC461fMWadlLp/wobxAea0RZI5aYNSsu1Pt8ZgIVhnnD3Ue001V2zdsXNOOrAP/Yenje+TJSLCN9Lf8APy6M5BiRjpwArEzLT6tepJHpOqR1malwAi05rZSHadmJT9nCT3pEeTRegUaw3UV50W3M6CFvcKjJzBhPMBpNCxgA1/3pTYApW5h9BcgFB5vGmlAISrnsXNOf9Xx+ZqhOmJ5DhkKWlEdWw/m3GgfNjsE82Z6YbzxbATrhfO4FkMeOoTDhZTjCVIfEcKhiK5IXLGfJifbQjZAU6mN6aAASDWpmkl0A3a8Al6E0k0g26crJ6E7CWE7N+Cohbe7ZzYCh+sUZyWHWyCySBSXLDJa9BGGKwcz+Ldg9YBgLOzIy55aBsPPF28kI1/N3x3AORQabPhUqGHrJTpM/nY4FyP3YmD+4eLicPwZDdg9n7htAI/k/3H9uSepZU24AAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;image02.png&quot;
+        title=&quot;image02.png&quot;
+        src=&quot;/static/f138a29d2d490120a4859ffbc086fb4b/37523/image02.png&quot;
+        srcset=&quot;/static/f138a29d2d490120a4859ffbc086fb4b/e9ff0/image02.png 180w,
+/static/f138a29d2d490120a4859ffbc086fb4b/f21e7/image02.png 360w,
+/static/f138a29d2d490120a4859ffbc086fb4b/37523/image02.png 720w,
+/static/f138a29d2d490120a4859ffbc086fb4b/302a4/image02.png 1080w&quot;
+        sizes=&quot;(max-width: 720px) 100vw, 720px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;이제 main 브랜치에 수정사항이 생길 때마다 위처럼 자동으로 action이 실행되어 개인 repo에 반영되고, &lt;br/&gt; 개인 repo와 연동된 vercel도 다시 배포를 진행하게 된다.&lt;/p&gt;
+&lt;div class=&quot;table-of-contents&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#%EB%93%A4%EC%96%B4%EA%B0%80%EB%A9%B0&quot;&gt;들어가며&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#%ED%99%98%EA%B2%BD-%EB%B3%80%EC%88%98-%EC%84%A4%EC%A0%95&quot;&gt;환경 변수 설정&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#github-action-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0&quot;&gt;github action 설정하기&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;</content:encoded></item><item><title><![CDATA[글또 8기를 마무리하며]]></title><description><![CDATA[올해 2월부터 7월까지, 6개월동안 진행한 글또 8기 활동이 마무리되었다. 글또 
 개발 직군에 속한 회원들이 일정 금액을 예치하고…]]></description><link>https://dev-bomdong.github.io/journal-epilogue-of-gueltto/</link><guid isPermaLink="false">https://dev-bomdong.github.io/journal-epilogue-of-gueltto/</guid><pubDate>Sun, 16 Jul 2023 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;올해 2월부터 7월까지, 6개월동안 진행한 글또 8기 활동이 마무리되었다.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;글또&lt;/strong&gt; &lt;br/&gt;
