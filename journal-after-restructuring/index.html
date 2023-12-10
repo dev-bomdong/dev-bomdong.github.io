@@ -99,7 +99,28 @@
 <p>프론트 기술은 빠른 속도로 변화하고 있고 그 속도를 따라가기 위해 신규 개발을 모두 멈추고 마이그레이션에만 집중하는 것도 쉽지않다.
 이건 대부분의 회사에서 가지고 있을 고민이라 생각하므로 legacy 스택이라 해서 무조건 거부감을 갖는 것보다 <code class="language-text">어떻게하면 마냥 멈춰있지않고 바퀴를 잘 갈아 끼울 수 있을까</code> 를 팀원들과 함께 고민하고 있다.</p>
 <p>JSP에서 운영되고 있는 기능을 토대로 살을 붙이거나 개선해 React로 마이그레이션하는 것도 처음 해보는 경험이니 이 과정에서 JSP 화면에서 modal부터 React로 바꿔나가기 위해 window 객체를 활용해 메세지를 주고받는 등 두 스택을 버무리며 비즈니스 임팩을 낼 수 있는 방법을 배워나가는 중.</p>
-<p><img src="./image_1.png" alt="image_1.png"></p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 564px; "
+    >
+      <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 126.11111111111113%; position: relative; bottom: 0; left: 0; background-image: url('data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAZABQDASIAAhEBAxEB/8QAFwABAQEBAAAAAAAAAAAAAAAAAAMEAf/EABUBAQEAAAAAAAAAAAAAAAAAAAAB/9oADAMBAAIQAxAAAAHTKyDhZp1ibQr/xAAcEAEAAgIDAQAAAAAAAAAAAAABAgMSIQAQERT/2gAIAQEAAQUCgDKxSzkLtyfZfRveTFRoye//xAAUEQEAAAAAAAAAAAAAAAAAAAAg/9oACAEDAQE/AR//xAAUEQEAAAAAAAAAAAAAAAAAAAAg/9oACAECAQE/AR//xAAcEAADAAEFAAAAAAAAAAAAAAAAAREQAiAhMpH/2gAIAQEABj8C5JoVUxJhplR28K3s/8QAHBABAAMBAAMBAAAAAAAAAAAAAQARITEQQVFh/9oACAEBAAE/IahxEwtW/YXRfYmb1p3kYFLouAPQuQQqamMBt1BXa39h2Hj/2gAMAwEAAgADAAAAELfogP/EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQMBAT8QH//EABcRAQADAAAAAAAAAAAAAAAAAAABEBH/2gAIAQIBAT8QYiv/xAAeEAEAAwACAgMAAAAAAAAAAAABABEhQVEQMWFx8P/aAAgBAQABPxAEqVvP2Q5SAU9rBy51Shf3BBNVGmO63eLgVBoWq+CVKDXYqyjYviTy1cMUQQT1pvHtqJwuIyHE9nieif/Z'); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="image_1.jpeg"
+        title="image_1.jpeg"
+        src="/static/f2433484fa76d4b304b59e246de598ec/7723c/image_1.jpg"
+        srcset="/static/f2433484fa76d4b304b59e246de598ec/4ec73/image_1.jpg 180w,
+/static/f2433484fa76d4b304b59e246de598ec/158ba/image_1.jpg 360w,
+/static/f2433484fa76d4b304b59e246de598ec/7723c/image_1.jpg 564w"
+        sizes="(max-width: 564px) 100vw, 564px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+        decoding="async"
+      />
+    </span></p>
 <h3 id="새로운-동료들과-익숙하지-않은-기능을-다뤄나가는-경험" style="position:relative;"><a href="#%EC%83%88%EB%A1%9C%EC%9A%B4-%EB%8F%99%EB%A3%8C%EB%93%A4%EA%B3%BC-%EC%9D%B5%EC%88%99%ED%95%98%EC%A7%80-%EC%95%8A%EC%9D%80-%EA%B8%B0%EB%8A%A5%EC%9D%84-%EB%8B%A4%EB%A4%84%EB%82%98%EA%B0%80%EB%8A%94-%EA%B2%BD%ED%97%98" aria-label="새로운 동료들과 익숙하지 않은 기능을 다뤄나가는 경험 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>새로운 동료들과 익숙하지 않은 기능을 다뤄나가는 경험</h3>
 <p>다루게 된 서비스의 기능이 워낙 큰데 히스토리를 아는 사람도 없다 보니 서비스 전반을 두루두루 다루는 것보단 특정 기능에 집중하는 스쿼드 체제가 부담을 덜어주었다.</p>
 <p>매일 아침 데일리 스크럼을 하며 각자의 진행상황을 파악하고, 이때 기능과 관련된 작은 물음표도 모두 풀어낸다.
