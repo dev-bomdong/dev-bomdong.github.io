@@ -13,7 +13,7 @@ categories: React
 나름의 방법으로 고심해보며 중간중간 드는 궁금증들은 실제 구현된 코드도 찾아보며 해결해보기도 했다. 그 여정을 간단히 기록해보는 글.
 react-hook-form은 앞으로도 계속해서 사용할테니 아래 내용은 더 추가될 예정.
 
-### 서로 다른 컴포넌트에서 form 상태 공유하기
+## 서로 다른 컴포넌트에서 form 상태 공유하기
 
 한 파일 안에 모든 input이 존재해 form data가 관리되는 형태라면 큰 어려움이 없겠지만,
 
@@ -51,7 +51,7 @@ export const FormProvider = <
 };
 ```
 
-### FormProvider, form 태그 외부에서 handleSubmit을 해야할 때
+## FormProvider, form 태그 외부에서 handleSubmit을 해야할 때
 
 일반적으로 HTML form 태그의 submit event는 `type=”submit”` 형태의 제출 버튼이 form 내부에 위치해야 발생한다.
 
