@@ -1,4 +1,128 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Bomdong.log]]></title><description><![CDATA[봄동의 일상 속 개발록]]></description><link>https://dev-bomdong.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 16 Jan 2024 06:35:07 GMT</lastBuildDate><item><title><![CDATA[2023년 회고]]></title><description><![CDATA[2024년 첫 주를 마무리하며 돌아보는 202…]]></description><link>https://dev-bomdong.github.io/journal-goodbye-2023/</link><guid isPermaLink="false">https://dev-bomdong.github.io/journal-goodbye-2023/</guid><pubDate>Sun, 07 Jan 2024 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;2024년 첫 주를 마무리하며 돌아보는 2023년.
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Bomdong.log]]></title><description><![CDATA[봄동의 일상 속 개발록]]></description><link>https://dev-bomdong.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Sun, 04 Feb 2024 14:17:34 GMT</lastBuildDate><item><title><![CDATA[HTTP 캐시와 조건부 요청 헤더]]></title><description><![CDATA[HTTP 캐시 웹 브라우저가 서버로부터 받은 데이터를 일시적으로 저장하는 공간을 HTTP 캐시라고 한다. 캐시는 데이터,값을 복사해 임시로 저장하는 장소를 가르키고 AWS…]]></description><link>https://dev-bomdong.github.io/web-http-cache/</link><guid isPermaLink="false">https://dev-bomdong.github.io/web-http-cache/</guid><pubDate>Sun, 04 Feb 2024 00:00:00 GMT</pubDate><content:encoded>&lt;h2 id=&quot;http-캐시&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#http-%EC%BA%90%EC%8B%9C&quot; aria-label=&quot;http 캐시 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;HTTP 캐시&lt;/h2&gt;
+&lt;p&gt;웹 브라우저가 서버로부터 받은 데이터를 일시적으로 저장하는 공간을 HTTP 캐시라고 한다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;캐시는 데이터,값을 복사해 임시로 저장하는 장소를 가르키고 &lt;a href=&quot;https://aws.amazon.com/ko/caching/&quot;&gt;AWS&lt;/a&gt;에 따르면 다양한 유형이 있다. (데이터의 복사본을 저장하는 장소는 캐시, 캐시에 복사본을 저장하고 있다가 요청시 제공하는 과정 전체는 캐싱이라 한다.) 다만 조건부 요청 헤더와의 상호작용에 대한 이 글에선 HTTP 캐시(웹 캐시)만 다룰 예정.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;HTTP 캐시는 웹 서비스 성능 최적화에 도움을 주는데, 이미지나 자바스크립트 파일 등을 매번 다운로드하지 않고 복사본을 캐시에 저장해 두었다가 이후의 요청에 (유효시간 검증 후)캐시의 리소스를 사용할 수 있기 때문이다. 우리가 어떤 페이지에 처음 진입할 때와 n번째 진입할 때의 로딩 속도가 차이나는 이유도 여기에 있다.&lt;/p&gt;
+&lt;p&gt;HTTP 캐시는 주로 HTTP 헤더를 통해 제어되는데, 대표적인 헤더는 아래 정도가 있다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;Cache-Control&lt;/code&gt; : 캐시의 유효시간을 초 단위로 설정하거나 (max-age) 특정 데이터가 캐시하지 않도록 설정하는(no-store) 등 세밀한 제어를 할 수 있다.&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;Last-modified&lt;/code&gt; : 검증 헤더 중 하나로, 데이터가 마지막으로 수정된 시간을 뜻한다.&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;ETag&lt;/code&gt;(Entity Tag) : 캐시용 데이터에 임의로 고유한 이름을 달아두는 것으로, 데이터가 변경되면 이름도 함께 변경된다. 검증 헤더 중 하나.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;조건부-요청-헤더&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%A1%B0%EA%B1%B4%EB%B6%80-%EC%9A%94%EC%B2%AD-%ED%97%A4%EB%8D%94&quot; aria-label=&quot;조건부 요청 헤더 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;조건부 요청 헤더&lt;/h2&gt;
+&lt;p&gt;조건부 요청 헤더는 말 그대로 웹 브라우저가 서버에 요청을 보낼 때 특정 조건을 명시하는 역할을 한다.&lt;/p&gt;
+&lt;p&gt;조건부 요청 헤더는 HTTP 캐시와 상호작용해 웹 성능 최적화를 향상시킬 수 있다. 조건부 요청 헤더로 서버에 캐시된 데이터의 유효성을 확인요청하면, 서버는 유효하다면 데이터가 변경되지 않았음을 결과로 전달하고, 유효하지 않다면 새로운 데이터를 전송한다. 이 때 사용되는 헤더는 아래와 같다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;If-Modified-Since&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;If-UnModified-Since&lt;/code&gt; : 검증 헤더인 last-modified와 함께 사용된다.&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;If-Match&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;If-None-Match&lt;/code&gt; : 검증 헤더인 ETag와 함께 사용된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;http-캐시와-조건부-요청-헤더의-상호작용&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#http-%EC%BA%90%EC%8B%9C%EC%99%80-%EC%A1%B0%EA%B1%B4%EB%B6%80-%EC%9A%94%EC%B2%AD-%ED%97%A4%EB%8D%94%EC%9D%98-%EC%83%81%ED%98%B8%EC%9E%91%EC%9A%A9&quot; aria-label=&quot;http 캐시와 조건부 요청 헤더의 상호작용 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;HTTP 캐시와 조건부 요청 헤더의 상호작용&lt;/h2&gt;
+&lt;p&gt;그럼 앞서 소개한 조건부 요청 헤더는 HTTP 캐시와 어떻게 상호작용하는걸까?&lt;/p&gt;
+&lt;h3 id=&quot;last-modified와-if-unmodified-since&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#last-modified%EC%99%80-if-unmodified-since&quot; aria-label=&quot;last modified와 if unmodified since permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Last-Modified와 If-(Un)Modified-Since&lt;/h3&gt;
+&lt;p&gt;데이터의 최종 수정시간을 기준으로 데이터의 유효성을 검증한다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 720px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 36.66666666666667%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAHCAYAAAAIy204AAAACXBIWXMAABYlAAAWJQFJUiTwAAABCElEQVQoz52RS4qEQAyG6wi9FryUS9eewWN4iz6CO0HduBB3bqVbbPEtorYPaNt/SEBnGGZmMYG/UhUqX1Ipse87/mM/5VFM0KYsS0RRhNvtxn4cR2zbhmEY8Hw+WX3f85lEezLf96HrOq7X6ydwXVfYto04jnG/3xGGIV+keJqmXCzLslN5nuPxeDBA0zQIISDLMuZ55pig6q7rnhW6roPnedwhJdd1jaqq0DQNeyqQJAnfV1WVgZfLhV/BwNfrBcuyuEvHcWCaJoIgwDRNKIqCRTACtW3L4yBPZhgGJEmCoiggDgN/G/qyLAwlAHmaG/nvdoDOGdLyfr/58FV//e4hyiM78qnDDwFaA4Zz4zl4AAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;last-modified&quot;
+        title=&quot;last-modified&quot;
+        src=&quot;/static/3b0cd5924453b40ab5bca55101ba9f31/37523/img_1.png&quot;
+        srcset=&quot;/static/3b0cd5924453b40ab5bca55101ba9f31/e9ff0/img_1.png 180w,
+/static/3b0cd5924453b40ab5bca55101ba9f31/f21e7/img_1.png 360w,
+/static/3b0cd5924453b40ab5bca55101ba9f31/37523/img_1.png 720w,
+/static/3b0cd5924453b40ab5bca55101ba9f31/302a4/img_1.png 1080w,
+/static/3b0cd5924453b40ab5bca55101ba9f31/07a9c/img_1.png 1440w,
+/static/3b0cd5924453b40ab5bca55101ba9f31/fe83d/img_1.png 2262w&quot;
+        sizes=&quot;(max-width: 720px) 100vw, 720px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Client의 요청에 따른 응답을 보낼 때, Server는 &lt;code class=&quot;language-text&quot;&gt;Last-Modified&lt;/code&gt; 헤더에 데이터의 최종 수정시간을 전송한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Client는 이후 요청을 보낼 때 &lt;code class=&quot;language-text&quot;&gt;If-(Un)Modified-Since&lt;/code&gt; 헤더에 데이터의 최종 수정시간을 전송한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Server는 Client가 보낸 헤더값으로 데이터의 최종 수정시간을 비교하고, 변경이 없으면 &lt;code class=&quot;language-text&quot;&gt;304 Not Modified&lt;/code&gt;로 응답하며 body없이 HTTP 메타 정보를 함께 전송한다. 변경이 있어 새로운 데이터로 갱신해야 할 경우, (일반적으로)&lt;code class=&quot;language-text&quot;&gt;200 ok&lt;/code&gt;와 body로 데이터를 전송한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Client는 304 응답을 받을 경우 함께 전달받은 메타 정보로 캐시의 메타 정보를 갱신하고, 갱신한 캐시의 데이터를 재활용한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&quot;etag와-if-none-match&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#etag%EC%99%80-if-none-match&quot; aria-label=&quot;etag와 if none match permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;ETag와 If-(None)-Match&lt;/h3&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 720px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 36.66666666666667%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAHCAYAAAAIy204AAAACXBIWXMAABYlAAAWJQFJUiTwAAAA8ElEQVQoz4WR24mGQAyFpwMLsAg7sRprsAmrEG3AVwXxyTefvYsXVPB2lhOYxV32ZwPHzCSZz0xGPc+Dv+xT/FNe7xU/53miaRrUdY2qqrDvuySP48C2bd9inP66LsmnaQrf9+WMhgowz3PEcYyiKJAkiYi2LIsUv1WWpTSwrissy4JSCq7rQjem9J+GYZAgCzWw73sBtG0r4i24n+cZXdfBNE0BOo7zE5hlGcIwRBRFCIJAPK/HERBCMIHjOGKaJhGvbts2DMOA53kC5CjUe7hc3/ctnkB2y27oCdOz1UYA4e/zSi+0/nvh37XvGF/5C9KaB/qP7x5KAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;ETag&quot;
+        title=&quot;ETag&quot;
+        src=&quot;/static/6fdf16ba31a4663f8ba022cc20484ec3/37523/img_2.png&quot;
+        srcset=&quot;/static/6fdf16ba31a4663f8ba022cc20484ec3/e9ff0/img_2.png 180w,
+/static/6fdf16ba31a4663f8ba022cc20484ec3/f21e7/img_2.png 360w,
+/static/6fdf16ba31a4663f8ba022cc20484ec3/37523/img_2.png 720w,
+/static/6fdf16ba31a4663f8ba022cc20484ec3/302a4/img_2.png 1080w,
+/static/6fdf16ba31a4663f8ba022cc20484ec3/07a9c/img_2.png 1440w,
+/static/6fdf16ba31a4663f8ba022cc20484ec3/2acc9/img_2.png 2378w&quot;
+        sizes=&quot;(max-width: 720px) 100vw, 720px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;데이터의 유효성을 최종 수정시간이 아닌 캐시의 고유한 태그값(ETag)로 검증한다는 것을 제외하면 &lt;code class=&quot;language-text&quot;&gt;If-Modified-Since&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;If-UnModified-Since&lt;/code&gt;와 거의 동일하다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Client의 요청에 따른 응답을 보낼 때, Server는 ETag 헤더에 캐시의 고유한 태그값을 전송한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Client는 이후 요청을 보낼 때 &lt;code class=&quot;language-text&quot;&gt;If-(None)-Match&lt;/code&gt; 헤더에 캐시의 고유한 태그값&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Server는 Client가 보낸 헤더값으로 ETag값을 비교하고, 변경이 없으면 &lt;code class=&quot;language-text&quot;&gt;304 Not Modified&lt;/code&gt;로 응답하며 body없이 HTTP 메타 정보를 함께 전송한다.
+변경이 있어 새로운 데이터로 갱신해야 할 경우, (일반적으로)&lt;code class=&quot;language-text&quot;&gt;200 ok&lt;/code&gt;와 body로 데이터를 전송한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Client는 304 응답을 받을 경우 함께 전달받은 메타 정보로 캐시의 메타 정보를 갱신하고, 갱신한 캐시의 데이터를 재활용한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;p&gt;물론 리소스의 성격에 따라 &lt;code class=&quot;language-text&quot;&gt;Cache-Control : no-cache, no-store, must-revalidate&lt;/code&gt;로 애초에 캐시를 무효화 시킬 수도 있고, &lt;a href=&quot;https://toss.tech/article/smart-web-service-cache&quot;&gt;토스&lt;/a&gt;처럼 &lt;code class=&quot;language-text&quot;&gt;Cache-Control : max-age=31536000&lt;/code&gt; (최대값) 을 설정해 새로운 배포 전까지 계속해서 캐시된 리소스를 사용하게 제어할 수도 있다.&lt;/p&gt;
+&lt;div class=&quot;table-of-contents&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;#http-%EC%BA%90%EC%8B%9C&quot;&gt;HTTP 캐시&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;#%EC%A1%B0%EA%B1%B4%EB%B6%80-%EC%9A%94%EC%B2%AD-%ED%97%A4%EB%8D%94&quot;&gt;조건부 요청 헤더&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;#http-%EC%BA%90%EC%8B%9C%EC%99%80-%EC%A1%B0%EA%B1%B4%EB%B6%80-%EC%9A%94%EC%B2%AD-%ED%97%A4%EB%8D%94%EC%9D%98-%EC%83%81%ED%98%B8%EC%9E%91%EC%9A%A9&quot;&gt;HTTP 캐시와 조건부 요청 헤더의 상호작용&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#last-modified%EC%99%80-if-unmodified-since&quot;&gt;Last-Modified와 If-(Un)Modified-Since&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#etag%EC%99%80-if-none-match&quot;&gt;ETag와 If-(None)-Match&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;</content:encoded></item><item><title><![CDATA[2023년 회고]]></title><description><![CDATA[2024년 첫 주를 마무리하며 돌아보는 202…]]></description><link>https://dev-bomdong.github.io/journal-goodbye-2023/</link><guid isPermaLink="false">https://dev-bomdong.github.io/journal-goodbye-2023/</guid><pubDate>Sun, 07 Jan 2024 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;2024년 첫 주를 마무리하며 돌아보는 2023년.
 기억에 남는 키워드를 중심으로 회고를 작성해 본다.&lt;/p&gt;
 &lt;h2 id=&quot;메인-기능-릴리즈-이슈해결&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%A9%94%EC%9D%B8-%EA%B8%B0%EB%8A%A5-%EB%A6%B4%EB%A6%AC%EC%A6%88-%EC%9D%B4%EC%8A%88%ED%95%B4%EA%B2%B0&quot; aria-label=&quot;메인 기능 릴리즈 이슈해결 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;메인 기능 릴리즈, 이슈&amp;#x26;해결&lt;/h2&gt;
 &lt;p&gt;시설관리 서비스의 신규 메인 기능으로 사진을 첨부해 이슈를 등록하고, 해결하는 일종의 신문고와 같은 &lt;code class=&quot;language-text&quot;&gt;이슈&amp;amp;해결&lt;/code&gt; 기능을 개발했다.&lt;/p&gt;
