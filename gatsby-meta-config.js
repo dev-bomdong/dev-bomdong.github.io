@@ -1,6 +1,6 @@
 module.exports = {
   title: `Bomdong.log`,
-  description: `봄동의 일상 속 개발록`,
+  description: `일상 속 개발록`,
   language: `ko`, // `ko`, `en` => currently support versions for Korean and English
   siteUrl: `https://dev-bomdong.github.io/`,
   ogImage: `/blog-thumbnail.png`, // Path to your in the 'static' folder
@@ -19,7 +19,7 @@ module.exports = {
     },
     social: {
       github: 'https://github.com/dev-bomdong',
-      linkedIn: ``, // `https://www.linkedin.com/in/jinhyeok-jeong-800871192`,
+      linkedIn: 'https://www.linkedin.com/in/donghee-kim-66a935264/',
       email: 'dongdh02076@gmail.com',
     },
   },
