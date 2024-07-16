@@ -58,18 +58,62 @@ Design Patterns: Elements of Reusable Object-Oriented Software의 분류에 따�
 
 ![strategy-pattern-diagram](./img_3.png)
 
-### Context
+- `Context` : 전략을 사용하는 클래스
 
-전략을 사용하는 클래스
+- `Strategy` : 모든 전략에 대한 공통 인터페이스
 
-### Strategy
+- `ConcreteStrategy` : 전략 인터페이스를 구현하는 구체적인 전략 클래스
 
-모든 전략에 대한 공통 인터페이스
+위의 UML Class diagram과 맞는 예제 코드를 아래에 간단하게 작성해봤다.
 
-### ConcreteStrategy
+```typescript
+//Strategy
+interface Strategy {
+  execute(): void;
+}
 
-`Strategy` 인터페이스를 구현하는 구체적인 전략 클래스 <br/>
-ConcreteStrategyA와 ConcreteStrategyB는 `Strategy` 인터페이스를 따라 `execute()`를 구현하고 있지만, 그 세부 구현은 같지 않다.
+//ConcreteStrategy
+class ConcreteStrategyA implements Strategy {
+  execute() {
+    console.log("Let's run strategy A!");
+    // Strategy A 고유의 알고리즘 구현
+  }
+}
+
+class ConcreteStrategyB implements Strategy {
+  execute() {
+    console.log("Let's run strategy B!");
+    // Strategy B 고유의 알고리즘 구현
+  }
+}
+
+// Context
+class Context {
+  private strategy: Strategy;
+
+  constructor(strategy: Strategy) {
+    this.strategy = strategy;
+  }
+
+  public setStrategy(strategy: Strategy) {
+    this.strategy = strategy;
+  }
+
+  public executeStrategy() {
+    this.strategy.execute();
+  }
+}
+
+// Usage
+const context = new Context(new ConcreteStrategyA());
+context.executeStrategy(); // "Let's run strategy A!" 출력
+
+context.setStrategy(new ConcreteStrategyB());
+context.executeStrategy(); // "Let's run strategy B!" 출력
+```
+
+- `ConcreteStrategyA`와 `ConcreteStrategyB`는 공통 인터페이스를 따라 `execute()`를 구현하지만, 그 세부 구현은 같지 않다. (console에 출력하는 메세지가 다름을 알 수 있다.)
+- context의 `executeStrategy`에선 구체적 전략의 `execute()`의 로직을 알지 못한다.
 
 ### 주요 특징
 
