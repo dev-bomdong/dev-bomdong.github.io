@@ -295,7 +295,7 @@
 
 .markdown :not(pre) > code.language-text {
   background: rgba(135, 131, 120, 0.15);
-  color: #eb5757;
+  color: var(--content-text-color);
   overflow-wrap: break-word;
 }
 
