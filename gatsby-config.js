@@ -181,6 +181,17 @@ module.exports = {
               escapeEntities: {},
             },
           },
+          {
+            resolve: "gatsby-omni-font-loader",
+            options: {
+              enableListener: true,
+              preconnect: [`https://fonts.googleapis.com`, `https://fonts.gstatic.com`],
+              web: [{
+                name: `Pretendard`,
+                file: `https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css`,
+              }],
+            },
+          },
           `gatsby-remark-autolink-headers`,
           `gatsby-remark-copy-linked-files`,
           `gatsby-remark-smartypants`,

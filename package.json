@@ -10,6 +10,7 @@
     "@mui/icons-material": "^5.11.0",
     "@mui/material": "^5.11.6",
     "gatsby": "^5.11.0",
+    "gatsby-omni-font-loader": "^2.0.2",
     "gatsby-plugin-advanced-sitemap": "^2.1.0",
     "gatsby-plugin-feed": "^5.5.0",
     "gatsby-plugin-google-analytics": "^4.9.0",
