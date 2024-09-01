@@ -165,7 +165,7 @@ function updateEffectImpl(
 
 `updateEffectImpl`에선 의존성 배열을 순회하면서 `areHookInputsEqual` 함수로 이전 의존성과 새로운 의존성을 비교하는 절차를 거친다.
 
-두 의존성이 달라질 때 React에게 이 Fiber에 변경사항이 있음을 알려주고 (`currentlyRenderingFiber.flags |= fiberFlags;` ) pusshEffect에 첫 번째 인자로 `HookHasEffect | hookFlags`를 전달한다. HookHasEffect는 [비트플래그](http://localhost:8000/react-useEffect/#effect-%EA%B0%9D%EC%B2%B4%EC%9D%98-tag)로, commit phase에서 어떤 effect를 실행할지 결정하는데 사용되므로, 이 effect가 이번 렌더링 사이클에서 실행되어야 함을 나타낸다.
+두 의존성이 달라질 때 React에게 이 Fiber에 변경사항이 있음을 알려주고 (`currentlyRenderingFiber.flags |= fiberFlags;` ) pusshEffect에 첫 번째 인자로 `HookHasEffect | hookFlags`를 전달한다. HookHasEffect는 [비트플래그](https://dev-bomdong.github.io/react-useEffect/#effect-%EA%B0%9D%EC%B2%B4%EC%9D%98-tag)로, commit phase에서 어떤 effect를 실행할지 결정하는데 사용되므로, 이 effect가 이번 렌더링 사이클에서 실행되어야 함을 나타낸다.
 
 #### pushEffect()
 
@@ -466,7 +466,7 @@ if (areHookInputsEqual(nextDeps, prevDeps)) {
 }
 ```
 
-[effect 생성 및 스케쥴링](http://localhost:8000/react-useEffect/#effect-%EC%83%9D%EC%84%B1-%EB%B0%8F-%EC%8A%A4%EC%BC%80%EC%A5%B4%EB%A7%81)에서 살펴본 `updateEffectImpl` 함수를 떠올려보면, `areHookInputsEqual`함수를 통해 의존성 배열의 변화를 감지하고(이전과 일치하는지 검증)하고 effect의 재실행 여부를 결정했다. 의존성 배열이란 데이터의 변경에 따라 조건부로 실행된다.
+[effect 생성 및 스케쥴링](https://dev-bomdong.github.io/react-useEffect/#effect-%EC%83%9D%EC%84%B1-%EB%B0%8F-%EC%8A%A4%EC%BC%80%EC%A5%B4%EB%A7%81)에서 살펴본 `updateEffectImpl` 함수를 떠올려보면, `areHookInputsEqual`함수를 통해 의존성 배열의 변화를 감지하고(이전과 일치하는지 검증)하고 effect의 재실행 여부를 결정했다. 의존성 배열이란 데이터의 변경에 따라 조건부로 실행된다.
 
 ### 렌더링과 effect의 분리 및 비동기적 실행
 
@@ -482,7 +482,7 @@ if (
 }
 ```
 
-[commitRootImpl](http://localhost:8000/react-useEffect/#commitrootimpl) 함수에서 effect가 실행되는 코드를 다시 가져와봤다.
+[commitRootImpl](https://dev-bomdong.github.io/react-useEffect/#commitrootimpl) 함수에서 effect가 실행되는 코드를 다시 가져와봤다.
 렌더링은 동기적으로 이루어지지만, effect의 실행(`flushPassiveEffects`)은 별도로 스케줄링 (`scheduleCallback`)된다. 따라서 UI 업데이트와 데이터 동기화 작업이 서로를 방해하지 않는다.
 
 `scheduleCallback`은 React의 스케쥴러를 통해 작업을 비동기적으로 + 우선순위에 기반해 + 중단 가능하게 실행한다. 이 특징은 Concurrent mode에서 더 중요해지는데 화면이 갱신될 때 UI 먼저 즉시 반영하고, useEffect 내부에서 데이터를 불러올 경우 비동기적으로 실행할 수 있다.
@@ -495,7 +495,7 @@ commitPassiveUnmountEffects(root.current);
 commitPassiveMountEffects(root, root.current, lanes, transitions);
 ```
 
-[flushPassiveEffectsImpl](http://localhost:8000/react-useEffect/#flushpassiveeffectsimpl) 함수 내부를 보면
+[flushPassiveEffectsImpl](https://dev-bomdong.github.io/react-useEffect/#flushpassiveeffectsimpl) 함수 내부를 보면
 이전 effect의 cleanUp 함수(`commitPassiveUnmountEffects`)를 먼저 실행하고, 그 다음 새로운 effect를 실행한다. 이전 상태와의 동기화를 해제하고, 그 다음 새로운 상태와 동기화하는 과정이라 할 수 있다.
 
 ## 마치며
