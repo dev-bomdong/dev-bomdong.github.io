@@ -81,8 +81,9 @@
 <p>전략 패턴 예제는 대부분 클래스로 되어있어 클래스를 지양하는 팀의 코드에 맞게 전략 객체로 변형해 보는 식으로 응용해 보고, 흩어진 분기 처리를 일관된 구조로 모으는 과정에서 추상화의 대상에 대한 고민도 진득하게 해볼 수 있었다.
 이 경험을 잘 정리해서 커뮤니티 밋업행사에서 발표도 하고 <a href="https://dev-bomdong.github.io/react-strategy-pattern/">블로그 포스팅</a>도 했으니 여러모로 기억에 남는다.</p>
 <h2 id="jsp-react-탐지-크롬-익스텐션" style="position:relative;"><a href="#jsp-react-%ED%83%90%EC%A7%80-%ED%81%AC%EB%A1%AC-%EC%9D%B5%EC%8A%A4%ED%85%90%EC%85%98" aria-label="jsp react 탐지 크롬 익스텐션 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>JSP-React 탐지 크롬 익스텐션</h2>
-<p>회사에서 주어진 요구사항 외에 주체적으로 문제를 정의해서 해결해 보자는 마음으로 진행한 혼자만의 프로젝트 <code class="language-text">플러스알파 만들기</code>의 산출물
-별도의 포스팅을 쓰려 했는데 일단 해가 넘어갔으니 회고록에 간략히 정리해 본다.</p>
+<p>회사에서 주어진 요구사항 외에 주체적으로 문제를 정의해서 해결해 보자는 마음으로 진행한 혼자만의 프로젝트 <code class="language-text">회사에서 플러스알파 만들기</code>의 산출물. <br/>
+협업하며 느꼈던 문제를 해결하기 위해 만든 사내 tool로, 기술적으로 복잡하진 않지만 유용하게 쓰이고 있어 가심비가 훌륭했던 프로젝트였다.
+(별도의 포스팅을 쓰려 했는데 일단 해가 넘어갔으니 회고록에 간략히 정리해 본다.)</p>
 <h3 id="문제-정의" style="position:relative;"><a href="#%EB%AC%B8%EC%A0%9C-%EC%A0%95%EC%9D%98" aria-label="문제 정의 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>문제 정의</h3>
 <p><a href="">출퇴근 담당 스쿼드에서의 1년</a>에서 언급한 것처럼 회사에서 개발하고 있는 서비스는 90% 정도 JSP로 이루어져 있는데 기능이 너무 방대해서 한꺼번에 옮기기보다는 JSP 페이지에서 특정 모달만 React로 바꾸거나 특정 섹션만 React로 변경하는 등 기능 고도화와 함께 부분적으로 React로 마이그레이션 해나가고 있다.</p>
 <p>JSP, React 페이지는 url 구조가 다르기에 쉽게 구분이 가능하지만 비개발자가 JSP 페이지에 부분적으로 React가 적용된 부분을 알아차리기가 쉽지 않았다.
@@ -249,6 +250,11 @@
 </ul>
 <p>독서모임의 장점은 1) 나와 다른 의견을 경청하는 연습 2) 발제에 맞게 본인의 생각을 논리적으로 구조화하며 말하는 연습을 해볼 수 있는 것이라 생각한다.
 경청과 구조화는 협업을 할 때도 굉장히 중요한 것이어서 불가피한 일이 있지 않는 이상 2025년에도 쭉 함께할 예정</p>
+<h2 id="2025년에-집중할-방향" style="position:relative;"><a href="#2025%EB%85%84%EC%97%90-%EC%A7%91%EC%A4%91%ED%95%A0-%EB%B0%A9%ED%96%A5" aria-label="2025년에 집중할 방향 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2025년에 집중할 방향</h2>
+<p>신년 <strong>목표</strong>를 세우는 것보단 올해 집중하고 싶은 <strong>방향</strong>을 생각해보는 걸 선호하는 편이다. 직업인으로서 2025년에 나아가고 싶은 방향을 크게 두 가지 생각해봤다.</p>
+<p>첫 번째로 <strong>나무보다 숲을 볼 줄 아는 기술자</strong>가 되고 싶다는 마음이 크다. 자신없는 인프라, 네트워크 분야에 대한 학습을 해봐야지란 생각으로 2024년 연말부터 &#x3C;모두의 네트워크 - 미즈구치 카츠야> 책을 읽으며 예열하고 있다.</p>
+<p>두 번째는 <strong><code class="language-text">내가 가진 A</code>를 통해 <code class="language-text">문제 B</code>를 해결하는 사람이 되기위해, 여기서의 A와 B를 구체화해나가는 것.</strong> A를 정의하기 위해선 내 강점과 능력을 객관적으로 바라보며 리스트업 해야한다. 물론 지금 리스트업 해둔 것들이 있긴하지만 좀더 구체적으로 스스로를 돌아보며 정리가 필요하다는 생각 (그 과정에서 자연스레 채워야 할 부분의 우선순위도 알 수 있게 될 것 같다)
+더 중요한 건 B라고 생각하는데 어떤 문제를 해결하며 직업인으로서의 가치를 증명하고 싶은지 고민하다보면 지금도 하고있는 커리어 관련 불안과 고민이 조금은 안정될 것 같다.</p>
 <hr>
 <p>한 해 동안 딱 나이만큼의 책을 읽었고, 일상 블로그에 50개의 주간 일기를 포스팅했다.
 1년이 대략 52주이니 거의 매주 일기를 쓴 셈인데 이렇게 주간 일기를 써온 게 벌써 9년 정도 되었다.
@@ -287,6 +293,9 @@
 </li>
 <li>
 <p><a href="#%EB%8F%85%EC%84%9C%EB%AA%A8%EC%9E%84">독서모임</a></p>
+</li>
+<li>
+<p><a href="#2025%EB%85%84%EC%97%90-%EC%A7%91%EC%A4%91%ED%95%A0-%EB%B0%A9%ED%96%A5">2025년에 집중할 방향</a></p>
 </li>
 </ul>
 </div></div></div><div class="post-navigator"><div class="post-navigator-card-wrapper"><a class="post-card prev" href="/journal-futureconf-meetup/"><div class="direction">이전 글</div><div class="title">프론트엔드 개발자의 커뮤니티 밋업 기획 도전기</div></a></div><div class="post-navigator-card-wrapper"></div></div><div class="utterances"></div></main><footer class="page-footer-wrapper"><p class="page-footer">© <!-- -->2025<!-- --> <a href="https://github.com/dev-bomdong">dev-bomdong</a> powered by<a href="https://github.com/zoomKoding/zoomkoding-gatsby-blog"> zoomkoding-gatsby-blog</a></p></footer><div class="dark-mode-button-wrapper"><button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium dark-mode-button css-1yxmbwk" tabindex="0" type="button"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge dark-mode-icon css-6flbmm" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="DarkModeIcon"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"></path></svg></button></div></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-ZZQWRB4MK9"></script><script>
