@@ -60,11 +60,11 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   const results = await graphql(`
     {
-      allMarkdownRemark(sort: {frontmatter: {date: DESC}}, limit: 1000) {
+      allMarkdownRemark(sort: { frontmatter: { date: DESC } }, limit: 1000) {
         edges {
           node {
             id
-            excerpt(pruneLength: 500, truncate: true)
+            excerpt(pruneLength: 150, truncate: true)
             fields {
               slug
             }
@@ -99,15 +99,14 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   createPostsPages({ createPage, results });
 };
 
-
 exports.onCreateNode = ({ node, actions, getNode }) => {
-  const { createNodeField } = actions
+  const { createNodeField } = actions;
   if (node.internal.type === `MarkdownRemark`) {
-    const value = createFilePath({ node, getNode })
+    const value = createFilePath({ node, getNode });
     createNodeField({
       name: `slug`,
       node,
       value,
-    })
+    });
   }
-}
+};

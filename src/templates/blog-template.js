@@ -43,7 +43,6 @@ function BlogTemplate({ data }) {
   );
 }
 
-
 export default BlogTemplate;
 
 export const pageQuery = graphql`
@@ -51,7 +50,7 @@ export const pageQuery = graphql`
     cur: markdownRemark(fields: { slug: { eq: $slug } }) {
       id
       html
-      excerpt(pruneLength: 500, truncate: true)
+      excerpt(pruneLength: 150, truncate: true)
       frontmatter {
         date(formatString: "MMMM DD, YYYY")
         title

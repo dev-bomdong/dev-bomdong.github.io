@@ -35,11 +35,11 @@ export default HomePage;
 
 export const pageQuery = graphql`
   query {
-   allMarkdownRemark(sort: {frontmatter: {date: DESC}}) {
+    allMarkdownRemark(sort: { frontmatter: { date: DESC } }) {
       edges {
         node {
           id
-          excerpt(pruneLength: 500, truncate: true)
+          excerpt(pruneLength: 150, truncate: true)
           frontmatter {
             categories
             title
