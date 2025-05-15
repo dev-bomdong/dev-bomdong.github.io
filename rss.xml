@@ -1,4 +1,280 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Bomdong.log]]></title><description><![CDATA[일상 속 개발록]]></description><link>https://dev-bomdong.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Sun, 05 Jan 2025 01:17:12 GMT</lastBuildDate><item><title><![CDATA[2024년 회고]]></title><description><![CDATA[들어가며 202…]]></description><link>https://dev-bomdong.github.io/journal-goodbye-2024/</link><guid isPermaLink="false">https://dev-bomdong.github.io/journal-goodbye-2024/</guid><pubDate>Sat, 04 Jan 2025 00:00:00 GMT</pubDate><content:encoded>&lt;h1 id=&quot;들어가며&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%93%A4%EC%96%B4%EA%B0%80%EB%A9%B0&quot; aria-label=&quot;들어가며 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;들어가며&lt;/h1&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Bomdong.log]]></title><description><![CDATA[일상 속 개발록]]></description><link>https://dev-bomdong.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Thu, 15 May 2025 14:15:01 GMT</lastBuildDate><item><title><![CDATA[협업 병목을 줄이기 위한 자동화 실험 기록]]></title><description><![CDATA[들어가며 재직 중인 회사에서 새로운 서비스를 맡게 된지도 어느덧…]]></description><link>https://dev-bomdong.github.io/experiment-with-automation/</link><guid isPermaLink="false">https://dev-bomdong.github.io/experiment-with-automation/</guid><pubDate>Thu, 15 May 2025 00:00:00 GMT</pubDate><content:encoded>&lt;h2 id=&quot;들어가며&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%93%A4%EC%96%B4%EA%B0%80%EB%A9%B0&quot; aria-label=&quot;들어가며 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;들어가며&lt;/h2&gt;
+&lt;p&gt;재직 중인 회사에서 새로운 서비스를 맡게 된지도 어느덧 1년 반이 지났다. 처음에는 새로 합을 맞추게 된 동료들과 익숙하지 않은 도메인에 적응하며 주어진 요구사항을 최선의 방법으로 구현해내는걸 주요 과제로 삼았다.
+그렇게 시간이 흐르며 동료들과 도메인에 익숙해질 무렵, 자연스럽게 새로운 갈증과 고민이 생겼다.&lt;/p&gt;
+&lt;p&gt;단순히 주어진 요구사항을 구현하는 것을 넘어 &lt;strong&gt;+a를 만들어내는 사람&lt;/strong&gt;이 되고싶었다. +a를 만들어내는 사람은 어떤 사람일까? 내가 만들 수 있는 +a는 무엇일까? 혼자서만 고민하다보니 점점 더 거창하게 느껴지고 답이 잘 내려지지 않아 외부에 적극적으로 도움을 구했다. 저분은 +a를 만들어 내시는 것 같다란 느낌이 드는 분들께 링크드인과 소속된 커뮤니티를 활용해 커피챗을 요청했고, 감사하게도 모든 분들이 기꺼이 수락해주셔서 이야기를 나눌 수 있었다.&lt;/p&gt;
+&lt;p&gt;다양한 관점에서 이루어진 대화 끝에 내린 결론은 마냥 거창하게 생각하지 말고, &lt;strong&gt;회사에서 업무를 하며 느꼈던 문제나 불편함을 사소한 것부터 직접 개선해보기&lt;/strong&gt;였다.&lt;/p&gt;
+&lt;p&gt;그 이후 업무를 할 때 자연스레 촉수를 곤두세우게 됐고, 협업 과정의 반복적인 수작업, 불필요한 커뮤니케이션 비용 같은 것들이 눈에 들어오기 시작했다. 이런 불편함을 기술적으로 해소할 수 있다면 조직에 기능을 만들어내는 것과는 결이 다른 임팩트를 줄 수 있고, 결과적으로 내가 고민하던 +a를 만들어낼 수 있지 않을까?란 생각에 작은 실험들을 시작했다. 아래에는 그렇게 진행했던 두가지 실험에 대해 적어보려 한다.&lt;/p&gt;
+&lt;h2 id=&quot;slack-워크플로로-누구도-복붙하지-않는-채널-만들기&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#slack-%EC%9B%8C%ED%81%AC%ED%94%8C%EB%A1%9C%EB%A1%9C-%EB%88%84%EA%B5%AC%EB%8F%84-%EB%B3%B5%EB%B6%99%ED%95%98%EC%A7%80-%EC%95%8A%EB%8A%94-%EC%B1%84%EB%84%90-%EB%A7%8C%EB%93%A4%EA%B8%B0&quot; aria-label=&quot;slack 워크플로로 누구도 복붙하지 않는 채널 만들기 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Slack 워크플로로 누구도 복붙하지 않는 채널 만들기&lt;/h2&gt;
+&lt;h3 id=&quot;관찰-그리고-문제-정의하기&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EA%B4%80%EC%B0%B0-%EA%B7%B8%EB%A6%AC%EA%B3%A0-%EB%AC%B8%EC%A0%9C-%EC%A0%95%EC%9D%98%ED%95%98%EA%B8%B0&quot; aria-label=&quot;관찰 그리고 문제 정의하기 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;관찰, 그리고 문제 정의하기&lt;/h3&gt;
+&lt;p&gt;우연히 비즈니스팀과 디자인팀이 소속된 홈페이지 작업 관련 Slack 채널을 보게 되었는데 작업 관련 내용이 특정 양식을 복사/붙여넣기 하는 형태로 공유되고 있었다.&lt;/p&gt;
+&lt;p&gt;매번 특정 양식을 찾아 복사해야 하고, 수동으로 작성하는 과정에서 오타나 포맷 오류가 자주 발생하고 있었다. 또 다양한 유형의 작업이 유사한 포맷으로 공유되다보니 현황을 한눈에 파악하기 어려워보였다.&lt;/p&gt;
+&lt;p&gt;채널 활동 빈도가 높은 동료들에게 파악한 문제점에 대해 이야기 해보았고, 비슷한 불편함을 느끼고 있다는 걸 확인했다. 관찰을 통해 문제점을 찾아냈으니 한 번 개선해보자는 마음이 들었다.&lt;/p&gt;
+&lt;h3 id=&quot;패턴-파악하기&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%ED%8C%A8%ED%84%B4-%ED%8C%8C%EC%95%85%ED%95%98%EA%B8%B0&quot; aria-label=&quot;패턴 파악하기 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;패턴 파악하기&lt;/h3&gt;
+&lt;p&gt;문제를 해결하기 위해 우선 채널을 관찰하며 업무 흐름과 패턴을 파악해봤다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 720px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 109.44444444444446%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAWCAYAAADAQbwGAAAACXBIWXMAABYlAAAWJQFJUiTwAAAEHUlEQVQ4y22U6XMTRxDF9f9/ppJUCBROCBQkFCGE2BTYwRcEgw8sbEmWbMuHZK20h2b2mNnZ45eakeTkQ7aqq1vdq7ev+01Po9ZjankMcYciOiYPv2LCI0rRcjlXKySqhG5U05vCSVjSGue0Jzlt39Cb1nSimpukpoH9w/AZTJbxvv7E1/U7HG3cwW89gsmf1MPnkA+Jclju17y5hmfNiO/X2txda/Ng65yVfs2rPhxMoFFpn0KcUIjezOQpRvQwokshba4LRYIuoR8ZrmXJtaxu7XJaOG9rXlLS0LlBxgqlS7SpSDNDpgpyU5Mpg4gVRVFBVTIWGZ0bQfs6oHUdOH86TmgPQvqBQitFQ2tFHEuoK6qyxPNGRFEI1JRlgZSCoiigKjj2S54c+Hy7ss83y/t89/qQhx8uuP/uhLeXIFNtATVCSuI4Ic0UaZrNLMuQcYyU0gHWVcl5oPk8NLw/DZ1tdQO2egEfLxO+eCVxqmaAUkxRiURnMZE/JgrGqFSSxcLVLGBZVcRSksSSNE1Ik4QoDMmylDSJiaVAuZZzgx4eETZfM2m+wfuywrS1yrS1hmy9RU/OMeVsHNJ1EpMkMUJMGXseSZK4nK0pldFQuaEYHHD61wOaK/c4XP6BzuoS7dUlvI9PKCY98rJ2MzwLNB8HOZ8uNDtXmg8XCZ8Gmp1rzd6oIM4UDaUN+ahF2d9Gn22jz7dJuhukvU2XU47hDPB4Ynh9VnF3d5+7777wcKPHvdUmL1uC9YEV5T8zdLNJYqZRiJhGt3ORYqFySWei2RrCi6tLfmte8sfBiBd7V2xcFrwf1v+KYlUW8/kEQUAQhk5hm1uoXFUlkYjxRYKQhmlimEwTRGYIRIo/jcmyBUMpsb4oDEIIB2xBrGoLwIXKlnUcC9eJd3PjOnM5p3I2A7QAdV07G41G+L6Pfcq5sg6wLN17WZaR57ljYxW2sbIYSeJqs5bnrGzCsrI+TdPb47AAtLXF43me+/git+hoLoqYtyMJg8BZHM9+L1ZvcQ7thyyj3BiU0rdsF4TmoiSIOCVOMiZBiB9GLrY5IeO5KNVsVmLqvJiGTLzR7fxsfsZQKfJxl2rcppp03NbkN8cuLsctdw6L+aZEcUqQFoSpYSI1174gSA1+nONLPWNYGM1o/xXdtSXONn52G2JttPOMi82HRCfb2NvL3j77fZ/H7095vnvFL3+fOfv94IaXhx6vmh6JymnkWpGfbTLa+ZWzjUecbz52/mL7CdH+c/Kr3dmm1CWHw4Snex5L621+XO9wf+2Ih1s9nn4esNJNiDN7fakMM2xSDfYoBnuUc7NxNdhFjzqYoqIuC/qh4mBcsT9U7N9o9oaKvYGNc5pje31lNIwxrvfMHpf/syxzR8aK4uatFSa36mrnF7EjZgz/AMhPcXJSNJ1sAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;draft_flow&quot;
+        title=&quot;draft_flow&quot;
+        src=&quot;/static/df9216ba0a379541c60397d21d8b9265/37523/draft_flow.png&quot;
+        srcset=&quot;/static/df9216ba0a379541c60397d21d8b9265/e9ff0/draft_flow.png 180w,
+/static/df9216ba0a379541c60397d21d8b9265/f21e7/draft_flow.png 360w,
+/static/df9216ba0a379541c60397d21d8b9265/37523/draft_flow.png 720w,
+/static/df9216ba0a379541c60397d21d8b9265/302a4/draft_flow.png 1080w,
+/static/df9216ba0a379541c60397d21d8b9265/51800/draft_flow.png 1196w&quot;
+        sizes=&quot;(max-width: 720px) 100vw, 720px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;채널에 공유되는 현황은 크게 &lt;strong&gt;작업 현황 알림&lt;/strong&gt;과 &lt;strong&gt;배포 알림&lt;/strong&gt;으로 나뉘어졌고, 각 현황마다의 업무 흐름은 위와 같이 이루어지고 있었다. 패턴을 파악하니 문제가 더 명확해졌다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;공유되어야 하는 정보는 각각 작업 시작, 배포 예정 메세지에 모두 작성되었으나 작업 완료/배포 완료 시점에도 공유하기위해 이전 단계에 작성했던 메세지를 복사해 수정해야했다.&lt;/li&gt;
+&lt;li&gt;배포 예정 알림 후 관련 실무진의 컨펌을 emoji를 통해 확인하는 과정이 번거로워 보였다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;자동화-도구-만들기&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%9E%90%EB%8F%99%ED%99%94-%EB%8F%84%EA%B5%AC-%EB%A7%8C%EB%93%A4%EA%B8%B0&quot; aria-label=&quot;자동화 도구 만들기 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;자동화 도구 만들기&lt;/h3&gt;
+&lt;p&gt;처음엔 단순하게 홈페이지 작업 플랫폼을 Slack과 연동해 로그인/로그아웃, 배포될 때 자동으로 알림이 오도록 하게 할까 생각했지만 결과적으로 Slack 워크플로로 결정했다.&lt;/p&gt;
+&lt;p&gt;공유되는 정보 중엔 배포 가능 여부 등 홈페이지 작업 플랫폼에서 알 수 없는 정보가 포함되어있었고, 배포 예정 알림은 홈페이지 작업 플랫폼과 별개의 프로세스이기에 단순히 알림을 주는 것만으로는 현재의 업무 흐름을 온전히 대체할 수 없다는 생각이 들었다. 또 워크플로는 노코드 툴이니 비개발직군인 디자인팀, 마케팅팀이 추후 필요에 따라 유지보수할 수 있다는 장점도 있었다.&lt;/p&gt;
+&lt;p&gt;앞서 정리한 두가지 작업 패턴에 따라 홈페이지 작업 알리미와 홈페이지 배포 알리미 워크플로를 만들었다.&lt;/p&gt;
+&lt;h4 id=&quot;홈페이지-작업-알리미&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%ED%99%88%ED%8E%98%EC%9D%B4%EC%A7%80-%EC%9E%91%EC%97%85-%EC%95%8C%EB%A6%AC%EB%AF%B8&quot; aria-label=&quot;홈페이지 작업 알리미 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;홈페이지 작업 알리미&lt;/h4&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 720px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 76.11111111111111%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAPCAYAAADkmO9VAAAACXBIWXMAABYlAAAWJQFJUiTwAAACbUlEQVQ4y52SW2scNxiG9///gVwEExPHBFNCTRrii5TGqVNCLgK1w9a76/V6jzPjmZ2zpJE0o33KaN2GQEObfvBKSILnO7waUF7C9le20zPWw1NMdA7Zb+xsyQ5g59f/HIO2vsPmQ0T8mTK6RKdD2uKaXavY874TKGSDsY5GW2qh6Bz0d23X9TgP/B4NpJSoxiBVQ1ULtOnBgq5r+T8xaERBFd6Qr8cUmwkimiLSkK4vNdviwg1tuMEGa7pwA3GELAuyPKeqKsqyREiJsWZfYVvdE388YfrLIYuLY6IPx+j179i2Q75/y83TAybHTxgdHTA9PiT96QVlsOZ2Pmc8GjFfrYm2FdZY3M4xaOoMFQwpF1cU80vE6gqVrnyF7WqOGg/R0zFqcu3VTK7BObZp6oHJfUJcx+id7kfez1BRCUlVS8pKUMv9LDtvyrejb3U2m3Ef3hNUAcqpv4ASaw1KSvI89yAhHoC9c849OOgetHezf0/TlLzI9xl27FuWUtAoRb+XZYHRmrqu/wH4tZxzf6vr94dkA6kUZS3Jy9qrEsq3/28tf/PbqCpDbRfIZE4dzdDpEpkG3hT/Ze6m2Pmtl7mb4pZzRJ4RhCFJHJMkW9Isp9GNL2IgwwmriyPGPz/x2rx/RjE6x7kdwZvXXB48YnpyxO3JEVeHj1m+eI5KYlbLBeM/hixWa4KkRDeWtm0ZmHyNmV1Qjs+pJ+9QN+eY4LN/1J8+Er76kfDsJdHZS+5OfyB78xpaS1YUjEYjojAiq1KKNt+7bIzGNBJrGqzupdCN8sPGGjD6i/qzbrxZdS1YLpeEQURcJKQm9cA/AQhadyzxN8xEAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;work status flow&quot;
+        title=&quot;work status flow&quot;
+        src=&quot;/static/65af17bfbe6863dd346cadbaa7699654/37523/work_status_flow.png&quot;
+        srcset=&quot;/static/65af17bfbe6863dd346cadbaa7699654/e9ff0/work_status_flow.png 180w,
+/static/65af17bfbe6863dd346cadbaa7699654/f21e7/work_status_flow.png 360w,
+/static/65af17bfbe6863dd346cadbaa7699654/37523/work_status_flow.png 720w,
+/static/65af17bfbe6863dd346cadbaa7699654/302a4/work_status_flow.png 1080w,
+/static/65af17bfbe6863dd346cadbaa7699654/07a9c/work_status_flow.png 1440w,
+/static/65af17bfbe6863dd346cadbaa7699654/c0566/work_status_flow.png 1544w&quot;
+        sizes=&quot;(max-width: 720px) 100vw, 720px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;먼저 홈페이지 작업 알리미 워크플로에 대해 알아보자면, 실무진 분들께 확인해보니 공유되는 정보 중 가장 중요한 정보가 ‘전체 퍼블리시 가능 여부’였고, 여기에서 영감을 받아 신호등 컨셉으로 만들었다 🚥&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;작업 시작 공유&lt;/strong&gt; : 워크플로를 호출해 form에 필수로 공유되어야 하는 사항을 작성한다.
+작성이 끝나면 정해진 양식에 맞게 포맷팅된 ‘작업 시작’ 메세지가 전송된다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;작업 완료 공유&lt;/strong&gt; : 작업 시작 메세지의 &lt;code class=&quot;language-text&quot;&gt;작업 완료했어요&lt;/code&gt; 버튼을 클릭해 참고사항을 입력한다.
+간혹 작업을 하다보면 추가로 공유할 사항이 생길 수 있다는 실무진 분들의 의견을 참고해 이 단계를 추가했다.참고사항을 입력하면 기존의 작업 시작 메세지 정보와 참고사항을 포함한 작업 완료 메세지가 전송된다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&quot;홈페이지-배포-알리미&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%ED%99%88%ED%8E%98%EC%9D%B4%EC%A7%80-%EB%B0%B0%ED%8F%AC-%EC%95%8C%EB%A6%AC%EB%AF%B8&quot; aria-label=&quot;홈페이지 배포 알리미 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;홈페이지 배포 알리미&lt;/h4&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 720px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 86.1111111111111%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAARCAYAAADdRIy+AAAACXBIWXMAABYlAAAWJQFJUiTwAAACv0lEQVQ4y5WUaW/bRhRF9f9/Q4oGaZsARZd0QQIUruU0+RC3iR1bkhdJNrXRlCWL22xchnMCjew0iusPHeBgAOLh8r73Ltk6T+Bt1LDXj9k5ueZtWPFhCcY64CEePq1xajm7sXQjydE05XRZMYgtReVoSmiqf7El2Ap0aTHGYLSmMIaqqqjrGuccraWs2e1d8fLdgHZ3xm4v4jI2mMzyzx8r2s8vPK9+CXj964ywXzNJNAe9PkfnAd2LEZlUWGtpGkcryiteXwr+7M1pny3ZG6QM4hKZVBy/Ehy2Yw52bzhsr3i/syLsV0DFPArJcoHS0rvbCDa0zPqBkZRaYESGLRRG5v5t/3kclGXFfH4NblOzbvWO1iIvOQg1fweJ591UMUpKjCgZHCUMOwkX3YzhcczwKGUxM1hbMR6PyfMca+st0dY0bfj5IuPRfocnewN+OI7pxg6xKtj5PuDFdye0fxzz2zcdfn9yyqhjvM3FYkGWZV5kSzCTmijVXCWKcCWJUsNNprC1o1J4yrtbQl2ArSuUUggh7restcIoiRI5IksptEJJ4Qf8UAZ745h+/5TJ+JLZLERrTVmWG8F1nmzjkEqRpCnrXZii8Ftbd+Mat42DorIs5lNGo4A0TbdbNt6hQEvhXRZafuaQ//W1eMFUaMJYMV0JJsucq8SwzCR11aBS0PkGc0uhHHnRsFwl3l0cJwghKYpik8PhQvL4TcBXu6c8/qvPt/sh+5MUkzXs/RTy8tmZ3/SLpyc8/7rDqFsQSsf7bp/943M6gxH9ycxn0wsuRMmHK83hNN8wU4zTglJboqFlem48kzNF0JNki03Lq+u5j01RrBci/czXtFxjwVmg2eAszof1ob+Ko3GOyyBASrk1Pz/DT2N3t3wquC26t+UNQRAQRZGPzN0CveDnofySu6Iv77XA2l1d1feC/RGrkBJFDMntNQAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;deploy_flow&quot;
+        title=&quot;deploy_flow&quot;
+        src=&quot;/static/3251f176d37fe60f9cc6c0c00457587d/37523/deploy_flow.png&quot;
+        srcset=&quot;/static/3251f176d37fe60f9cc6c0c00457587d/e9ff0/deploy_flow.png 180w,
+/static/3251f176d37fe60f9cc6c0c00457587d/f21e7/deploy_flow.png 360w,
+/static/3251f176d37fe60f9cc6c0c00457587d/37523/deploy_flow.png 720w,
+/static/3251f176d37fe60f9cc6c0c00457587d/302a4/deploy_flow.png 1080w,
+/static/3251f176d37fe60f9cc6c0c00457587d/07a9c/deploy_flow.png 1440w,
+/static/3251f176d37fe60f9cc6c0c00457587d/0f882/deploy_flow.png 1584w&quot;
+        sizes=&quot;(max-width: 720px) 100vw, 720px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;다음으로 홈페이지 배포 알리미에 대해 알아보자.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;배포 예정 사항 공유&lt;/strong&gt; : 워크플로를 호출해 form에 필수로 공유되어야 하는 사항을 작성한다.
+작성이 끝나면 정해진 양식에 맞게 포맷팅된 ‘배포 예정’ 메세지가 전송된다. (여기까진 작업 알리미와 거의 동일)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;관련 실무진 컨펌&lt;/strong&gt; : 관련 실무진은 배포 예정사항 확인 후 배포 예정 메세지의 &lt;code class=&quot;language-text&quot;&gt;확인했어요&lt;/code&gt; 버튼을 클릭한다.
+버튼 클릭시 배포 예정 메세지의 스레드에 버튼을 클릭한 유저명과 함께 확인했다는 댓글이 달린다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;컨펌 후 배포 완료&lt;/strong&gt; : 스레드 댓글에 달린 &lt;code class=&quot;language-text&quot;&gt;배포 완료했어요&lt;/code&gt; 버튼을 클릭한다.
+(워크플로를 최초 호출한 배포 예정 작업자가 클릭했을 때만 동작)
+배포 예정 메세지의 정보를 기반으로 한 배포 완료 메세지가 자동 전송된다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;배포 예정 메세지를 작성한 뒤 버튼을 트리거로 1) 스레드에 확인 완료 댓글을 달고 2) 배포 완료 메세지도 전송해야 했다.
+워크플로의 다음 단계로 이동시키는 버튼은 한 단계당 한개씩만 지원해서 최대한 어색하지 않은 흐름으로 단계를 구성하려 노력했다.&lt;/p&gt;
+&lt;p&gt;두 워크플로에서 가장 신경쓴 점은 기존의 업무 흐름을 동일하게 구현하되 그 내부의 불필요한 반복을 줄이는 것. 또 러닝커브를 최대한 낮추기 위해 직관적으로 다음 동작을 보여주는 버튼 트리거를 애용했다.&lt;/p&gt;
+&lt;h3 id=&quot;결과&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EA%B2%B0%EA%B3%BC&quot; aria-label=&quot;결과 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;결과&lt;/h3&gt;
+&lt;p&gt;워크플로 배포 및 안내 후, 감사하게도 동료분들이 열화와 같은 성원과 함께 적극적으로 사용해주셔서 홈페이지 작업 채널은 워크플로만으로 원활히 돌아가는 채널이 되었다!
+이전과 같은 반복적인 복사-붙여넣기 메세지는 아예 사라졌다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 720px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 46.111111111111114%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAJCAYAAAAywQxIAAAACXBIWXMAABYlAAAWJQFJUiTwAAABLElEQVQoz5WSzW7CMBCE8/5v1VMPFT2gqpg2JMSxDSWE4MSQH0K+ygGh9hZWWlterWZndhx8fsyJ4xilFKlSKK3RWo/3WJOSJEmw1jIlAn9EUYQQglAsEQsxvqPvkDRek0hJmqZst1vyPCfLMg6Hw5hVVdE0Defzmbqu6bqO4DoM7LVhu1oTiS+WQrAQgtgDrtYj+2SdYIxBSUmmbsyllGw2G3a7HWVZ4pyjbVuCy+WC0YZ9lmHuDSfnqOsG11n6a88zEXiqs9k78/kcIRaEYcjPLqOqHOfW4QcOwzA5A6/fyymOOe5UYe0RpTRdd/k3eTKgX2pRFPcClLYcHa7ckb6/s+PWPEmyB7S2fBQ841QZ8qLg2vcPoMmAfof+n3nHtNG8vL2OxvyV8QzgL1lGtTGSUuw9AAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;update_note&quot;
+        title=&quot;update_note&quot;
+        src=&quot;/static/f94a81dc48a1cb4b97306a4acd4d1a48/37523/update_note.png&quot;
+        srcset=&quot;/static/f94a81dc48a1cb4b97306a4acd4d1a48/e9ff0/update_note.png 180w,
+/static/f94a81dc48a1cb4b97306a4acd4d1a48/f21e7/update_note.png 360w,
+/static/f94a81dc48a1cb4b97306a4acd4d1a48/37523/update_note.png 720w,
+/static/f94a81dc48a1cb4b97306a4acd4d1a48/302a4/update_note.png 1080w,
+/static/f94a81dc48a1cb4b97306a4acd4d1a48/07a9c/update_note.png 1440w,
+/static/f94a81dc48a1cb4b97306a4acd4d1a48/045f9/update_note.png 2350w&quot;
+        sizes=&quot;(max-width: 720px) 100vw, 720px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;주기적으로 채널 모니터링도 하며 자잘한 수정을 하고있다. 나만의 토이프로젝트를 운영하는 느낌이랄까,,&lt;/p&gt;
+&lt;p&gt;실무진분들께 워크플로 도입 전후에 대해서도 자주 의견을 여쭤보는데, 특정 양식을 찾아다니고 복붙하는 과정이 사라지다보니 업무 피로도가 줄고, 메세지 오타나 누락이 줄어 명시적으로 업무 흐름을 파악할 수 있다는 피드백을 받았다. 또 동료분들의 열화와 같은 성원에 자기효능감을 느낄 수 있었다.🧚‍♀️&lt;/p&gt;
+&lt;p&gt;워크플로는 노코드 기반이기에 기술적인 난이도는 높지 않았지만, &lt;strong&gt;관찰 → 분석 → 자동화 → 개선&lt;/strong&gt;이라는 구조적인 문제 해결 과정을 거쳤다는 점에서 개인적으로 의미가 컸다.&lt;/p&gt;
+&lt;h2 id=&quot;react인지-jsp인지-크롬-익스텐션으로-셀프-확인하기&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#react%EC%9D%B8%EC%A7%80-jsp%EC%9D%B8%EC%A7%80-%ED%81%AC%EB%A1%AC-%EC%9D%B5%EC%8A%A4%ED%85%90%EC%85%98%EC%9C%BC%EB%A1%9C-%EC%85%80%ED%94%84-%ED%99%95%EC%9D%B8%ED%95%98%EA%B8%B0&quot; aria-label=&quot;react인지 jsp인지 크롬 익스텐션으로 셀프 확인하기 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;React인지 JSP인지, 크롬 익스텐션으로 셀프 확인하기&lt;/h2&gt;
+&lt;h3 id=&quot;관찰-그리고-문제-정의하기-1&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EA%B4%80%EC%B0%B0-%EA%B7%B8%EB%A6%AC%EA%B3%A0-%EB%AC%B8%EC%A0%9C-%EC%A0%95%EC%9D%98%ED%95%98%EA%B8%B0-1&quot; aria-label=&quot;관찰 그리고 문제 정의하기 1 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;관찰, 그리고 문제 정의하기&lt;/h3&gt;
+&lt;p&gt;현재 담당하고 있는 서비스는 대부분이 JSP로 구성되어 있고 점진적으로 React로 마이그레이션 해나가고 있다. 모든 서비스를 한번에 옮기기엔 서비스 규모가 너무 크기 때문에 달리는 열차의 바퀴를 교체하듯이.. strangler fig 패턴을 기반으로 기능 고도화를 곁들이며 모달, 특정 섹션 단위로 옮겨나가고 있다.&lt;/p&gt;
+&lt;p&gt;서비스 규모가 크고 마이그레이션 범위가 모호하다 보니 기획자, 디자이너, QA엔지니어가 해당 영역의 기술 스택을 파악하는 데 어려움을 겪었다.
+React와 JSP를 구분할 수 있는 공식적인 문서나 가이드는 존재하지 않았고 실제 기획자는 매번 프론트엔드 개발자에게 질문을 해야 했다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;“이 페이지는 JSP인 것 같은데, 모달은 React인가요?”&lt;/p&gt;
+&lt;p&gt;“이 섹션은 React처럼 보이는데 맞나요?”&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;작은 질문이지만 반복되면서 나도, 기획자도 피로도가 쌓이고 있었다.&lt;/p&gt;
+&lt;h3 id=&quot;패턴-파악하기-1&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%ED%8C%A8%ED%84%B4-%ED%8C%8C%EC%95%85%ED%95%98%EA%B8%B0-1&quot; aria-label=&quot;패턴 파악하기 1 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;패턴 파악하기&lt;/h3&gt;
+&lt;p&gt;각 페이지별로 생길 수 있는 경우의 수를 나눠 카테고리를 나눠봤다. 크게 4가지의 유형으로 정리할 수 있었다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;JSP Page&lt;/code&gt; : JSP로만 개발된 페이지&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;React Page&lt;/code&gt; : React로만 개발된 페이지&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;React Modal&lt;/code&gt; : JSP Page에 React Modal을 띄운 형태&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;React Section&lt;/code&gt;: JSP Page의 일부분이 React로 구성된 형태&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;여기서 JSP Page와 React Page는 URL을 통해 구분할 수 있었다.&lt;/p&gt;
+&lt;p&gt;JSP와 React가 공존할 경우의 세부 유형은 JSP Page 내부의 &lt;code class=&quot;language-text&quot;&gt;iframe&lt;/code&gt; &lt;code class=&quot;language-text&quot;&gt;src&lt;/code&gt;를 분석해 확인할 수 있었다.&lt;/p&gt;
+&lt;p&gt;React로 개발된 Modal은 사내 디자인 시스템 요소를 활용하는데, 이때 특정 class가 포함되기에 &lt;code class=&quot;language-text&quot;&gt;iframe&lt;/code&gt;의 &lt;code class=&quot;language-text&quot;&gt;src&lt;/code&gt;에 React Page의 URL이 포함되어 있다면 &lt;code class=&quot;language-text&quot;&gt;classList.contains()&lt;/code&gt;를 통해 Modal인지 Section인지 확인할 수 있었다.&lt;/p&gt;
+&lt;h3 id=&quot;자동화-도구-만들기-1&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%9E%90%EB%8F%99%ED%99%94-%EB%8F%84%EA%B5%AC-%EB%A7%8C%EB%93%A4%EA%B8%B0-1&quot; aria-label=&quot;자동화 도구 만들기 1 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;자동화 도구 만들기&lt;/h3&gt;
+&lt;p&gt;비개발직군이 기술스택을 파악하려면 어떤 방법이 가장 편할까? 고민해보니 직관적인 시각화가 필요하다고 느꼈다. 그래서 다음과 같은 방식의 &lt;strong&gt;크롬 익스텐션&lt;/strong&gt;을 직접 제작했다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 720px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 58.333333333333336%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAMCAYAAABiDJ37AAAACXBIWXMAAAsTAAALEwEAmpwYAAABtElEQVQoz32STY8SQRCG+e/GyGIW9GBcOMmePG1MTHBXAzMY8ODBg9ldE/RoIhJ2M8N89fdjugdwMKyVVGa6q+rpt6q79eV1m/7LF5yedul1u3Q6JzztdGi3n/D8pM1Zr94/5s96PQb9PufDV5wPhwwGA1rzqws+zefMZjOm04+MoylRHDONYx6PxjwaTbiKYi6jmHeTKPjl9uv3c23YmVCKVlZKmiYa/59zxVdh+Z9p61BakylNqQ2tLMswxmCtRVQVZZGDtVTGIP36/o4kSULMGI01JuSHGmNwzgEO6RxVAOZ5gPmAMRYfxjmUg6SsKIoCpRRa6wDxef+6B4od0Bd489AaXAOlg0LpoJL6GCohArReHwL3CjebzT4QgEGhxU/uevGDizdvGb0f82E8IeT6uWmNEGJbxyFwvV5Td9kEOjTw6+6em5tbrm+/8X2x4Ocq4XdSkuSSrHgAmKZpaMOfugf6mVjvhzdcVJKyEujtJR5teblcUpZl8KZCP8O0rMg2KUmahvjOPMQLOApsKmgqDAnGIoVASrnvYOcPAlerFX6O/j0eKnTkUoU32VT2F8JR4B+rq4j5K0zfuQAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;react_section&quot;
+        title=&quot;react_section&quot;
+        src=&quot;/static/e8340a7162249950f4e4b1f077d73ef4/37523/react_section.png&quot;
+        srcset=&quot;/static/e8340a7162249950f4e4b1f077d73ef4/e9ff0/react_section.png 180w,
+/static/e8340a7162249950f4e4b1f077d73ef4/f21e7/react_section.png 360w,
+/static/e8340a7162249950f4e4b1f077d73ef4/37523/react_section.png 720w,
+/static/e8340a7162249950f4e4b1f077d73ef4/302a4/react_section.png 1080w,
+/static/e8340a7162249950f4e4b1f077d73ef4/07a9c/react_section.png 1440w,
+/static/e8340a7162249950f4e4b1f077d73ef4/de755/react_section.png 3302w&quot;
+        sizes=&quot;(max-width: 720px) 100vw, 720px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;페이지 로딩 시 JSP Page, React Page, React Modal, React Section을 &lt;strong&gt;다른 색상으로 하이라이팅&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;각 요소 위에 해당 기술 스택 정보를 보여주는 &lt;strong&gt;라벨 표시&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;MVP 형태로 제작하여 테스트했고, 실제로 스쿼드 기획자분께 선보였더니 반응은 기대 이상이었다. 좀더 다듬어 전사에도 공유했다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 720px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 57.77777777777777%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAMCAYAAABiDJ37AAAACXBIWXMAABYlAAAWJQFJUiTwAAAByElEQVQoz5VSa3OiQBDk//+sXC6eCYcR5Qr0RMDlsQsLyEMir77aNfFiSD5kqrpmoKZ6u2dGMU0TPiEghCAIAsRxLFEUBcZxRN/3GIZB1iJEfsNnobiui91uh+12C8u0YFkWDMOQkP83W2w2GwR+AM/z4LmezEJAlmWoqgplWeJ4PMpaSShDHEYIwhCE+AjDEHmeywYBofTtO03TK5qmQdu2V5zPZ3RdB6XmGQr7gOhAYNs2XMdBFEXyNWH1u6EklIJ5BGGYwCP+xdarJTFTQU4pk0qFtbquZS0Un06nyVwV1/MgYO8duCTA3nGxt20wFoMnXNoTljnPwPl/u8KewHtCqZAnCRiloFGEmDEJxphURylFWRSo6wZ9E19tvd/wx20r6mIJ9beG1foP9LWB5WoN07Igzmk2m+Hu/h53Px8we/iB+fwX9o4zOZ0bherKgKotoD3r0JY69PUK+5DDjwtkaQqXxhJ5fgTPcpRVfUM0WUov5jCOaF8adOcXjMMAsdx+uDR3fQ/OuTzwr2zeEF6bBJEYdNte0LXyoerU4O/ORl5U6Lp+YnVCqBsGnrQFHrUFZo9PmKuqzAfivyoc0Mt7HD+d3UfCf+V4kvB0ETbhAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;extension_notice&quot;
+        title=&quot;extension_notice&quot;
+        src=&quot;/static/59dbbae45b9c38530793f7967771cc49/37523/extension_notice.png&quot;
+        srcset=&quot;/static/59dbbae45b9c38530793f7967771cc49/e9ff0/extension_notice.png 180w,
+/static/59dbbae45b9c38530793f7967771cc49/f21e7/extension_notice.png 360w,
+/static/59dbbae45b9c38530793f7967771cc49/37523/extension_notice.png 720w,
+/static/59dbbae45b9c38530793f7967771cc49/302a4/extension_notice.png 1080w,
+/static/59dbbae45b9c38530793f7967771cc49/07a9c/extension_notice.png 1440w,
+/static/59dbbae45b9c38530793f7967771cc49/71dc1/extension_notice.png 2346w&quot;
+        sizes=&quot;(max-width: 720px) 100vw, 720px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;h3 id=&quot;결과-1&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EA%B2%B0%EA%B3%BC-1&quot; aria-label=&quot;결과 1 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;결과&lt;/h3&gt;
+&lt;p&gt;이 결과를 가장 실감하는 사람 중 한명은 바로 나일텐데, 익스텐션을 배포한 이후 스쿼드 기획자님께 이 부분은 React인가요? 라는 질문을 받은 적이 없다. 이제 더 이상 질문하지 않아도 혼자서 익스텐션을 통해 페이지별 기술 스택을 정확히 파악할 수 있게 되었기 때문. 작은 확장 프로그램이었지만, 실사용자인 내 업무 스트레스를 줄여준😇 사례였다.&lt;/p&gt;
+&lt;h2 id=&quot;느낀-점--도구보다-중요한-것은-문제-해결-능력&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%8A%90%EB%82%80-%EC%A0%90--%EB%8F%84%EA%B5%AC%EB%B3%B4%EB%8B%A4-%EC%A4%91%EC%9A%94%ED%95%9C-%EA%B2%83%EC%9D%80-%EB%AC%B8%EC%A0%9C-%ED%95%B4%EA%B2%B0-%EB%8A%A5%EB%A0%A5&quot; aria-label=&quot;느낀 점  도구보다 중요한 것은 문제 해결 능력 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;느낀 점 – 도구보다 중요한 것은 문제 해결 능력&lt;/h2&gt;
+&lt;p&gt;사실 이 글의 초안은 예전에 작성해두었지만, 포스팅을 하기까지 꽤 오랜 시간 망설였다. 기술적으로 난이도가 높지 않은 내용이다보니 기록하는게 의미가 있을까?라는 생각이 들었기 때문. (각종 회고글은 잘만 포스팅하면서..?😶‍🌫️)&lt;/p&gt;
+&lt;p&gt;이 고민은 글의 초점을 ‘기술’보다 ‘문제 해결’에 두니 자연스레 해결됐다. 두 실험을 통해 &lt;strong&gt;도구 자체보다 문제를 인식하고 해결해내는 과정&lt;/strong&gt;이 중요하다는 걸 깨달았다.
+워크플로든, 크롬 익스텐션이든, 핵심은 사용된 기술의 종류보단 문제를 해결하는 방식에 있었다.&lt;/p&gt;
+&lt;p&gt;그리고 그 문제는 대부분 관찰에서 시작됐다. 불편해 보이는 점을 그냥 넘기지 않고 “왜 이렇게 하고 있을까?”, “더 나은 방법은 없을까?” 고민하며 문제를 정의하고, 패턴을 파악하다보면 그 안에서 개선점을 찾아낼 수 있었다.&lt;/p&gt;
+&lt;p&gt;요즘 개발 환경은 빠르게 변화하고 있다. 코드를 쓰는 일조차 AI가 어느 정도 대체 가능한, 이른바 ‘딸깍의 시대’가 오고 있다. 그럴 수록 중요해지는 것은 ‘무엇을’ 구현할지, ‘왜’ 구현해야 하는지를 판단하는 능력이라고 생각한다.&lt;/p&gt;
+&lt;p&gt;들어가며에서 언급한 +a를 만들어내는 사람은 &lt;strong&gt;주어진 과제 외에도 문제를 주체적으로 정의하고, 이를 기술적으로 개선하고 해결해나가는 사람&lt;/strong&gt;이 아닐까? 여기서 중요한 단어는 &lt;strong&gt;주체적&lt;/strong&gt;인 것 같다.&lt;/p&gt;
+&lt;p&gt;이 실험 기록을 시작으로 앞으로도 기술로 더 나은 협업 환경을 만드는 사람으로 성장해나가고 싶다.&lt;/p&gt;
+&lt;div class=&quot;table-of-contents&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;#%EB%93%A4%EC%96%B4%EA%B0%80%EB%A9%B0&quot;&gt;들어가며&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;#slack-%EC%9B%8C%ED%81%AC%ED%94%8C%EB%A1%9C%EB%A1%9C-%EB%88%84%EA%B5%AC%EB%8F%84-%EB%B3%B5%EB%B6%99%ED%95%98%EC%A7%80-%EC%95%8A%EB%8A%94-%EC%B1%84%EB%84%90-%EB%A7%8C%EB%93%A4%EA%B8%B0&quot;&gt;Slack 워크플로로 누구도 복붙하지 않는 채널 만들기&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;#%EA%B4%80%EC%B0%B0-%EA%B7%B8%EB%A6%AC%EA%B3%A0-%EB%AC%B8%EC%A0%9C-%EC%A0%95%EC%9D%98%ED%95%98%EA%B8%B0&quot;&gt;관찰, 그리고 문제 정의하기&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;#%ED%8C%A8%ED%84%B4-%ED%8C%8C%EC%95%85%ED%95%98%EA%B8%B0&quot;&gt;패턴 파악하기&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;#%EC%9E%90%EB%8F%99%ED%99%94-%EB%8F%84%EA%B5%AC-%EB%A7%8C%EB%93%A4%EA%B8%B0&quot;&gt;자동화 도구 만들기&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#%ED%99%88%ED%8E%98%EC%9D%B4%EC%A7%80-%EC%9E%91%EC%97%85-%EC%95%8C%EB%A6%AC%EB%AF%B8&quot;&gt;홈페이지 작업 알리미&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#%ED%99%88%ED%8E%98%EC%9D%B4%EC%A7%80-%EB%B0%B0%ED%8F%AC-%EC%95%8C%EB%A6%AC%EB%AF%B8&quot;&gt;홈페이지 배포 알리미&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;#%EA%B2%B0%EA%B3%BC&quot;&gt;결과&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;#react%EC%9D%B8%EC%A7%80-jsp%EC%9D%B8%EC%A7%80-%ED%81%AC%EB%A1%AC-%EC%9D%B5%EC%8A%A4%ED%85%90%EC%85%98%EC%9C%BC%EB%A1%9C-%EC%85%80%ED%94%84-%ED%99%95%EC%9D%B8%ED%95%98%EA%B8%B0&quot;&gt;React인지 JSP인지, 크롬 익스텐션으로 셀프 확인하기&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#%EA%B4%80%EC%B0%B0-%EA%B7%B8%EB%A6%AC%EA%B3%A0-%EB%AC%B8%EC%A0%9C-%EC%A0%95%EC%9D%98%ED%95%98%EA%B8%B0-1&quot;&gt;관찰, 그리고 문제 정의하기&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#%ED%8C%A8%ED%84%B4-%ED%8C%8C%EC%95%85%ED%95%98%EA%B8%B0-1&quot;&gt;패턴 파악하기&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#%EC%9E%90%EB%8F%99%ED%99%94-%EB%8F%84%EA%B5%AC-%EB%A7%8C%EB%93%A4%EA%B8%B0-1&quot;&gt;자동화 도구 만들기&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#%EA%B2%B0%EA%B3%BC-1&quot;&gt;결과&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;#%EB%8A%90%EB%82%80-%EC%A0%90--%EB%8F%84%EA%B5%AC%EB%B3%B4%EB%8B%A4-%EC%A4%91%EC%9A%94%ED%95%9C-%EA%B2%83%EC%9D%80-%EB%AC%B8%EC%A0%9C-%ED%95%B4%EA%B2%B0-%EB%8A%A5%EB%A0%A5&quot;&gt;느낀 점 – 도구보다 중요한 것은 문제 해결 능력&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;</content:encoded></item><item><title><![CDATA[2024년 회고]]></title><description><![CDATA[들어가며 202…]]></description><link>https://dev-bomdong.github.io/journal-goodbye-2024/</link><guid isPermaLink="false">https://dev-bomdong.github.io/journal-goodbye-2024/</guid><pubDate>Sat, 04 Jan 2025 00:00:00 GMT</pubDate><content:encoded>&lt;h1 id=&quot;들어가며&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%93%A4%EC%96%B4%EA%B0%80%EB%A9%B0&quot; aria-label=&quot;들어가며 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;들어가며&lt;/h1&gt;
 &lt;p&gt;2024년을 한 문장으로 표현하자면 &lt;strong&gt;작은 시도를 반복하고, 그 안에서 꾸준히 의미를 찾아간 한 해&lt;/strong&gt;였다.&lt;br/&gt;
 평소 일정을 &lt;code class=&quot;language-text&quot;&gt;Work&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;Development&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;Health&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;Networking&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;Personal&lt;/code&gt; 항목으로 나눠 관리하기에 회고도 동일한 분류로 진행했는데 적다 보니 각 항목별 분량이 너무 길어져 기술 블로그에선 &lt;code class=&quot;language-text&quot;&gt;Work&lt;/code&gt;,&lt;code class=&quot;language-text&quot;&gt;Networking&lt;/code&gt; 항목 위주로 작성하고 나머지 항목은 일상 블로그에 적어봐야겠다.&lt;/p&gt;
 &lt;h1 id=&quot;work&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#work&quot; aria-label=&quot;work permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Work&lt;/h1&gt;
