@@ -1,16 +1,390 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Bomdong.log]]></title><description><![CDATA[일상 속 개발록]]></description><link>https://dev-bomdong.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Mon, 23 Jun 2025 04:05:01 GMT</lastBuildDate><item><title><![CDATA[협업 병목을 줄이기 위한 자동화 실험 기록]]></title><description><![CDATA[들어가며 재직 중인 회사에서 새로운 서비스를 맡게 된지도 어느덧…]]></description><link>https://dev-bomdong.github.io/experiment-with-automation/</link><guid isPermaLink="false">https://dev-bomdong.github.io/experiment-with-automation/</guid><pubDate>Thu, 15 May 2025 00:00:00 GMT</pubDate><content:encoded>&lt;h2 id=&quot;들어가며&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%93%A4%EC%96%B4%EA%B0%80%EB%A9%B0&quot; aria-label=&quot;들어가며 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;들어가며&lt;/h2&gt;
-&lt;p&gt;재직 중인 회사에서 새로운 서비스를 맡게 된지도 어느덧 1년 반이 지났다. 소속이 변경된 직후는 새로 합을 맞추게 된 동료들과 익숙하지 않은 도메인에 적응하는데 집중했다. 낯선 요구사항이 주어져도 일정에 맞춰 최선의 방법으로 구현해내는걸 주요 과제로 삼았다.
-시간이 흐르며 어느정도 동료들과 도메인에 익숙해졌고, 자연스럽게 새로운 갈증과 고민이 생겼다.&lt;/p&gt;
-&lt;p&gt;단순히 주어진 요구사항을 구현하는 것을 넘어 &lt;strong&gt;+α를 만들어내는 사람&lt;/strong&gt;이 되고싶었다.&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Bomdong.log]]></title><description><![CDATA[일상 속 개발록]]></description><link>https://dev-bomdong.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 18 Jul 2025 15:23:54 GMT</lastBuildDate><item><title><![CDATA[프롬프팅으로 문서 자동화 흐름 설계하기]]></title><description><![CDATA[들어가며 재직 중인 회사의 프론트엔드팀에선 디자인 시스템을 직접 운영하고 있다.
+공통 토큰과 컴포넌트 중심으로 UI를 구성하면서 component-driven development…]]></description><link>https://dev-bomdong.github.io/document-automation-with-ai/</link><guid isPermaLink="false">https://dev-bomdong.github.io/document-automation-with-ai/</guid><pubDate>Sat, 19 Jul 2025 00:00:00 GMT</pubDate><content:encoded>&lt;h2 id=&quot;들어가며&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%93%A4%EC%96%B4%EA%B0%80%EB%A9%B0&quot; aria-label=&quot;들어가며 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;들어가며&lt;/h2&gt;
+&lt;p&gt;재직 중인 회사의 프론트엔드팀에선 디자인 시스템을 직접 운영하고 있다.
+공통 토큰과 컴포넌트 중심으로 UI를 구성하면서 component-driven development를 실무에 녹여낼 수 있었고, 팀의 생산성도 눈에 띄게 향상됐다.&lt;/p&gt;
+&lt;p&gt;다만 그 생산성을 유지하려면 피할 수 없는 루틴한 작업이 있었다. &lt;br/&gt;
+바로 &lt;strong&gt;컴포넌트를 만들 때마다 storybook 문서 작성하기.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;컴포넌트마다 예제 코드, Props, Playground 등을 포함한 문서를 템플릿에 맞춰 작성해야 했다.
+복잡하진 않지만 시간이 오래 걸리고, 귀찮고, 실수가 잦은 작업이었다.
+템플릿을 기준으로 복사-붙여넣기하는 흐름이라 작성자마다 표현 방식이 달라지고, 한두 개의 섹션을 빠뜨리는 실수도 종종 있었다.&lt;/p&gt;
+&lt;p&gt;이런 작업을 반복하다보니 문득 &lt;strong&gt;이 문서를 꼭 사람이 써야되나..?&lt;/strong&gt; 🥱 생각이 들었다.&lt;/p&gt;
+&lt;p&gt;마침 우리 팀은 Cursor를 도입해 적극적으로 활용하고 있었고, 자동화에 대한 관심도 높은 편이었다. Cursor Rule을 작성해 보일러플레이트 코드를 자동 생성하는 실험도 활발히 이루어졌고, 주간 회의에서는 어떤 자동화를 시도해봤는지 공유하고는 했다.
+이런 팀 분위기 덕분에 &lt;strong&gt;Storybook 문서화 같은 반복 작업도 Cursor로 자동화해볼 수 있지 않을까&lt;/strong&gt; 란 생각이 들었고, 직접 Cursor rule을 설계해보는 계기가 됐다.&lt;/p&gt;
+&lt;h2 id=&quot;초기-흐름-설계&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%B4%88%EA%B8%B0-%ED%9D%90%EB%A6%84-%EC%84%A4%EA%B3%84&quot; aria-label=&quot;초기 흐름 설계 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;초기 흐름 설계&lt;/h2&gt;
+&lt;h3 id=&quot;흐름을-직접-그려보며-방향-잡기&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%ED%9D%90%EB%A6%84%EC%9D%84-%EC%A7%81%EC%A0%91-%EA%B7%B8%EB%A0%A4%EB%B3%B4%EB%A9%B0-%EB%B0%A9%ED%96%A5-%EC%9E%A1%EA%B8%B0&quot; aria-label=&quot;흐름을 직접 그려보며 방향 잡기 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;흐름을 직접 그려보며 방향 잡기&lt;/h3&gt;
+&lt;p&gt;처음에는 프롬프팅 기법에 대한 지식이 거의 없었다. 다만, 구현하고자 하는 흐름만큼은 명확했다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;tsx&quot;&gt;&lt;pre class=&quot;language-tsx&quot;&gt;&lt;code class=&quot;language-tsx&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;특정 규칙에 의해 rule 실행&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;token string&quot;&gt;&quot;{컴포넌트명} 스토리 작성해줘&quot;&lt;/span&gt; 입력
+        │
+        ▼
+&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;필수 조건 확인&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+├── Figma 링크 있는가&lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt;
+│     ├─ &lt;span class=&quot;token constant&quot;&gt;O&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; 다음 단계 진행
+│     └─ &lt;span class=&quot;token constant&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;Figma 링크를 알려주세요&quot;&lt;/span&gt; 응답 후 대기
+└── 기존 스토리 파일 있는가&lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt;
+      ├─ &lt;span class=&quot;token constant&quot;&gt;O&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;리팩토링할까요?&quot;&lt;/span&gt; → 컨펌 대기
+      └─ &lt;span class=&quot;token constant&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; 신규 작성 흐름으로 진행
+        │
+        ▼
+&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;초안 설명&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+→ 어떤 스토리&lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;문서가 생성될지 목차 위주로 브리핑
+→ 개발자의 피드백에 따라 수정
+        │
+        ▼
+&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;컨펌 요청&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+→ &lt;span class=&quot;token string&quot;&gt;&quot;진행할까요?&quot;&lt;/span&gt; 질문 후 대기
+&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt; 이 단계까지 어떠한 파일도 수정하지 않음
+        │
+        ▼
+&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;파일 생성 또는 수정&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&quot;설계-시-고려한-핵심-원칙&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%84%A4%EA%B3%84-%EC%8B%9C-%EA%B3%A0%EB%A0%A4%ED%95%9C-%ED%95%B5%EC%8B%AC-%EC%9B%90%EC%B9%99&quot; aria-label=&quot;설계 시 고려한 핵심 원칙 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;설계 시 고려한 핵심 원칙&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;명확한 트리거 설정하기&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;특정 규칙에 의해 rule이 실행되도록 했다. 의도된 조건이 아니면 작동하지 않는다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;필수 조건 선검사&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;storybook의 디자인탭에서 보여줄 Figma 링크나 기존 파일 존재 여부처럼 사전에 확인이 필요한 항목을 먼저 점검하고, 조건을 만족하지 않으면 다음 단계로 넘어가지 않도록 했다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;상호작용 기반 디벨롭&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;한번의 요청으로 바로 문서가 완성되는게 아니라, 초안 설명 → 피드백 반영 → 컨펌 구조로 문서를 함께 다듬어가는 흐름을 구성했다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;코드 수정은 항상 마지막에&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;cursor agent가 갑자기 여러 파일을 수정하는 상황을 방지하기위해, 컨펌 이전엔 실제 파일을 절대 건드리지 않도록 제한했다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;이-흐름의-일반화된-방식이-있을까&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%9D%B4-%ED%9D%90%EB%A6%84%EC%9D%98-%EC%9D%BC%EB%B0%98%ED%99%94%EB%90%9C-%EB%B0%A9%EC%8B%9D%EC%9D%B4-%EC%9E%88%EC%9D%84%EA%B9%8C&quot; aria-label=&quot;이 흐름의 일반화된 방식이 있을까 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;이 흐름의 일반화된 방식이 있을까?&lt;/h3&gt;
+&lt;p&gt;최근 개발 스터디를 통해 &lt;code class=&quot;language-text&quot;&gt;일반해&lt;/code&gt; 란 개념을 접하고 어떤 문제 상황을 마주하면, 이미 이론적으로 정리된 해결 틀이나 방법이 존재하지 않을까 의심해보는 습관이 생겼다.&lt;/p&gt;
+&lt;p&gt;이번 작업도 그랬다. 처음에는 막연하게 ‘이렇게 작동했으면 좋겠다’는 직관을 따라 흐름을 그렸다. 단계가 정제되면서 &lt;code class=&quot;language-text&quot;&gt;trigger&lt;/code&gt;처럼 명명 가능한 키워드가 붙기 시작했고, 이런 구조가 프롬프트 설계 쪽에 이미 존재하지 않을까 싶었다. &lt;em&gt;(일반해를 찾아내려는 감각 발동..!)&lt;/em&gt; 실제로 조사해보니 무의식적으로 구성한 흐름이 다양한 프롬프팅 기법과 구조적으로 유사했다.&lt;/p&gt;
+&lt;h2 id=&quot;프롬프팅-기법으로-구조-다듬기&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%ED%94%84%EB%A1%AC%ED%94%84%ED%8C%85-%EA%B8%B0%EB%B2%95%EC%9C%BC%EB%A1%9C-%EA%B5%AC%EC%A1%B0-%EB%8B%A4%EB%93%AC%EA%B8%B0&quot; aria-label=&quot;프롬프팅 기법으로 구조 다듬기 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;프롬프팅 기법으로 구조 다듬기&lt;/h2&gt;
+&lt;h3 id=&quot;1-언제-실행시킬까-trigger-pattern&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#1-%EC%96%B8%EC%A0%9C-%EC%8B%A4%ED%96%89%EC%8B%9C%ED%82%AC%EA%B9%8C-trigger-pattern&quot; aria-label=&quot;1 언제 실행시킬까 trigger pattern permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;1. 언제 실행시킬까 (Trigger Pattern)&lt;/h3&gt;
+&lt;p&gt;무분별한 실행은 혼란을 낳으니 &lt;code class=&quot;language-text&quot;&gt;{컴포넌트명} 스토리 작성해줘&lt;/code&gt; 라는 구체적인 입력이 있어야만 rule이 작동하도록 구성했다. 이는 일반적인 &lt;code class=&quot;language-text&quot;&gt;Trigger Pattern&lt;/code&gt;의 정의와 일치한다. AI가 임의로 반응하지 않고, 특정 조건이 충족됐을 때만 동작을 개시하는 방식이다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 720px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 57.22222222222223%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAABYlAAAWJQFJUiTwAAABXElEQVQoz4VSV3bEIAz0PeKSdVljwDSXbbn/tSZPApxkNy/5GBAgjUZCRT8oKOVh7AoxWbyVLaq6R1l1/6KqO1RNj7rpOaZuBhTNaeRDRvnN/gtlInB+R1hu2PYHpPIo2rOCXa6Y3Q4brjD+gtOg0A6K9wiJUy/j/Vkd7wfSHfkUZLj1xqTTvECZlXdpVii74Swd5Lzw3aQDpCE7QOgAZaMPiRkmi3cipEXbDW65QWgPoXwMUMnWgc+jdNHWAaOKNvlTQhL1nipgQspuwgXabUxCTt04oxeGMxPIJlJ6GyYTIQx6Mb8SkkEqiZRKH9VX5roVaLqJUac9g2IzMin3kKRrtzMh9XP2O7eAFetwtEFybxdOPqaEGYdCWsL2gN/uWC4f8Osdxu/QdsXsqLfx53kK8jSknSrJRBlcMv1WVkfB1L9cynNpz8jqfvSQRuQgDFcenW7UL9l/w7PCTwMKRORZFRBFAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;trigger_pattern&quot;
+        title=&quot;trigger_pattern&quot;
+        src=&quot;/static/ee8bc6956720a11ea9c6719cfab41bca/37523/trigger_pattern.png&quot;
+        srcset=&quot;/static/ee8bc6956720a11ea9c6719cfab41bca/e9ff0/trigger_pattern.png 180w,
+/static/ee8bc6956720a11ea9c6719cfab41bca/f21e7/trigger_pattern.png 360w,
+/static/ee8bc6956720a11ea9c6719cfab41bca/37523/trigger_pattern.png 720w,
+/static/ee8bc6956720a11ea9c6719cfab41bca/302a4/trigger_pattern.png 1080w,
+/static/ee8bc6956720a11ea9c6719cfab41bca/b79a5/trigger_pattern.png 1372w&quot;
+        sizes=&quot;(max-width: 720px) 100vw, 720px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Tag 스토리 작성해줘라고 입력하면 트리거 패턴에 따라 rule이 실행된다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;2-어떤-조건이-충족돼야-하나-guard-clause&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#2-%EC%96%B4%EB%96%A4-%EC%A1%B0%EA%B1%B4%EC%9D%B4-%EC%B6%A9%EC%A1%B1%EB%8F%BC%EC%95%BC-%ED%95%98%EB%82%98-guard-clause&quot; aria-label=&quot;2 어떤 조건이 충족돼야 하나 guard clause permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;2. 어떤 조건이 충족돼야 하나 (Guard Clause)&lt;/h3&gt;
+&lt;p&gt;필수 조건인 1) Figma 링크 존재 여부 2) 기존 스토리 파일 유무를 초기에 점검한다. 조건이 충족되지 않으면 흐름은 중단되거나 대기 상태에 들어간다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 720px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 71.66666666666667%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAACXBIWXMAABYlAAAWJQFJUiTwAAAB5klEQVQ4y42U2W7bMBBFacRt0tZOXLRe5EWKFlqURG3U4j0F8pD//6MbDGULcmIUeTgiwfXOzBWZzGqkxR6J2iGvjojzLbLyoPtCKlhuAJtHePbCL8HoQ5u6mK5oFnAiarH/gycS2OsIzPYCrEWi4SKGH6QQkYJNB7rBFZYjGmz/No4A82UNtX9DUr8i271hLSuMxzM8Pv7GYDjCcDjCYPCEp9FfzAxTs1g6LUti5er+yuJgw9Ef3P8Y4P7nAA+/huh/fwBj7BO9Xg93d330+99gzK32EGNhw5g/a5amB2YYJsbjOSaTBSaTOabTJQzDatV0mc5Wmosq0+KIZA4ZK8RJAe5LMIdHcNcS1BKUuzZXHcxzjrr5pDaQCmFcIEpKcJGABXGBtNhp8voIstE6zOBH+RkFIQuESQkRF5+qq13hEI0zGPmOPKc2L1D1SXuQfFlsXlo2h1cU238Izgd2fffxAq1Q1Ufk1QFZudd9UsODVCsktWRw8tnF5Le4HM5cP0ac10jUBjKrGoPyUIfwkVs/QVepDtnyQp23cnNCWmxRbk86NFJ4gVR28S85DjPwILlWSB3aRGHRoraNcl3BZixv5wgap0ub+ewqlyxMK/0wUHGitNYFCpOqfSCoWF6Q6pCtL4T8DpnSkxfpCSL+AAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;Guard_Clause&quot;
+        title=&quot;Guard_Clause&quot;
+        src=&quot;/static/cc8c263323402d9487a45499ddfedd82/37523/Guard_Clause.png&quot;
+        srcset=&quot;/static/cc8c263323402d9487a45499ddfedd82/e9ff0/Guard_Clause.png 180w,
+/static/cc8c263323402d9487a45499ddfedd82/f21e7/Guard_Clause.png 360w,
+/static/cc8c263323402d9487a45499ddfedd82/37523/Guard_Clause.png 720w,
+/static/cc8c263323402d9487a45499ddfedd82/302a4/Guard_Clause.png 1080w,
+/static/cc8c263323402d9487a45499ddfedd82/d0c2f/Guard_Clause.png 1362w&quot;
+        sizes=&quot;(max-width: 720px) 100vw, 720px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;필수 조건인 figma 링크, 스토리 파일 존재 여부를 순차적으로 확인하는 사고 과정&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;이 방식은 소프트웨어 디자인 패턴 중 하나인 &lt;code class=&quot;language-text&quot;&gt;Guard Clause&lt;/code&gt;에서 따왔다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The term &lt;strong&gt;guard clause&lt;/strong&gt; is a &lt;a href=&quot;https://en.wikipedia.org/wiki/Software_design_pattern&quot;&gt;Software design pattern&lt;/a&gt; attributed to &lt;a href=&quot;https://en.wikipedia.org/wiki/Kent_Beck&quot;&gt;Kent Beck&lt;/a&gt; who codified many often unnamed coding practices into named software design patterns, the practice of using this technique dates back to at least the early 1960’s. The &lt;strong&gt;guard clause&lt;/strong&gt; most commonly &lt;strong&gt;is added at the beginning of a procedure&lt;/strong&gt; and is said to &lt;strong&gt;“guard” the rest of the procedure by handling edgecases upfront.&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;핵심은 앞단에서 조건을 확인해 &lt;strong&gt;예외적인 경우를 조기에 차단하는 것&lt;/strong&gt;이다.&lt;/p&gt;
+&lt;h3 id=&quot;3-어떤-예시를-학습시킬-것인가-few-shot-prompting&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#3-%EC%96%B4%EB%96%A4-%EC%98%88%EC%8B%9C%EB%A5%BC-%ED%95%99%EC%8A%B5%EC%8B%9C%ED%82%AC-%EA%B2%83%EC%9D%B8%EA%B0%80-few-shot-prompting&quot; aria-label=&quot;3 어떤 예시를 학습시킬 것인가 few shot prompting permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;3. 어떤 예시를 학습시킬 것인가 (Few-shot Prompting)&lt;/h3&gt;
+&lt;p&gt;AI가 문서 스타일과 코드 컨벤션을 학습할 수 있도록, 다양한 컴포넌트의 스토리 파일을 참조 예시로 제시했다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 720px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 54.44444444444444%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAABYlAAAWJQFJUiTwAAABG0lEQVQoz51TWU7FMAzsTVi6pmnWJule4P6HGmT3PYQQtE98jBw58WS8ZUL1MP0M7SfYuEK5Ea2OkDZB+QkmLJDmONMbujdhhnIDfNoYNiyMUhhkRJjmd4RxZ/i0MsK4IU474rgfdnqDiwtq6VC1FqWwqKVnVOSTDq9VhyyvFbQbGNIEKJvQ6h7kLxqNolEoheYz+Z6LFk+5+BV0lxFrZxM6E9kSqTSRg++Pvge8lPIUWV51UC6hs5FBSimts6AzYlZIhIrVRQaldw8i+4iyPwgDF/YRJeeEN3XaD6CunxFdfXJrylG/ozERlTBfqf7EZQ2pm7W0PCp1ayGUR9P5/ys8Jn+BiytvAk1+nD94G2iDXNrQDzuDBvqK8BNj4kiRPsG1AgAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;Few-shot_Prompting&quot;
+        title=&quot;Few-shot_Prompting&quot;
+        src=&quot;/static/be56b8e8bdef44733641e76859dfe0b0/37523/Few-shot_Prompting.png&quot;
+        srcset=&quot;/static/be56b8e8bdef44733641e76859dfe0b0/e9ff0/Few-shot_Prompting.png 180w,
+/static/be56b8e8bdef44733641e76859dfe0b0/f21e7/Few-shot_Prompting.png 360w,
+/static/be56b8e8bdef44733641e76859dfe0b0/37523/Few-shot_Prompting.png 720w,
+/static/be56b8e8bdef44733641e76859dfe0b0/302a4/Few-shot_Prompting.png 1080w,
+/static/be56b8e8bdef44733641e76859dfe0b0/cd138/Few-shot_Prompting.png 1220w&quot;
+        sizes=&quot;(max-width: 720px) 100vw, 720px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;참조 파일(예제)들을 분석해 패턴을 학습하는 사고 과정&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;이렇게 학습할 예제를 제공하는 방식은 &lt;code class=&quot;language-text&quot;&gt;Few-shot Prompting&lt;/code&gt; 기법에 해당한다. &lt;strong&gt;입력–출력 예제를 함께 제공하여, AI가 문맥과 규칙을 간접적으로 학습하게 만드는 방식&lt;/strong&gt;이다. 특히 템플릿 기반 문서처럼 일정한 형식이 중요한 경우 매우 유용하다.&lt;/p&gt;
+&lt;p&gt;프롬프트 엔지니어링 가이드 문서에선&lt;code class=&quot;language-text&quot;&gt;Few-shot Prompting&lt;/code&gt; 을 아래와 같이 정의하고 있다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Few-shot prompting can be used as a technique &lt;strong&gt;to enable in-context learning where we provide demonstrations in the prompt&lt;/strong&gt; to steer the model to better performance. &lt;strong&gt;The demonstrations serve as conditioning for subsequent examples&lt;/strong&gt; where we would like the model to generate a response.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;후속 예제를 컨디셔닝하는 데모(예제)는 shot이라고 불린다. (예제를 하나만 제공했으면 1-shot)
+내 경우엔 다양한 예시를 가진 컴포넌트 총 4개를 예시로 지정했는데, 이러면 총 4-shot을 제공한 셈이다.&lt;/p&gt;
+&lt;h3 id=&quot;4-어떤-형식으로-출력돼야-하나-structured-prompting&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#4-%EC%96%B4%EB%96%A4-%ED%98%95%EC%8B%9D%EC%9C%BC%EB%A1%9C-%EC%B6%9C%EB%A0%A5%EB%8F%BC%EC%95%BC-%ED%95%98%EB%82%98-structured-prompting&quot; aria-label=&quot;4 어떤 형식으로 출력돼야 하나 structured prompting permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;4. 어떤 형식으로 출력돼야 하나 (Structured Prompting)&lt;/h3&gt;
+&lt;p&gt;문서 구조와 코드 스타일이 일관되도록 출력 양식을 미리 정의하고, 생성되는 문서가 정해진 틀을 따르도록 유도했다.&lt;/p&gt;
+&lt;p&gt;디자인 시스템의 Storybook 문서는 팀이 정한 구조와 컨벤션에 맞춰야 했다. 예를 들어, 컴포넌트를 감싸는 레이아웃 컴포넌트가 있고, 정해진 문체와 코드 스타일을 따르는 식이다. 이런 규칙은 단순히 예시를 제공해 학습시키는 것만으로는 한계가 있다고 판단해, 보다 명시적으로 양식을 적어주었다.&lt;/p&gt;
+&lt;p&gt;이런 방식은 &lt;code class=&quot;language-text&quot;&gt;Structured Prompting&lt;/code&gt;이라 불린다. &lt;strong&gt;AI가 출력할 구조를 미리 정의하거나 유도하여, 일관된 형식의 결과를 얻는 전략&lt;/strong&gt;이다. 덕분에 모든 컴포넌트 문서의 스타일과 구성 순서를 동일하게 유지할 수 있었다.&lt;/p&gt;
+&lt;h3 id=&quot;5-결과를-어떻게-설명하고-컨펌-받을-것인가-chain-of-thought--human-in-the-loop&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#5-%EA%B2%B0%EA%B3%BC%EB%A5%BC-%EC%96%B4%EB%96%BB%EA%B2%8C-%EC%84%A4%EB%AA%85%ED%95%98%EA%B3%A0-%EC%BB%A8%ED%8E%8C-%EB%B0%9B%EC%9D%84-%EA%B2%83%EC%9D%B8%EA%B0%80-chain-of-thought--human-in-the-loop&quot; aria-label=&quot;5 결과를 어떻게 설명하고 컨펌 받을 것인가 chain of thought  human in the loop permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;5. 결과를 어떻게 설명하고 컨펌 받을 것인가 (Chain-of-Thought + Human-in-the-loop)&lt;/h3&gt;
+&lt;p&gt;Cursor Agent를 처음 썼을 때 가장 당황했던 경험 중 하나는, 간단한 요청만 했는데 갑자기 여러 파일을 한꺼번에 수정해버린 일이었다. 흐름을 이해하지 못한 상태에서 코드를 바꾸다 보니 주도권을 뺏긴 느낌이 들기도 했다.&lt;/p&gt;
+&lt;p&gt;이를 막기위해 문서를 생성하기 전에 초안을 먼저 설명하고, 사용자로부터 “진행할까요?” 컨펌을 받아야만 실행되도록 했다. 이는 Chain-of-Thought의 중간 추론 설명 + Human-in-the-loop 를 합친 형태다.&lt;/p&gt;
+&lt;h4 id=&quot;chain-of-thought-cot&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#chain-of-thought-cot&quot; aria-label=&quot;chain of thought cot permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Chain-of-Thought (CoT)&lt;/h4&gt;
+&lt;p&gt;LLM이 단순한 정답만 내놓는 대신, &lt;strong&gt;중간 추론 과정을 단계별로 설명하게 하여&lt;/strong&gt; 더 정확하고 복잡한 문제 해결을 가능하게 만드는 프롬프팅 기법이다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;chain-of-thought (CoT) prompting enables complex reasoning capabilities through intermediate reasoning steps. &lt;strong&gt;You can combine it with few-shot prompting to get better results&lt;/strong&gt; on more complex tasks that require reasoning before responding.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;마침 이전 단계에서 활용한 &lt;code class=&quot;language-text&quot;&gt;few-shot prompting&lt;/code&gt;과의 궁합도 좋았다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 720px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 50.55555555555556%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAIAAAA7N+mxAAAACXBIWXMAAAsTAAALEwEAmpwYAAAB90lEQVQoz32Qv2/TQBTH/ecxsDBTNhi6IURG5goo7ICoOjIAqloQVE2D1B9ABamTOKntu/PZju3ESS4+GxqffXf2gVux8nnSd/nqq/feV6uVin8VPmW67ZqmiTG2LCuOY6WUqmsmaxinX34ObcdFCNq2jRACAAghlFIaF2LfCLaOrPYoTClNkmR5RZplRX7pztPtU7B9AtBkSWmyIEtCyGJBsizjnGv5amX09IHeNXr6NQAAz/MQhIQs4yhAxrlvG649hKO+C8xw7EfBOAqDoii0oihm83kQhvFsxhiTUqp/VFKM3PD5gbnxebh5cLHZQS+/B3vD6H0Xd6wpK8om7PkegABAgJCDMfY8D0Loum7JcjQlu4NgR3d3e/7OIDq0JiYeGwBPCBVCaIyxMQ4CHKWLjCaUUpqmKb0iZ2w2mYwtOHW82PcmPoxDLwg8BwFC5lJKrVa1Q83z6NRK+lJVUlZCCCmlaKaa0emRdXiGj1OWXNVfq1qpWkkum82c869O5213uw0/Zg7khEilGkeKmqsf4+P1/Zt3P9x4/O3Blv7s1fmT172nL/SNNt7hgjdhdlmWv3mxEpfTuMxSLiUvy5KXNVd7/Tfr727d/7T2sLPWaq+1Du60jm8/Ormnu2dVVWvqv+SrfJXlecGElNcHq6rRSlZ/f/4DGlMRL6Sf5SsAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;Chain-of-Thought&quot;
+        title=&quot;Chain-of-Thought&quot;
+        src=&quot;/static/9793ea79c61881b1d1b6a8b944f527a3/37523/CoT.png&quot;
+        srcset=&quot;/static/9793ea79c61881b1d1b6a8b944f527a3/e9ff0/CoT.png 180w,
+/static/9793ea79c61881b1d1b6a8b944f527a3/f21e7/CoT.png 360w,
+/static/9793ea79c61881b1d1b6a8b944f527a3/37523/CoT.png 720w,
+/static/9793ea79c61881b1d1b6a8b944f527a3/f79fa/CoT.png 940w&quot;
+        sizes=&quot;(max-width: 720px) 100vw, 720px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;기존의 &lt;code class=&quot;language-text&quot;&gt;Zero-shot Prompting&lt;/code&gt;이 “질문 → 정답” 구조라면, &lt;code class=&quot;language-text&quot;&gt;CoT Prompting&lt;/code&gt;은 “질문 → 중간 추론 → 정답”의 구조를 따르도록 유도한다.
+CoT에서 말하는 중간 추론을 먼저 출력하고 최종 정답은 그 이후에 출력하는 방식을 응용해서 AI가 암묵적인 추론을 막고 단계적으로 사고하도록 만들고 싶었다.&lt;/p&gt;
+&lt;p&gt;문서를 곧바로 생성하는 것이 아니라 먼저 &lt;strong&gt;“어떤 구성으로 문서를 생성하려는지 계획을 먼저 설명하도록”&lt;/strong&gt; 했다.&lt;/p&gt;
+&lt;p&gt;예를 들어,&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;tsx&quot;&gt;&lt;pre class=&quot;language-tsx&quot;&gt;&lt;code class=&quot;language-tsx&quot;&gt;이제 &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;componentName&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; 관련 파일들을 분석하고 초안을 작성하겠습니다&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;
+
+분석 결과&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;componentName&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; Props&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt;
+&lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;
+생성할 StoryFn 목록&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt;
+&lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;componentName&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;mdx 파일 초안&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt;
+&lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;
+
+이렇게 진행할까요&lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;와 같이 &lt;strong&gt;예상되는 산출물의 구성과 목적을 먼저 설명하게 하고&lt;/strong&gt;, 사용자의 컨펌을 받은 뒤에야 문서를 생성한다.&lt;/p&gt;
+&lt;h4 id=&quot;human-in-the-loop-hitl&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#human-in-the-loop-hitl&quot; aria-label=&quot;human in the loop hitl permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Human-in-the-loop (HITL)&lt;/h4&gt;
+&lt;p&gt;Human-in-the-loop는 사람이 AI의 중간 결과물을 직접 확인하고 승인함으로써, AI와 사람 사이에 일종의 ‘피드백 루프’를 형성한다. 예측 불가능한 실행을 막고 자동화 흐름에 통제권을 부여하는 방식이다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 720px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 35%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAHCAYAAAAIy204AAAACXBIWXMAABYlAAAWJQFJUiTwAAAAvklEQVQoz52R2w7CIBBE+Q5tKSyUS4HesMZU/f/PGkONxidvDyezLzOb3WEuzpiWC+bjFaYbIXQH2Ya/YdJEKJugXY8yiz9Ciqf4yUQwagOUieBkIZT/mYYcuLSbFphxCb4bsK8Ida1Q/YiUFkQOpByENGC1MNhVhIpr1FzftWm/gjct+mHBlE/Iy4qYMpi2CT5l+DjDhhE2TFsxr7z7X6M8eDm7nKw8WBiOW8tDXjEezk8ezfv+8Awtz/+07Aa8gcl/yNrvLAAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;Human-in-the-loop&quot;
+        title=&quot;Human-in-the-loop&quot;
+        src=&quot;/static/3f95033693bdccf73fa6fd48dac2462f/37523/HITL.png&quot;
+        srcset=&quot;/static/3f95033693bdccf73fa6fd48dac2462f/e9ff0/HITL.png 180w,
+/static/3f95033693bdccf73fa6fd48dac2462f/f21e7/HITL.png 360w,
+/static/3f95033693bdccf73fa6fd48dac2462f/37523/HITL.png 720w,
+/static/3f95033693bdccf73fa6fd48dac2462f/302a4/HITL.png 1080w,
+/static/3f95033693bdccf73fa6fd48dac2462f/8b936/HITL.png 1368w&quot;
+        sizes=&quot;(max-width: 720px) 100vw, 720px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;반드시 사람의 최종 확인을 받고나서 코드가 수정/생성되며, 덕분에 코드의 통제권이 사람에게 유지된다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;6-파일-생성수정&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#6-%ED%8C%8C%EC%9D%BC-%EC%83%9D%EC%84%B1%EC%88%98%EC%A0%95&quot; aria-label=&quot;6 파일 생성수정 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;6. 파일 생성/수정&lt;/h3&gt;
+&lt;p&gt;마지막 단계는 피드백에 다라 파일을 생성하거나 수정하는 작업이다.
+이 시점까지는 실제 코드 수정을 하지 않았고, 모든 확인이 끝난 후에만 실행되도록 제한했다.
+덕분에 자동화 작업도 예측 가능하고, 통제 가능한 상태로 이뤄질 수 있었다.&lt;/p&gt;
+&lt;h1 id=&quot;최종-자동화-흐름&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%B5%9C%EC%A2%85-%EC%9E%90%EB%8F%99%ED%99%94-%ED%9D%90%EB%A6%84&quot; aria-label=&quot;최종 자동화 흐름 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;최종 자동화 흐름&lt;/h1&gt;
+&lt;p&gt;프롬프트 기법을 활용해 최종적으로 정리한 흐름은 아래와 같다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;tsx&quot;&gt;&lt;pre class=&quot;language-tsx&quot;&gt;&lt;code class=&quot;language-tsx&quot;&gt;────────────────────────────────────────
+&lt;span class=&quot;token number&quot;&gt;1.&lt;/span&gt; 트리거 &lt;span class=&quot;token function&quot;&gt;감지&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;Trigger Pattern&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+────────────────────────────────────────
+  └─ &lt;span class=&quot;token string&quot;&gt;&quot;{컴포넌트명} 스토리 작성해줘&quot;&lt;/span&gt; 입력 시 Rule 작동
+                  │
+                  ▼
+────────────────────────────────────────
+&lt;span class=&quot;token number&quot;&gt;2.&lt;/span&gt; 필수 조건 &lt;span class=&quot;token function&quot;&gt;확인&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;Guard Clause&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+────────────────────────────────────────
+  ├─ &lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1.&lt;/span&gt; Figma 링크 확인
+  │     ├─ 있음 → 다음 단계 진행
+  │     └─ 없음 → &lt;span class=&quot;token string&quot;&gt;&quot;링크를 알려주세요&quot;&lt;/span&gt; 응답 후 대기
+  └─ &lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;2.&lt;/span&gt; 기존 스토리 파일 확인
+         ├─ 있음 → &lt;span class=&quot;token string&quot;&gt;&quot;리팩토링할까요?&quot;&lt;/span&gt; 컨펌 후 진행
+         └─ 없음 → 다음 단계 진행
+                  │
+                  ▼
+────────────────────────────────────────
+&lt;span class=&quot;token number&quot;&gt;3.&lt;/span&gt; 예제 기반 패턴 &lt;span class=&quot;token function&quot;&gt;학습&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;Few&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;shot Prompting&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+────────────────────────────────────────
+  ├─ 참조 스토리 분석&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Button&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; Input 등
+  └─ 파일 구조 분석
+       ├─ 코드 &lt;span class=&quot;token function&quot;&gt;파일&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;tsx&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;types&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;ts&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+       │    └─ Props 타입&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; Enum&lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;Union 추출
+       └─ 문서 &lt;span class=&quot;token function&quot;&gt;파일&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;mdx&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+            └─ 목차&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; Meta 객체&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; 문서 구조 학습
+                  │
+                  ▼
+────────────────────────────────────────
+&lt;span class=&quot;token number&quot;&gt;4.&lt;/span&gt; 정해진 구조에 따른 초안 &lt;span class=&quot;token function&quot;&gt;작성&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;Structured Prompting&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+────────────────────────────────────────
+  ├─ 문서 구성 템플릿 &lt;span class=&quot;token function&quot;&gt;적용&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;ComponentStage&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; Stack 등&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+  ├─ 문체 &lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt; 코드 스타일 통일
+  ├─ ArgTypes 규칙 기반 Controls 자동 생성
+  ├─ 필수 StoryFn &lt;span class=&quot;token function&quot;&gt;생성&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;Playground&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; Variant 등&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+  └─ 복잡도 있는 컴포넌트 예외 처리
+                  │
+                  ▼
+────────────────────────────────────────
+&lt;span class=&quot;token number&quot;&gt;5.&lt;/span&gt; 초안 설명 및 &lt;span class=&quot;token function&quot;&gt;컨펌&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;Chain &lt;span class=&quot;token keyword&quot;&gt;of&lt;/span&gt; Thought &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; Human&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;in&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;the&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;loop&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+────────────────────────────────────────
+  └─ 사용자에게 분석 결과 및 생성 계획 제시
+       └─ &lt;span class=&quot;token string&quot;&gt;&quot;진행할까요?&quot;&lt;/span&gt; 질문 → 컨펌 후에만 실행
+                  │
+                  ▼
+────────────────────────────────────────
+&lt;span class=&quot;token number&quot;&gt;6.&lt;/span&gt; 문서 생성 및 리팩토링
+────────────────────────────────────────
+  └─ &lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;mdx &lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;stories&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;tsx 파일 생성 또는 수정
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h1 id=&quot;회고&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%ED%9A%8C%EA%B3%A0&quot; aria-label=&quot;회고 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;회고&lt;/h1&gt;
+&lt;p&gt;이 흐름과 cursor rule을 팀 회의에서 공유하고 시연했을 때, 편의성과 예측 가능성 면에서 긍정적인 피드백을 받았다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;가장 먼저 나왔던 피드백은 &lt;code class=&quot;language-text&quot;&gt;귀찮은 문서화를 채팅처럼 처리할 수 있다는 점이 편하다&lt;/code&gt;는 말이였다.
+매번 수작업으로 예제와 props를 채워넣던 과정을 자동화해 “스토리 작성해줘” 한 문장으로 시작할 수 있게 된 것이다.&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;컨펌 없이는 코드가 수정되지 않는 구조가 마음에 든다&lt;/code&gt;는 의견도 있었다.
+이전엔 cursor agent가 한 번에 여러 파일을 예고 없이 수정해 당황하는 경우가 있었지만,
+지금은 작업 계획과 함께 “진행할까요?”라는 질문을 한 뒤 기다리고, 사용자 컨펌 이후에야 파일이 수정되니 안심하고 요청할 수 있다는 점이 마음에 들었다는 의견이 많았다.
+&lt;strong&gt;자동화의 주도권이 사람에게 있다&lt;/strong&gt;는 점이 핵심이었다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;팀뿐만 아니라 스스로에게도 꽤 의미 있는 작업이었다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;처음에는 그냥 너무 번거로운데 문서화 좀 자동화할 수 없을까?라는 생각으로 시작했지만, 설계 흐름을 구체화해 나가면서 &lt;strong&gt;AI를 도구로 활용하려면, 그 도구가 작동할 수 있는 맥락부터 먼저 설계해야 한다&lt;/strong&gt;는 사실을 깨달았다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;무엇보다 흥미로웠던 건, &lt;strong&gt;처음에는 감으로 그렸던 흐름이 나중에 보니 여러 프롬프트 설계 기법과 닮아 있었다는 점&lt;/strong&gt;이다. 의식하지 못했던 단계들이 나중에 보니 &lt;code class=&quot;language-text&quot;&gt;Trigger&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;Guard Clause&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;Few-shot&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;Structured&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;Chain of Thought&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;Human-in-the-loop&lt;/code&gt; 와 같은 이름을 가진 구조적 기법들이었다. 감으로 만든 구조에 이름이 붙자, 설계는 더욱 명확해졌고 재사용 가능해졌다.(개발 스터디에서 ‘일반해’를 찾는 감각을 훈련한 경험도 큰 도움이 되었다.)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;최근 AI가 빠르게 발전하는 걸 지켜보며 나는 AI를 어떻게, 어디까지 활용할 수 있을까 고민이 많았다.
+이번 작업을 통해 느낀 건 &lt;strong&gt;AI는 명확한 문맥을 제공해 최선의 결과를 도출해내는 도구로 사용하고, 결과물의 주도권은 내게&lt;/strong&gt; 있어야 한다.
+결국 AI와 보다 정확하게 소통해 보다 나은 결과를 도출하기 위해선 공용어인 다양한 프롬프팅 기법에 꾸준히 관심을 가져야겠다는 문장으로 나름 긴 실험기를 마무리해본다.&lt;/p&gt;
+&lt;h2 id=&quot;참고자료&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C&quot; aria-label=&quot;참고자료 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;참고자료&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Guard_(computer_science)&quot;&gt;Guard (computer science) - Wikipedia&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.promptingguide.ai/techniques/fewshot&quot;&gt;Few-shot Prompting - Prompt Engineering Guide&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.promptingguide.ai/techniques/cot&quot;&gt;Chain-of-Thought Prompting - Prompt Engineering Guide&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://medium.com/@ligtleyang/three-pillars-of-best-practice-in-prompt-engineering-few-shot-chain-of-thought-and-structured-a7ce8a105dd9&quot;&gt;Three Pillars of Best Practice in Prompt Engineering - Medium&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://terms.tta.or.kr/dictionary/dictionaryView.do?word_seq=181673-1&quot;&gt;Human in the loop - TTA 정보통신용어사전&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.samsungsds.com/kr/insights/human_in_the_loop.html&quot;&gt;Human in the Loop - Samsung SDS Insights&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&quot;table-of-contents&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;#%EB%93%A4%EC%96%B4%EA%B0%80%EB%A9%B0&quot;&gt;들어가며&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;#%EC%B4%88%EA%B8%B0-%ED%9D%90%EB%A6%84-%EC%84%A4%EA%B3%84&quot;&gt;초기 흐름 설계&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#%ED%9D%90%EB%A6%84%EC%9D%84-%EC%A7%81%EC%A0%91-%EA%B7%B8%EB%A0%A4%EB%B3%B4%EB%A9%B0-%EB%B0%A9%ED%96%A5-%EC%9E%A1%EA%B8%B0&quot;&gt;흐름을 직접 그려보며 방향 잡기&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#%EC%84%A4%EA%B3%84-%EC%8B%9C-%EA%B3%A0%EB%A0%A4%ED%95%9C-%ED%95%B5%EC%8B%AC-%EC%9B%90%EC%B9%99&quot;&gt;설계 시 고려한 핵심 원칙&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#%EC%9D%B4-%ED%9D%90%EB%A6%84%EC%9D%98-%EC%9D%BC%EB%B0%98%ED%99%94%EB%90%9C-%EB%B0%A9%EC%8B%9D%EC%9D%B4-%EC%9E%88%EC%9D%84%EA%B9%8C&quot;&gt;이 흐름의 일반화된 방식이 있을까?&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;#%ED%94%84%EB%A1%AC%ED%94%84%ED%8C%85-%EA%B8%B0%EB%B2%95%EC%9C%BC%EB%A1%9C-%EA%B5%AC%EC%A1%B0-%EB%8B%A4%EB%93%AC%EA%B8%B0&quot;&gt;프롬프팅 기법으로 구조 다듬기&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;#1-%EC%96%B8%EC%A0%9C-%EC%8B%A4%ED%96%89%EC%8B%9C%ED%82%AC%EA%B9%8C-trigger-pattern&quot;&gt;1. 언제 실행시킬까 (Trigger Pattern)&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;#2-%EC%96%B4%EB%96%A4-%EC%A1%B0%EA%B1%B4%EC%9D%B4-%EC%B6%A9%EC%A1%B1%EB%8F%BC%EC%95%BC-%ED%95%98%EB%82%98-guard-clause&quot;&gt;2. 어떤 조건이 충족돼야 하나 (Guard Clause)&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;#3-%EC%96%B4%EB%96%A4-%EC%98%88%EC%8B%9C%EB%A5%BC-%ED%95%99%EC%8A%B5%EC%8B%9C%ED%82%AC-%EA%B2%83%EC%9D%B8%EA%B0%80-few-shot-prompting&quot;&gt;3. 어떤 예시를 학습시킬 것인가 (Few-shot Prompting)&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;#4-%EC%96%B4%EB%96%A4-%ED%98%95%EC%8B%9D%EC%9C%BC%EB%A1%9C-%EC%B6%9C%EB%A0%A5%EB%8F%BC%EC%95%BC-%ED%95%98%EB%82%98-structured-prompting&quot;&gt;4. 어떤 형식으로 출력돼야 하나 (Structured Prompting)&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;#5-%EA%B2%B0%EA%B3%BC%EB%A5%BC-%EC%96%B4%EB%96%BB%EA%B2%8C-%EC%84%A4%EB%AA%85%ED%95%98%EA%B3%A0-%EC%BB%A8%ED%8E%8C-%EB%B0%9B%EC%9D%84-%EA%B2%83%EC%9D%B8%EA%B0%80-chain-of-thought--human-in-the-loop&quot;&gt;5. 결과를 어떻게 설명하고 컨펌 받을 것인가 (Chain-of-Thought + Human-in-the-loop)&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#chain-of-thought-cot&quot;&gt;Chain-of-Thought (CoT)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#human-in-the-loop-hitl&quot;&gt;Human-in-the-loop (HITL)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;#6-%ED%8C%8C%EC%9D%BC-%EC%83%9D%EC%84%B1%EC%88%98%EC%A0%95&quot;&gt;6. 파일 생성/수정&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;#%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C&quot;&gt;참고자료&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;</content:encoded></item><item><title><![CDATA[협업 병목을 줄이기 위한 자동화 실험 기록]]></title><description><![CDATA[들어가며 재직 중인 회사에서 새로운 서비스를 맡게 된지도 어느덧…]]></description><link>https://dev-bomdong.github.io/experiment-with-automation/</link><guid isPermaLink="false">https://dev-bomdong.github.io/experiment-with-automation/</guid><pubDate>Thu, 15 May 2025 00:00:00 GMT</pubDate><content:encoded>&lt;h2 id=&quot;들어가며&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%93%A4%EC%96%B4%EA%B0%80%EB%A9%B0&quot; aria-label=&quot;들어가며 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;들어가며&lt;/h2&gt;
+&lt;p&gt;재직 중인 회사에서 새로운 서비스를 맡게 된지도 어느덧 1년 반이 지났다. 소속이 변경된 직후는 새로 합을 맞추게 된 동료들과 익숙하지 않은 도메인에 적응하는데 집중했다. 낯선 요구사항이 주어져도 일정에 맞춰 최선의 방법으로 구현해내는걸 주요 과제로 삼았다. 시간이 흐르며 어느정도 동료들과 도메인에 익숙해졌고, 자연스럽게 새로운 갈증과 고민이 생겼다.&lt;/p&gt;
+&lt;p&gt;단순히 주어진 요구사항을 구현하는 것을 넘어 +α를 만들어내는 사람이 되고싶었다.&lt;/p&gt;
 &lt;p&gt;+α를 만들어내는 사람은 어떤 사람일까? 내가 만들 수 있는 +α는 무엇일까? 고민하면 할수록 점점 더 거창하게 느껴지고 답이 내려지지 않았다. 혼자서 끙끙 앓지말고 외부의 도움을 받아볼까싶어 적극적으로 도움을 구했다. 저분은 +α를 만들어 내시는 것 같다란 느낌이 드는 분들께 링크드인과 소속된 커뮤니티를 활용해 커피챗을 요청했고, 감사하게도 모든 분들이 기꺼이 수락해주셔서 이야기를 나눌 수 있었다.&lt;/p&gt;
-&lt;p&gt;다양한 관점에서 이루어진 대화 끝에 내린 결론은 마냥 거창하게 생각하지 말고, &lt;strong&gt;회사에서 업무를 하며 느꼈던 문제나 불편함을 사소한 것부터 직접 개선해보기&lt;/strong&gt;였다.&lt;/p&gt;
+&lt;p&gt;다양한 관점에서 이루어진 대화 끝에 내린 결론은 마냥 거창하게 생각하지 말고, 회사에서 업무를 하며 느꼈던 문제나 불편함을 사소한 것부터 직접 개선해보기였다.&lt;/p&gt;
 &lt;p&gt;이후 업무를 할 때 자연스레 촉수를 곤두세우게 됐고, 협업 과정의 반복적인 수작업, 불필요한 커뮤니케이션 비용이 눈에 들어왔다. 이런 불편함을 기술적으로 해소할 수 있다면 조직에 기능을 만들어내는 것과는 결이 다른 임팩트를 줄 수 있고, 내가 고민하던 +α를 만들어낼 수 있지 않을까?란 생각에 작은 실험들을 시작했다. 그렇게 진행했던 두가지 실험에 대해 적어보려 한다.&lt;/p&gt;
 &lt;h2 id=&quot;slack-워크플로로-누구도-복붙하지-않는-채널-만들기&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#slack-%EC%9B%8C%ED%81%AC%ED%94%8C%EB%A1%9C%EB%A1%9C-%EB%88%84%EA%B5%AC%EB%8F%84-%EB%B3%B5%EB%B6%99%ED%95%98%EC%A7%80-%EC%95%8A%EB%8A%94-%EC%B1%84%EB%84%90-%EB%A7%8C%EB%93%A4%EA%B8%B0&quot; aria-label=&quot;slack 워크플로로 누구도 복붙하지 않는 채널 만들기 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Slack 워크플로로 누구도 복붙하지 않는 채널 만들기&lt;/h2&gt;
 &lt;h3 id=&quot;관찰-그리고-문제-정의하기&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EA%B4%80%EC%B0%B0-%EA%B7%B8%EB%A6%AC%EA%B3%A0-%EB%AC%B8%EC%A0%9C-%EC%A0%95%EC%9D%98%ED%95%98%EA%B8%B0&quot; aria-label=&quot;관찰 그리고 문제 정의하기 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;관찰, 그리고 문제 정의하기&lt;/h3&gt;
-&lt;p&gt;우연히 비즈니스팀과 디자인팀이 소속된 홈페이지 작업 관련 Slack 채널을 보게 되었다.
-채널엔 특정 양식을 복사/붙여넣기해 내용을 채워넣는 형태로 홈페이지 작업 현황이 공유되고 있었다.&lt;/p&gt;
-&lt;p&gt;매번 특정 양식을 찾아 복사해야 하고, 수동으로 작성하는 과정에서 오타나 포맷 오류가 자주 발생하고 있었다.
-또 다양한 유형의 작업이 유사한 포맷으로 공유되다보니 현황을 한눈에 구분하기 어려워보였다.&lt;/p&gt;
+&lt;p&gt;우연히 비즈니스팀과 디자인팀이 소속된 홈페이지 작업 관련 Slack 채널을 보게 되었다. 채널엔 특정 양식을 복사/붙여넣기해 내용을 채워넣는 형태로 홈페이지 작업 현황이 공유되고 있었다.&lt;/p&gt;
+&lt;p&gt;매번 특정 양식을 찾아 복사해야 하고, 수동으로 작성하는 과정에서 오타나 포맷 오류가 자주 발생하고 있었다. 또 다양한 유형의 작업이 유사한 포맷으로 공유되다보니 현황을 한눈에 구분하기 어려워보였다.&lt;/p&gt;
 &lt;p&gt;채널 활동 빈도가 높은 동료들에게 파악한 문제점에 대해 이야기 해보았고, 비슷한 불편함을 느끼고 있다는 걸 확인했다. 관찰을 통해 문제점을 찾아냈으니 한 번 개선해보자는 마음이 들었다.&lt;/p&gt;
 &lt;h3 id=&quot;패턴-파악하기&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%ED%8C%A8%ED%84%B4-%ED%8C%8C%EC%95%85%ED%95%98%EA%B8%B0&quot; aria-label=&quot;패턴 파악하기 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;패턴 파악하기&lt;/h3&gt;
 &lt;p&gt;문제를 해결하기 위해 우선 채널을 관찰하며 업무 흐름과 패턴을 파악해봤다.&lt;/p&gt;
@@ -38,16 +412,14 @@
         decoding=&quot;async&quot;
       /&gt;
     &lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;채널에 공유되는 현황은 크게 &lt;strong&gt;작업 현황 알림&lt;/strong&gt;과 &lt;strong&gt;배포 알림&lt;/strong&gt;으로 나뉘어졌고, 각 현황마다의 업무 흐름은 위와 같이 이루어지고 있었다. 패턴을 파악하니 문제가 더 명확해졌다.&lt;/p&gt;
+&lt;p&gt;채널에 공유되는 현황은 크게 작업 현황 알림과 배포 알림으로 나뉘어졌고, 각 현황마다의 업무 흐름은 위와 같이 이루어지고 있었다. 패턴을 파악하니 문제가 더 명확해졌다.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;공유되어야 하는 정보는 각각 작업 시작, 배포 예정 메세지에 모두 작성되었으나 작업 완료/배포 완료 시점에도 공유하기위해 이전 단계에 작성했던 메세지를 복사해 수정해야했다.&lt;/li&gt;
 &lt;li&gt;배포 예정 알림 후 관련 실무진의 컨펌을 emoji를 통해 확인하는 과정이 번거로워 보였다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&quot;자동화-도구-만들기&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%9E%90%EB%8F%99%ED%99%94-%EB%8F%84%EA%B5%AC-%EB%A7%8C%EB%93%A4%EA%B8%B0&quot; aria-label=&quot;자동화 도구 만들기 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;자동화 도구 만들기&lt;/h3&gt;
 &lt;p&gt;처음엔 홈페이지 작업 플랫폼을 Slack과 연동해 로그인/로그아웃, 배포시 자동 알림을 보내려했다.. 하지만 이것저것 고려한 끝에 Slack 워크플로로 결정했다.&lt;/p&gt;
-&lt;p&gt;공유되는 정보 중엔 배포 가능 여부 등 홈페이지 작업 플랫폼에서 알 수 없는 정보가 포함되어있었다.
-배포 예정 알림은 홈페이지 작업 플랫폼과 별개의 프로세스이기에 단순히 알림을 주는 것만으로는 현재의 업무 흐름을 온전히 대체할 수 없다는 생각이 들었다.
-워크플로는 노코드 툴이니 비개발직군인 디자인팀, 마케팅팀이 추후 필요에 따라 유지보수할 수 있다는 장점도 있었다.&lt;/p&gt;
+&lt;p&gt;공유되는 정보 중엔 배포 가능 여부 등 홈페이지 작업 플랫폼에서 알 수 없는 정보가 포함되어있었다. 배포 예정 알림은 홈페이지 작업 플랫폼과 별개의 프로세스이기에 단순히 알림을 주는 것만으로는 현재의 업무 흐름을 온전히 대체할 수 없다는 생각이 들었다. 워크플로는 노코드 툴이니 비개발직군인 디자인팀, 마케팅팀이 추후 필요에 따라 유지보수할 수 있다는 장점도 있었다.&lt;/p&gt;
 &lt;p&gt;앞서 정리한 두가지 작업 패턴에 따라 홈페이지 작업 알리미와 홈페이지 배포 알리미 워크플로를 만들었다.&lt;/p&gt;
 &lt;h4 id=&quot;홈페이지-작업-알리미&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%ED%99%88%ED%8E%98%EC%9D%B4%EC%A7%80-%EC%9E%91%EC%97%85-%EC%95%8C%EB%A6%AC%EB%AF%B8&quot; aria-label=&quot;홈페이지 작업 알리미 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;홈페이지 작업 알리미&lt;/h4&gt;
 &lt;p&gt;&lt;span
@@ -75,16 +447,14 @@
         decoding=&quot;async&quot;
       /&gt;
     &lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;홈페이지 작업 알리미 워크플로를 개발하기 전 동료들에게 작업 프로세스와 필요한 기능을 확인하는 시간을 가졌다. 이 과정에서 홈페이지 작업에서 가장 중요한 정보가 &lt;code class=&quot;language-text&quot;&gt;전체 퍼블리시 가능 여부&lt;/code&gt;라는걸 알게됐다.&lt;/p&gt;
+&lt;p&gt;홈페이지 작업 알리미 워크플로를 개발하기 전 동료들에게 작업 프로세스와 필요한 기능을 확인하는 시간을 가졌다. 이 과정에서 홈페이지 작업에서 가장 중요한 정보가 전체 퍼블리시 가능 여부라는걸 알게됐다.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;🤔 : 가능 여부라면 boolean인데.. true of false.. 시각화하면 🔴 or 🟢?&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;boolean에서 시작되어 🔴 or 🟢 로 귀결된 의식의 흐름에 따라 워크플로의 컨셉은 신호등이 되었다. 🚥&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;작업 시작 공유&lt;/strong&gt; : 워크플로를 호출해 form에 필수로 공유되어야 하는 사항을 작성한다.
-작성이 끝나면 정해진 양식에 맞게 포맷팅된 ‘작업 시작’ 메세지가 전송된다.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;작업 완료 공유&lt;/strong&gt; : 작업 시작 메세지의 &lt;code class=&quot;language-text&quot;&gt;작업 완료했어요&lt;/code&gt; 버튼을 클릭해 참고사항을 입력한다.
-간혹 작업을 하다보면 추가로 공유할 사항이 생길 수 있다는 실무진 분들의 의견을 참고해 이 단계를 추가했다.참고사항을 입력하면 기존의 작업 시작 메세지 정보와 참고사항을 포함한 작업 완료 메세지가 전송된다.&lt;/li&gt;
+&lt;li&gt;작업 시작 공유 : 워크플로를 호출해 form에 필수로 공유되어야 하는 사항을 작성한다. 작성이 끝나면 정해진 양식에 맞게 포맷팅된 ‘작업 시작’ 메세지가 전송된다.&lt;/li&gt;
+&lt;li&gt;작업 완료 공유 : 작업 시작 메세지의 작업 완료했어요 버튼을 클릭해 참고사항을 입력한다. 간혹 작업을 하다보면 추가로 공유할 사항이 생길 수 있다는 실무진 분들의 의견을 참고해 이 단계를 추가했다.참고사항을 입력하면 기존의 작업 시작 메세지 정보와 참고사항을 포함한 작업 완료 메세지가 전송된다.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h4 id=&quot;홈페이지-배포-알리미&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%ED%99%88%ED%8E%98%EC%9D%B4%EC%A7%80-%EB%B0%B0%ED%8F%AC-%EC%95%8C%EB%A6%AC%EB%AF%B8&quot; aria-label=&quot;홈페이지 배포 알리미 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;홈페이지 배포 알리미&lt;/h4&gt;
 &lt;p&gt;&lt;span
@@ -114,17 +484,11 @@
     &lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;다음으로 홈페이지 배포 알리미에 대해 알아보자.&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;배포 예정 사항 공유&lt;/strong&gt; : 워크플로를 호출해 form에 필수로 공유되어야 하는 사항을 작성한다.
-작성이 끝나면 정해진 양식에 맞게 포맷팅된 &lt;code class=&quot;language-text&quot;&gt;배포 예정&lt;/code&gt; 메세지가 전송된다. (여기까진 작업 알리미와 거의 동일)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;관련 실무진 컨펌&lt;/strong&gt; : 관련 실무진은 배포 예정사항 확인 후 배포 예정 메세지의 &lt;code class=&quot;language-text&quot;&gt;확인했어요&lt;/code&gt; 버튼을 클릭한다.
-버튼 클릭시 배포 예정 메세지의 스레드에 버튼을 클릭한 유저명과 함께 확인했다는 댓글이 달린다.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;컨펌 후 배포 완료&lt;/strong&gt; : 스레드 댓글에 달린 &lt;code class=&quot;language-text&quot;&gt;배포 완료했어요&lt;/code&gt; 버튼을 클릭한다.
-(워크플로를 최초 호출한 배포 예정 작업자가 클릭했을 때만 동작)
-배포 예정 메세지의 정보를 기반으로 한 배포 완료 메세지가 자동 전송된다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;배포 예정 사항 공유&lt;/strong&gt; : 워크플로를 호출해 form에 필수로 공유되어야 하는 사항을 작성한다. 작성이 끝나면 정해진 양식에 맞게 포맷팅된 배포 예정 메세지가 전송된다. (여기까진 작업 알리미와 거의 동일)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;관련 실무진 컨펌&lt;/strong&gt; : 관련 실무진은 배포 예정사항 확인 후 배포 예정 메세지의 확인했어요 버튼을 클릭한다. 버튼 클릭시 배포 예정 메세지의 스레드에 버튼을 클릭한 유저명과 함께 확인했다는 댓글이 달린다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;컨펌 후 배포 완료&lt;/strong&gt; : 스레드 댓글에 달린 배포 완료했어요 버튼을 클릭한다. (워크플로를 최초 호출한 배포 예정 작업자가 클릭했을 때만 동작) 배포 예정 메세지의 정보를 기반으로 한 배포 완료 메세지가 자동 전송된다.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;배포 예정 메세지를 작성한 뒤 버튼을 트리거로 1) 스레드에 확인 완료 댓글을 달고 2) 배포 완료 메세지도 전송해야 했다.
-워크플로는 다음 단계로 이동시키는 버튼은 한 단계당 한개씩만 지원한다. 트리거를 하나씩만 사용할 수 있는 활경에서 최대한 어색하지 않은 흐름으로 단계를 구성하려 노력했다.
-두 워크플로에서 가장 신경쓴 점은 기존의 업무 흐름을 동일하게 구현하되 그 내부의 불필요한 반복을 줄이는 것.&lt;/p&gt;
+&lt;p&gt;배포 예정 메세지를 작성한 뒤 버튼을 트리거로 1) 스레드에 확인 완료 댓글을 달고 2) 배포 완료 메세지도 전송해야 했다. 워크플로는 다음 단계로 이동시키는 버튼은 한 단계당 한개씩만 지원한다. 트리거를 하나씩만 사용할 수 있는 활경에서 최대한 어색하지 않은 흐름으로 단계를 구성하려 노력했다. 두 워크플로에서 가장 신경쓴 점은 기존의 업무 흐름을 동일하게 구현하되 그 내부의 불필요한 반복을 줄이는 것.&lt;/p&gt;
 &lt;h3 id=&quot;결과&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EA%B2%B0%EA%B3%BC&quot; aria-label=&quot;결과 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;결과&lt;/h3&gt;
 &lt;p&gt;워크플로 배포 및 안내 후, 감사하게도 동료분들이 적극적으로 사용해주셔서 워크플로만으로 원활히 돌아가는 채널이 되었다! 이제 아무도 복붙하지 않는다 🧚‍♂️&lt;/p&gt;
 &lt;p&gt;&lt;span
@@ -158,8 +522,7 @@
 &lt;h2 id=&quot;react인지-jsp인지-셀프-확인하는-크롬-익스텐션-만들기&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#react%EC%9D%B8%EC%A7%80-jsp%EC%9D%B8%EC%A7%80-%EC%85%80%ED%94%84-%ED%99%95%EC%9D%B8%ED%95%98%EB%8A%94-%ED%81%AC%EB%A1%AC-%EC%9D%B5%EC%8A%A4%ED%85%90%EC%85%98-%EB%A7%8C%EB%93%A4%EA%B8%B0&quot; aria-label=&quot;react인지 jsp인지 셀프 확인하는 크롬 익스텐션 만들기 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;React인지 JSP인지 셀프 확인하는 크롬 익스텐션 만들기&lt;/h2&gt;
 &lt;h3 id=&quot;관찰-그리고-문제-정의하기-1&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EA%B4%80%EC%B0%B0-%EA%B7%B8%EB%A6%AC%EA%B3%A0-%EB%AC%B8%EC%A0%9C-%EC%A0%95%EC%9D%98%ED%95%98%EA%B8%B0-1&quot; aria-label=&quot;관찰 그리고 문제 정의하기 1 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;관찰, 그리고 문제 정의하기&lt;/h3&gt;
 &lt;p&gt;현재 담당하고 있는 서비스는 대부분이 JSP로 구성되어 있고 점진적으로 React로 마이그레이션 해나가고 있다. 모든 서비스를 한번에 옮기기엔 서비스 규모가 너무 크기 때문에 달리는 열차의 바퀴를 교체하듯이.. strangler fig 패턴을 기반으로 기능 고도화를 곁들이며 모달, 특정 섹션 단위로 옮겨나가고 있다.&lt;/p&gt;
-&lt;p&gt;서비스 규모가 크고 마이그레이션 범위가 모호하다 보니 기획자, 디자이너, QA엔지니어가 해당 영역의 기술 스택을 파악하는 데 어려움을 겪었다.
-React와 JSP를 구분할 수 있는 공식적인 문서나 가이드는 존재하지 않았고 실제 기획자는 매번 프론트엔드 개발자에게 질문을 해야 했다.&lt;/p&gt;
+&lt;p&gt;서비스 규모가 크고 마이그레이션 범위가 모호하다 보니 기획자, 디자이너, QA엔지니어가 해당 영역의 기술 스택을 파악하는 데 어려움을 겪었다. React와 JSP를 구분할 수 있는 공식적인 문서나 가이드는 존재하지 않았고 실제 기획자는 매번 프론트엔드 개발자에게 질문을 해야 했다.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;“이 페이지는 JSP인 것 같은데, 모달은 React인가요?”&lt;/p&gt;
 &lt;p&gt;“이 섹션은 React처럼 보이는데 맞나요?”&lt;/p&gt;
@@ -173,15 +536,12 @@ React와 JSP를 구분할 수 있는 공식적인 문서나 가이드는 존재�
 &lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;React Modal&lt;/code&gt; : JSP Page에 React Modal을 띄운 형태&lt;/li&gt;
 &lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;React Section&lt;/code&gt;: JSP Page의 일부분이 React로 구성된 형태&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;JSP Page와 React Page 여부는 URL 규칙을 통해 비교적 쉽게 구분할 수 있었다.
-JSP와 React가 공존할 경우는 JSP Page 내부 &lt;code class=&quot;language-text&quot;&gt;iframe&lt;/code&gt; 태그의 &lt;code class=&quot;language-text&quot;&gt;src&lt;/code&gt;를 활용했다.&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;iframe&lt;/code&gt; 태그의 &lt;code class=&quot;language-text&quot;&gt;src&lt;/code&gt;에 React Page URL이 포함되는지 확인&lt;/li&gt;
-&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;classList.contains()&lt;/code&gt; 으로 사내 디자인시스템 Modal 요소를 사용하는지 확인&lt;/li&gt;
-&lt;li&gt;사용할 경우 React Modal, 사용하지 않을 경우 React Section으로 분류&lt;/li&gt;
-&lt;/ol&gt;
+&lt;p&gt;JSP Page와 React Page 여부는 URL 규칙을 통해 비교적 쉽게 구분할 수 있었다. JSP와 React가 공존할 경우는 JSP Page 내부 iframe 태그의 src를 활용했다.&lt;/p&gt;
+&lt;p&gt;iframe 태그의 src에 React Page URL이 포함되는지 확인
+classList.contains() 으로 사내 디자인시스템 Modal 요소를 사용하는지 확인
+사용할 경우 React Modal, 사용하지 않을 경우 React Section으로 분류&lt;/p&gt;
 &lt;h3 id=&quot;자동화-도구-만들기-1&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%9E%90%EB%8F%99%ED%99%94-%EB%8F%84%EA%B5%AC-%EB%A7%8C%EB%93%A4%EA%B8%B0-1&quot; aria-label=&quot;자동화 도구 만들기 1 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;자동화 도구 만들기&lt;/h3&gt;
-&lt;p&gt;비개발직군이 자동화 도구를 사용할 때 가장 중요한 점이 뭘까? 고민해보니 답은 쉬운 트리거 (= 딸-깍) + 직관적인 시각화가 필요하다고 느꼈다. 그래서 다음과 같은 방식의 &lt;strong&gt;크롬 익스텐션&lt;/strong&gt;을 직접 제작했다.&lt;/p&gt;
+&lt;p&gt;비개발직군이 자동화 도구를 사용할 때 가장 중요한 점이 뭘까? 고민해보니 답은 쉬운 트리거 + 직관적인 시각화가 필요하다고 느꼈다. 그래서 다음과 같은 방식의 크롬 익스텐션을 직접 제작했다.&lt;/p&gt;
 &lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
       style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 720px; &quot;
@@ -208,8 +568,8 @@ JSP와 React가 공존할 경우는 JSP Page 내부 &lt;code class=&quot;languag
       /&gt;
     &lt;/span&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;페이지 로딩 시 JSP Page, React Page, React Modal, React Section을 &lt;strong&gt;다른 색상으로 하이라이팅&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;각 요소 위에 해당 기술 스택 정보를 보여주는 &lt;strong&gt;라벨 표시&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;페이지 로딩 시 JSP Page, React Page, React Modal, React Section을 다른 색상으로 하이라이팅&lt;/li&gt;
+&lt;li&gt;각 요소 위에 해당 기술 스택 정보를 보여주는 라벨 표시&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;MVP 형태로 제작하여 테스트했고, 실제로 스쿼드 기획자분께 선보였더니 반응은 기대 이상이었다. 좀더 다듬어 전사에도 공유했다.&lt;/p&gt;
 &lt;p&gt;&lt;span
@@ -241,11 +601,10 @@ JSP와 React가 공존할 경우는 JSP Page 내부 &lt;code class=&quot;languag
 &lt;p&gt;이 결과를 가장 실감하는 사람 중 한명은 바로 나일텐데, 익스텐션을 배포한 이후 스쿼드 기획자님께 이 부분은 React인가요? 라는 질문을 받은 적이 없다. 이제 더 이상 질문하지 않아도 익스텐션을 통해 페이지별 기술 스택을 정확히 파악할 수 있게 되었기 때문. 작은 확장 프로그램이었지만, 실사용자인 내 업무 스트레스를 줄여준 사례였다.&lt;/p&gt;
 &lt;h2 id=&quot;느낀-점--도구보다-중요한-것은-문제-해결-능력&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%8A%90%EB%82%80-%EC%A0%90--%EB%8F%84%EA%B5%AC%EB%B3%B4%EB%8B%A4-%EC%A4%91%EC%9A%94%ED%95%9C-%EA%B2%83%EC%9D%80-%EB%AC%B8%EC%A0%9C-%ED%95%B4%EA%B2%B0-%EB%8A%A5%EB%A0%A5&quot; aria-label=&quot;느낀 점  도구보다 중요한 것은 문제 해결 능력 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;느낀 점 – 도구보다 중요한 것은 문제 해결 능력&lt;/h2&gt;
 &lt;p&gt;사실 이 글의 초안은 예전에 작성해두었지만, 포스팅을 하기까지 꽤 오랜 시간 망설였다. 기술적으로 난이도가 높지 않은데 이걸 기록하는게 의미가 있을까?라는 생각이 들었기 때문. (각종 회고글은 잘만 포스팅하면서..😶‍🌫️)&lt;/p&gt;
-&lt;p&gt;이 고민은 글의 초점을 ‘기술’보다 ‘문제 해결’에 두니 자연스레 해결됐다. 두 실험을 통해 &lt;strong&gt;도구 자체보다 문제를 인식하고 해결해내는 과정&lt;/strong&gt;이 중요하다는 걸 깨달았다. 워크플로든, 크롬 익스텐션이든, 핵심은 사용된 기술의 종류보단 문제를 해결하는 방식에 있었다.&lt;/p&gt;
+&lt;p&gt;이 고민은 글의 초점을 ‘기술’보다 ‘문제 해결’에 두니 자연스레 해결됐다. 두 실험을 통해 &lt;strong&gt;도구 자체보다 문제를 인식하고 해결해내는 과정이 중요하다&lt;/strong&gt;는 걸 깨달았다. 워크플로든, 크롬 익스텐션이든, 핵심은 사용된 기술의 종류보단 문제를 해결하는 방식에 있었다.&lt;/p&gt;
 &lt;p&gt;돌이켜보면 문제 해결의 첫 걸음은 관찰에서 시작됐다. 불편해 보이는 점을 그냥 넘기지 않고 “왜 이렇게 하고 있을까?”, “더 나은 방법은 없을까?” 고민하며 문제를 정의하고, 패턴을 파악하다보면 개선점을 찾아낼 수 있었다.&lt;/p&gt;
-&lt;p&gt;요즘 개발 환경은 무섭도록 빠르게 변화하고 있다. 바이브코딩으로 기획자나 디자이너가 각종 서비스를 출시하는 이른바 ‘딸깍의 시대’가 오고 있다. 그럴 수록 중요해지는 것은 &lt;code class=&quot;language-text&quot;&gt;무엇을&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;왜&lt;/code&gt; 구현해야 하는지 판단하는 능력이라고 생각한다.&lt;/p&gt;
-&lt;p&gt;들어가며에서 언급한 +α를 만들어내는 사람은 &lt;strong&gt;주어진 과제 외에도 문제를 주체적으로 정의하고, 이를 기술적으로 개선하고 해결해나가는 사람&lt;/strong&gt;이 아닐까? 여기서 중요한 단어는 &lt;strong&gt;주체적&lt;/strong&gt;인 것 같다.
-이 실험 기록을 시작으로 앞으로도 기술로 더 나은 협업 환경을 만드는 사람으로 성장해나가고 싶다.&lt;/p&gt;
+&lt;p&gt;요즘 개발 환경은 무섭도록 빠르게 변화하고 있다. 바이브코딩으로 기획자나 디자이너가 각종 서비스를 출시하는 이른바 ‘딸깍의 시대’가 오고 있다. 그럴 수록 중요해지는 것은 &lt;strong&gt;무엇을, 왜 구현해야 하는지 판단하는 능력&lt;/strong&gt;이라고 생각한다.&lt;/p&gt;
+&lt;p&gt;들어가며에서 언급한 +α를 만들어내는 사람은 &lt;strong&gt;주어진 과제 외에도 문제를 주체적으로 정의하고, 이를 기술적으로 개선하고 해결해나가는 사람&lt;/strong&gt;이 아닐까? 여기서 가장 중요한 단어는 &lt;strong&gt;주체적&lt;/strong&gt;이다. 이 실험 기록을 시작으로 앞으로도 기술로 더 나은 협업 환경을 만드는 사람으로 성장해나가고 싶다.&lt;/p&gt;
 &lt;div class=&quot;table-of-contents&quot;&gt;
 &lt;ul&gt;
 &lt;li&gt;
