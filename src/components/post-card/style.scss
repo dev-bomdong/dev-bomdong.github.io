@@ -13,13 +13,11 @@
     height: 100%;
     width: 100%;
     max-width: $content-max-width;
-    padding: 15px;
+    padding: 12px 0;
     margin-bottom: 15px;
-
     color: var(--primary-text-color);
-
     cursor: pointer;
-    transition: transform 0.2s;
+    transition: all 0.3s ease;
 
     &:hover {
       .title {
