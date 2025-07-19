@@ -4,8 +4,8 @@
   display: flex;
   justify-content: center;
   width: 100%;
+  padding-top: 2rem;
   height: 60px;
-
 
   .page-header {
     display: flex;
@@ -14,14 +14,9 @@
     @include content-max-width;
 
     .link {
-      font-weight: 700;
-      font-size: 17px;
+      font-weight: 900;
+      font-size: 2rem;
       color: var(--primary-text-color);
-
-      @include md {
-        font-weight: 700;
-        font-size: 20px;
-      }
     }
 
     .trailing-section {
@@ -35,8 +30,6 @@
           margin-right: 20px;
         }
       }
-
-
     }
   }
 }
