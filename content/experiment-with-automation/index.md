@@ -4,7 +4,7 @@ title: 협업 병목을 줄이기 위한 자동화 실험 기록
 date: '2025-05-15'
 author: Bomdong
 tags: journal
-categories: 회고록
+categories: '#자동화'
 ---
 
 ## 들어가며

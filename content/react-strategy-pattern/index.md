@@ -4,7 +4,7 @@ title: '반복되는 분기처리에 전략패턴 도입하기'
 date: '2024-07-15'
 author: Bomdong
 tags: React
-categories: React
+categories: '#DesignPattern'
 ---
 
 ## 들어가며

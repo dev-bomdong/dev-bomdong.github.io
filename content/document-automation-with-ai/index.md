@@ -4,7 +4,7 @@ title: 프롬프팅으로 문서 자동화 흐름 설계하기
 date: '2025-07-19'
 author: Bomdong
 tags: AI
-categories: 회고록
+categories: '#AI'
 ---
 
 ## 들어가며

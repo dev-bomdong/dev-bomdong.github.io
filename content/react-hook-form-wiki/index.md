@@ -4,7 +4,7 @@ title: react-hook-form을 사용하며 알게된 것들
 date: '2023-12-24'
 author: Bomdong
 tags: React
-categories: React
+categories: '#React'
 ---
 
 ## 들어가며

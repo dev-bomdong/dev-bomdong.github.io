@@ -4,7 +4,7 @@ title: '데이터 동기화 메커니즘으로서의 useEffect 탐구하기'
 date: '2024-08-14'
 author: Bomdong
 tags: React
-categories: React
+categories: '#React'
 ---
 
 ## 들어가며

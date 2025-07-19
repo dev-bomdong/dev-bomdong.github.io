@@ -4,7 +4,7 @@ title: '프론트엔드 개발자의 커뮤니티 밋업 기획 도전기'
 date: '2024-11-28'
 author: Bomdong
 tags: journal
-categories: 회고록
+categories: '#회고'
 ---
 
 ## 들어가며

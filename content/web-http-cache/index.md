@@ -4,7 +4,7 @@ title: HTTP 캐시와 조건부 요청 헤더
 date: '2024-02-04'
 author: Bomdong
 tags: Web
-categories: Web
+categories: '#Web'
 ---
 
 ## HTTP 캐시

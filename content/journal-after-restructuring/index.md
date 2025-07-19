@@ -4,7 +4,7 @@ title: 구조조정 3개월 후의 단상
 date: '2023-12-10'
 author: Bomdong
 tags: journal
-categories: 회고록
+categories: '#회고'
 ---
 
 ## 들어가며

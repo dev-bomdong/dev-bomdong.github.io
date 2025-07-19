@@ -4,7 +4,7 @@ title: fork한 repository 자동 최신화하기 (feat. github action)
 date: '2023-09-26'
 author: Bomdong
 tags: Git
-categories: Git
+categories: '#Git'
 ---
 
 ## 들어가며

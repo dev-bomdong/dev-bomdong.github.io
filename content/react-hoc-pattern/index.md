@@ -4,7 +4,7 @@ title: '[번역] HOC Pattern'
 date: '2024-03-17'
 author: Bomdong
 tags: React
-categories: React
+categories: '#React'
 ---
 
 > 본 글은 원글 [patterns - HOC Pattern](https://www.patterns.dev/react/hoc-pattern)을 학습용으로 번역한 것입니다.

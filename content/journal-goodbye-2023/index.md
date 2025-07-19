@@ -4,7 +4,7 @@ title: 2023년 회고
 date: '2024-01-07'
 author: Bomdong
 tags: journal
-categories: 회고록
+categories: '#회고'
 ---
 
 2024년 첫 주를 마무리하며 돌아보는 2023년.

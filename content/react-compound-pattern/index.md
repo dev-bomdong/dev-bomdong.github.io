@@ -4,7 +4,7 @@ title: '[번역] Compound Pattern'
 date: '2024-03-03'
 author: Bomdong
 tags: React
-categories: React
+categories: '#DesignPattern'
 ---
 
 > 본 글은 원글 [patterns - Compound Pattern](https://www.patterns.dev/react/compound-pattern)을 학습용으로 번역한 것입니다.

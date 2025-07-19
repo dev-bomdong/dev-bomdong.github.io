@@ -4,7 +4,7 @@ title: '동료들의 멋진 행동에서 나의 액션 아이템 찾기'
 date: '2024-09-01'
 author: Bomdong
 tags: journal
-categories: 회고록
+categories: '#Etc'
 ---
 
 ## 들어가며

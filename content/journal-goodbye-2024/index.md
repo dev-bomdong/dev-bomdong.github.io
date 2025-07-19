@@ -4,7 +4,7 @@ title: 2024년 회고
 date: '2025-01-04'
 author: Bomdong
 tags: journal
-categories: 회고록
+categories: '#회고'
 ---
 
 # 들어가며

@@ -11,19 +11,13 @@ function PostTabs({ tabIndex, onChange, tabs, posts, showMoreButton }) {
 
   return (
     <div className="post-tabs-wrapper">
-      {/* <div className="post-tabs">
-        <Tabs
-          className="mui-tabs"
-          value={tabIndex}
-          onChange={onChange}
-          variant="scrollable"
-          scrollButtons="desktop"
-        >
+      <div className="post-tabs">
+        <Tabs className="mui-tabs" value={tabIndex} onChange={onChange}>
           {tabs.map((title, index) => (
             <Tab label={title} key={index} />
           ))}
         </Tabs>
-      </div> */}
+      </div>
       <PostCardColumn
         posts={showMoreButton ? tabPosts.slice(0, 4) : tabPosts}
         showMoreButton={showMoreButton && tabPosts.length > 4}
@@ -32,4 +26,5 @@ function PostTabs({ tabIndex, onChange, tabs, posts, showMoreButton }) {
     </div>
   );
 }
+
 export default PostTabs;
