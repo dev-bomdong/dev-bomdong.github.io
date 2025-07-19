@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Bomdong.log]]></title><description><![CDATA[일상 속 개발록]]></description><link>https://dev-bomdong.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Sat, 19 Jul 2025 10:17:40 GMT</lastBuildDate><item><title><![CDATA[프롬프팅으로 문서 자동화 흐름 설계하기]]></title><description><![CDATA[들어가며 재직 중인 회사의 프론트엔드팀에선 디자인 시스템을 직접 운영하고 있다.
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Bomdong.log]]></title><description><![CDATA[일상 속 개발록]]></description><link>https://dev-bomdong.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Sat, 19 Jul 2025 10:52:52 GMT</lastBuildDate><item><title><![CDATA[프롬프팅으로 문서 자동화 흐름 설계하기]]></title><description><![CDATA[들어가며 재직 중인 회사의 프론트엔드팀에선 디자인 시스템을 직접 운영하고 있다.
 공통 토큰과 컴포넌트 중심으로 UI를 구성하면서 component-driven development…]]></description><link>https://dev-bomdong.github.io/document-automation-with-ai/</link><guid isPermaLink="false">https://dev-bomdong.github.io/document-automation-with-ai/</guid><pubDate>Sat, 19 Jul 2025 00:00:00 GMT</pubDate><content:encoded>&lt;h2 id=&quot;들어가며&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%93%A4%EC%96%B4%EA%B0%80%EB%A9%B0&quot; aria-label=&quot;들어가며 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;들어가며&lt;/h2&gt;
 &lt;p&gt;재직 중인 회사의 프론트엔드팀에선 디자인 시스템을 직접 운영하고 있다.
 공통 토큰과 컴포넌트 중심으로 UI를 구성하면서 component-driven development를 실무에 녹여낼 수 있었고, 팀의 생산성도 눈에 띄게 향상됐다.&lt;/p&gt;
@@ -5661,7 +5661,7 @@ module&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;exports &lt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;현재 커서가 놓인 라인 삭제&lt;/td&gt;
-&lt;td&gt;⌘ +  ← (backspace)&lt;/td&gt;
+&lt;td&gt;⌘ + ← (backspace)&lt;/td&gt;
 &lt;td&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
