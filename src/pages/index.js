@@ -35,7 +35,7 @@ export default HomePage;
 
 export const pageQuery = graphql`
   query {
-   allMarkdownRemark(sort: {frontmatter: {date: DESC}}) {
+    allMarkdownRemark(sort: { frontmatter: { date: DESC } }) {
       edges {
         node {
           id
@@ -65,7 +65,6 @@ export const pageQuery = graphql`
           social {
             github
             linkedIn
-            email
           }
         }
       }

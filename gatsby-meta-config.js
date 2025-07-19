@@ -20,7 +20,7 @@ module.exports = {
     social: {
       github: 'https://github.com/dev-bomdong',
       linkedIn: 'https://www.linkedin.com/in/donghee-kim-66a935264/',
-      email: 'dongdh02076@gmail.com',
+      // email: 'dongdh02076@gmail.com',
     },
   },
 
