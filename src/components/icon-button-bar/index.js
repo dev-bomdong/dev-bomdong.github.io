@@ -33,12 +33,21 @@ function IconButtonBar({ links = {} }) {
     }
   }, []);
 
+  const getTooltipTitle = useCallback((link) => {
+    switch (link) {
+      case 'post':
+        return 'resume';
+      default:
+        return link;
+    }
+  }, []);
+
   return (
     <>
       {Object.keys(links).map((link, index) => {
         return (
           links[link] && (
-            <Tooltip key={index} title={link} arrow className="icon-tooltip">
+            <Tooltip key={index} title={getTooltipTitle(link)} arrow className="icon-tooltip">
               <IconButton size="small" href={`${link === 'email' ? `mailto:` : ``}${links[link]}`}>
                 {IconPicker(link)}
               </IconButton>
