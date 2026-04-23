@@ -1,35 +1,31 @@
-@use '../../styles/mixins'as *;
-
 .page-header-wrapper {
   display: flex;
   justify-content: center;
   width: 100%;
-  padding-top: 2rem;
-  height: 60px;
 
   .page-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    @include content-max-width;
+    width: 100%;
+    max-width: 560px;
+    padding: 28px 24px 0;
 
     .link {
-      font-weight: 900;
-      font-size: 2rem;
-      color: var(--primary-text-color);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--fg);
+      letter-spacing: -0.01em;
+      text-decoration: none;
+      display: inline-block;
+      transition: color 0.15s;
+
+      &:hover { color: var(--hover-fg); }
     }
 
     .trailing-section {
       display: flex;
       align-items: center;
-
-      .link {
-        margin-right: 10px;
-
-        @include md {
-          margin-right: 20px;
-        }
-      }
     }
   }
 }

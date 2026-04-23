@@ -3,7 +3,7 @@
 @use '../styles/reset'as *;
 @use '../styles/colors'as *;
 
-* {
+*, *::before, *::after {
     box-sizing: border-box;
     appearance: none;
 }
@@ -12,36 +12,54 @@ html {
     width: 100%;
     height: 100%;
     overflow-y: scroll;
-    font-size: 14px;
+    font-size: 15px;
 }
 
 body {
-    background-color: var(--background-color) !important;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font);
+    font-weight: 400;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
 }
 
-
 a {
-    color: var(--link-text-color);
+    color: var(--fg);
+    text-decoration: none;
+}
+
+// ── 페이지 전환 ──
+.page-transition-wrapper {
+  opacity: 0;
+  transform: translateY(6px);
+
+  &.page-enter {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  &.page-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.22s ease, transform 0.22s ease;
+  }
 }
 
 .page-wrapper {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     width: 100%;
     min-height: 100vh;
     word-break: keep-all;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-family: $font-family;
-    color: var(--primary-text-color);
-    @include content-horizontal-padding;
 
     .page-content {
         display: flex;
         flex-direction: column;
         align-items: center;
-        @include content-max-width;
+        width: 100%;
     }
 }
