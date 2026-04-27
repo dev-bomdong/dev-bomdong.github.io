@@ -1,0 +1,217 @@
+.home-wrap {
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 0 24px 80px;
+}
+
+.writing-label {
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+  padding-top: 0;
+  margin-bottom: 20px;
+}
+
+.category-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding-top: 48px;
+  margin-bottom: 28px;
+}
+
+.category-pill {
+  font-size: 12px;
+  font-family: var(--font);
+  color: var(--faint);
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding: 2px 0;
+  cursor: pointer;
+  letter-spacing: 0.01em;
+  position: relative;
+  transition: color 0.2s;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--fg);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  &:hover {
+    color: var(--muted);
+  }
+
+  &.active {
+    color: var(--fg);
+
+    &::after {
+      transform: scaleX(1);
+    }
+  }
+}
+
+.brand-placeholder {
+  padding-top: 80px;
+  text-align: center;
+
+  &__label {
+    font-size: 12px;
+    color: var(--faint);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+}
+
+// ── About page ──
+.about-hero {
+  padding: 52px 0 20px;
+
+  &__name {
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--fg);
+    line-height: 1.3;
+    margin-bottom: 0;
+  }
+}
+
+.about-section {
+  padding-top: 36px;
+
+  &__title {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.02em;
+    margin-bottom: 12px;
+  }
+}
+
+.about-career {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.about-career-row {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 0 16px;
+  padding: 14px 0;
+  border-top: 1px solid var(--border);
+  transition: opacity 0.15s;
+
+  &:last-child {
+    border-bottom: 1px solid var(--border);
+  }
+
+  &:hover {
+    opacity: 0.7;
+  }
+
+  &__left {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding-top: 1px;
+  }
+
+  &__period {
+    font-size: 12px;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  &__duration {
+    font-size: 11px;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  &__company {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--fg);
+  }
+
+  &__role {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  &__bullets {
+    margin: 6px 0 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+
+    li {
+      font-size: 13px;
+      color: var(--faint);
+      padding-left: 14px;
+      position: relative;
+      line-height: 1.6;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      &::before {
+        content: '·';
+        position: absolute;
+        left: 0;
+        color: var(--faint);
+        font-size: 18px;
+        line-height: 1.2;
+      }
+    }
+  }
+}
+
+.about-contacts {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.about-contact-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 0;
+  text-decoration: none;
+  color: var(--muted);
+  transition: color 0.15s;
+
+  &:hover {
+    color: var(--fg);
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  &__label {
+    font-size: 13px;
+  }
+}

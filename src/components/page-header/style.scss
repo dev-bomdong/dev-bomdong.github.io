@@ -1,35 +1,41 @@
-@use '../../styles/mixins'as *;
-
 .page-header-wrapper {
   display: flex;
   justify-content: center;
   width: 100%;
-  padding-top: 2rem;
-  height: 60px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg);
+}
 
-  .page-header {
+.page-header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 900px;
+  padding: 24px 24px 0;
+  gap: 24px;
+
+  .page-nav {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    @include content-max-width;
+    gap: 16px;
 
-    .link {
-      font-weight: 900;
-      font-size: 2rem;
-      color: var(--primary-text-color);
+    &__link {
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.15s;
+      letter-spacing: -0.005em;
+
+      &:hover { color: var(--fg); }
+      &.active { color: var(--fg); }
     }
+  }
 
-    .trailing-section {
-      display: flex;
-      align-items: center;
-
-      .link {
-        margin-right: 10px;
-
-        @include md {
-          margin-right: 20px;
-        }
-      }
-    }
+  .trailing-section {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
   }
 }

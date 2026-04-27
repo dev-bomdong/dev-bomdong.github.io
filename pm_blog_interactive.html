@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jiyeon.log</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
+<style>
+  /* Prism 기본 테마 색상을 블로그 색조에 맞게 덮어쓰기 */
+  code[class*="language-"], pre[class*="language-"] {
+    background: none;
+    color: #2a2a28;
+    font-family: 'SF Mono', 'Fira Mono', 'Menlo', monospace;
+    font-size: 12px;
+    text-shadow: none;
+  }
+  .token.keyword   { color: #555; font-style: italic; }
+  .token.string    { color: #4a7c59; }
+  .token.comment   { color: #aaa; }
+  .token.function  { color: #3a3a38; font-weight: 500; }
+  .token.number    { color: #888; }
+  .token.operator  { color: #777; }
+  .token.punctuation { color: #888; }
+  .token.class-name, .token.type-name { color: #666; }
+  /* 언어 라벨 */
+  .post-body pre[data-lang]::before {
+    content: attr(data-lang);
+    display: block;
+    font-size: 10px;
+    color: var(--faint);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    font-family: var(--font);
+  }
+</style>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #fdfdfc;
+    --fg: #111110;
+    --muted: #8f8e89;
+    --faint: #c8c7c2;
+    --border: #e8e7e2;
+    --hover-fg: #2a2a28;
+    --font: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+  }
+
+  html { font-size: 15px; }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font);
+    font-weight: 400;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ── 읽기 진행도 바 ── */
+  #progress-bar {
+    position: fixed;
+    top: 0; left: 0;
+    height: 1.5px;
+    width: 0%;
+    background: var(--fg);
+    z-index: 999;
+    transition: width 0.05s linear;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* ── PAGE SHELL ── */
+  .page {
+    min-height: 100vh;
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.22s ease, transform 0.22s ease;
+  }
+  .page.active {
+    pointer-events: auto;
+    opacity: 1;
+    transform: translateY(0);
+    position: relative;
+  }
+  .page.exit {
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: opacity 0.15s ease, transform 0.15s ease;
+  }
+
+  /* ── NAV ── */
+  header {
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 28px 24px 0;
+  }
+  /* 상세 페이지 헤더는 넓게 */
+  #page-post header {
+    max-width: 900px;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .site-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--fg);
+    letter-spacing: -0.01em;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: color 0.15s;
+  }
+  .site-name:hover { color: var(--hover-fg); }
+
+  /* ── INDEX PAGE ── */
+  .index-wrap {
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  .intro {
+    padding: 52px 0 40px;
+    border-bottom: 1px solid var(--border);
+  }
+  .intro-label {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 12px;
+    letter-spacing: 0.02em;
+  }
+  .intro-name {
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--fg);
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+  .intro-bio {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 400px;
+  }
+
+  .writing-section { padding-top: 36px; }
+  .section-label {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 4px;
+    letter-spacing: 0.02em;
+  }
+
+  /* ── 글 목록 행 ── */
+  .year-row {
+    display: grid;
+    grid-template-columns: 48px 1fr auto;
+    gap: 0 16px;
+    align-items: baseline;
+    padding: 10px 0;
+    border-top: 1px solid var(--border);
+    cursor: pointer;
+  }
+  .year-cell {
+    font-size: 12px;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+    padding-top: 1px;
+  }
+  .post-link-title {
+    font-size: 14px;
+    color: var(--fg);
+    letter-spacing: -0.01em;
+    line-height: 1.4;
+    transition: transform 0.2s cubic-bezier(0.25,0.46,0.45,0.94), color 0.15s;
+    display: inline-block;
+  }
+  .post-link-date {
+    font-size: 12px;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    transition: color 0.15s;
+  }
+  .year-row:hover .post-link-title {
+    transform: translateX(3px);
+    color: var(--hover-fg);
+  }
+  .year-row:hover .post-link-date { color: var(--fg); }
+
+  /* ── POST 레이아웃 — TOC 사이드바 포함 ── */
+  .post-outer {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 0 48px;
+    align-items: start;
+  }
+
+  /* ── TOC 사이드바 ── */
+  .toc {
+    position: sticky;
+    top: 48px;
+    padding-top: 40px;
+  }
+
+  .toc-label {
+    font-size: 11px;
+    color: var(--faint);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .toc-item {
+    display: block;
+    font-size: 12px;
+    color: var(--faint);
+    line-height: 1.45;
+    padding: 4px 0;
+    cursor: pointer;
+    transition: color 0.15s;
+    border: none;
+    background: none;
+    text-align: left;
+    font-family: var(--font);
+    width: 100%;
+  }
+  .toc-item:hover { color: var(--fg); }
+  .toc-item.active { color: var(--fg); }
+
+  /* ── 본문 영역 ── */
+  .post-wrap {
+    min-width: 0;
+  }
+
+  .post-header {
+    padding: 40px 0 32px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .back-btn {
+    font-size: 13px;
+    color: var(--muted);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 28px;
+    transition: color 0.15s, transform 0.15s;
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: var(--font);
+  }
+  .back-btn:hover { color: var(--fg); transform: translateX(-2px); }
+
+  .post-meta-line {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 14px;
+    display: flex;
+    gap: 12px;
+  }
+
+
+
+  .post-title-main {
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: -0.025em;
+    line-height: 1.25;
+    color: var(--fg);
+    margin-bottom: 14px;
+  }
+  .post-subtitle {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.6;
+    max-width: 440px;
+  }
+
+  /* ── POST BODY ── */
+  .post-body { padding-top: 32px; }
+
+  .post-body p {
+    font-size: 14.5px;
+    line-height: 1.8;
+    color: #2a2a28;
+    margin-bottom: 20px;
+  }
+  .post-body h2 {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--fg);
+    letter-spacing: -0.01em;
+    margin: 36px 0 12px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border);
+    scroll-margin-top: 60px;
+  }
+  .post-body ul {
+    margin: 0 0 20px;
+    padding: 0;
+    list-style: none;
+  }
+  .post-body ul li {
+    font-size: 14.5px;
+    line-height: 1.8;
+    color: #2a2a28;
+    padding-left: 14px;
+    position: relative;
+    margin-bottom: 4px;
+  }
+  .post-body ul li::before {
+    content: '·';
+    position: absolute;
+    left: 0;
+    color: var(--muted);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  .post-body blockquote {
+    border-left: 2px solid var(--border);
+    padding: 2px 0 2px 16px;
+    margin: 20px 0;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  /* ── 풀쿼트 ── */
+  .pull-quote {
+    padding: 24px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin: 32px 0;
+    cursor: pointer;
+    position: relative;
+  }
+  .pull-quote p {
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.5;
+    color: var(--fg);
+    margin: 0;
+    transition: color 0.2s;
+  }
+  .pull-quote .copy-hint {
+    position: absolute;
+    bottom: -1px; right: 0;
+    font-size: 11px;
+    color: var(--faint);
+    opacity: 0;
+    transition: opacity 0.15s;
+    transform: translateY(100%);
+    padding-top: 4px;
+  }
+  .pull-quote:hover .copy-hint { opacity: 1; }
+  .pull-quote.copied p { color: var(--muted); }
+
+  /* ── 원칙 카드 ── */
+  .principle-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 28px 0;
+  }
+  .principle-cell {
+    background: var(--bg);
+    padding: 16px;
+    transition: background 0.2s;
+  }
+  .principle-cell:hover { background: #f7f7f5; }
+  .principle-label {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    transition: color 0.2s;
+  }
+  .principle-cell:hover .principle-label { color: var(--fg); }
+  .principle-desc {
+    font-size: 12.5px;
+    color: var(--fg);
+    line-height: 1.5;
+  }
+  .principle-extra {
+    font-size: 11.5px;
+    color: var(--muted);
+    line-height: 1.5;
+    margin-top: 8px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s cubic-bezier(0.25,0.46,0.45,0.94), opacity 0.2s;
+    opacity: 0;
+  }
+  .principle-cell:hover .principle-extra { max-height: 80px; opacity: 1; }
+
+  /* ── 마크다운 추가 요소 ── */
+  .post-body h3 {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--fg);
+    letter-spacing: -0.005em;
+    margin: 28px 0 10px;
+    scroll-margin-top: 60px;
+  }
+
+  /* 인라인 코드 */
+  .post-body code {
+    font-family: 'SF Mono', 'Fira Mono', 'Menlo', monospace;
+    font-size: 12.5px;
+    background: #f2f1ee;
+    color: #3a3a38;
+    border-radius: 3px;
+    padding: 1px 5px;
+  }
+
+  /* 코드 블록 */
+  .post-body pre {
+    background: #f5f4f1;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 16px 18px;
+    margin: 20px 0;
+    overflow-x: auto;
+    position: relative;
+  }
+  .post-body pre code {
+    background: none;
+    padding: 0;
+    font-size: 12px;
+    line-height: 1.75;
+    color: #2a2a28;
+  }
+
+  /* 중첩 리스트 */
+  .post-body ul ul {
+    margin: 4px 0 4px 16px;
+    padding: 0;
+  }
+  .post-body ul ul li::before { content: '·'; color: var(--faint); }
+
+  /* 참고자료 링크 */
+  .post-body a {
+    color: var(--fg);
+    text-decoration: underline;
+    text-decoration-color: var(--faint);
+    text-underline-offset: 2px;
+    transition: text-decoration-color 0.15s;
+  }
+  .post-body a:hover { text-decoration-color: var(--fg); }
+
+  /* strong */
+  .post-body strong { font-weight: 500; color: var(--fg); }
+
+  /* ── POST FOOTER ── */
+  .post-footer-nav {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-back {
+    font-size: 13px;
+    color: var(--muted);
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-family: var(--font);
+    padding: 0;
+    transition: color 0.15s, transform 0.15s;
+  }
+  .footer-back:hover { color: var(--fg); transform: translateX(-2px); }
+  .footer-date { font-size: 12px; color: var(--faint); }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<!-- ════ PAGE 1 — INDEX ════ -->
+<div class="page active" id="page-index">
+  <header>
+    <a class="site-name" onclick="nav('index')">Jiyeon.log</a>
+  </header>
+
+  <div class="index-wrap">
+    <div class="intro">
+      <p class="intro-label">Updated Apr 2026</p>
+      <p class="intro-name">개발자로 시작해, 지금은 Product Manager.</p>
+      <p class="intro-bio">
+        프론트엔드 개발자로 커리어를 시작했고, 지금은 핀테크 스타트업에서 PM으로 일합니다. 기술과 제품 사이 어딘가에 서서, 복잡한 것을 단순하게 만드는 연습을 합니다. 서울에 있습니다.
+      </p>
+    </div>
+
+    <div class="writing-section">
+      <p class="section-label">Writing</p>
+      <div class="year-group">
+
+        <div class="year-row" onclick="nav('post')">
+          <span class="year-cell">2026</span>
+          <span class="post-link-title">개발자 눈으로 본 Family Values</span>
+          <span class="post-link-date">04/18</span>
+        </div>
+
+        <div class="year-row" onclick="nav('post')">
+          <span class="year-cell">2026</span>
+          <span class="post-link-title">PM이 로드맵을 짤 때 가장 많이 하는 실수</span>
+          <span class="post-link-date">03/28</span>
+        </div>
+
+        <div class="year-row" onclick="nav('post')">
+          <span class="year-cell">2026</span>
+          <span class="post-link-title">사용자 인터뷰에서 진짜 인사이트를 뽑는 법</span>
+          <span class="post-link-date">02/14</span>
+        </div>
+
+        <div class="year-row" onclick="nav('post')">
+          <span class="year-cell">2025</span>
+          <span class="post-link-title">North Star Metric을 잘못 설정했을 때 일어나는 일</span>
+          <span class="post-link-date">11/03</span>
+        </div>
+
+        <div class="year-row" onclick="nav('post')">
+          <span class="year-cell">2025</span>
+          <span class="post-link-title">엔지니어와 신뢰를 쌓는 PM의 습관들</span>
+          <span class="post-link-date">08/22</span>
+        </div>
+
+        <div class="year-row" onclick="nav('post')">
+          <span class="year-cell">2025</span>
+          <span class="post-link-title">React 상태 관리 — Context, Zustand, Jotai 비교</span>
+          <span class="post-link-date">05/10</span>
+        </div>
+
+        <div class="year-row" onclick="nav('post')">
+          <span class="year-cell">2024</span>
+          <span class="post-link-title">비동기 처리, Promise에서 async/await까지</span>
+          <span class="post-link-date">09/01</span>
+        </div>
+
+        <div class="year-row" onclick="nav('post')">
+          <span class="year-cell">2024</span>
+          <span class="post-link-title">개발자에서 PM이 된 뒤 가장 많이 받는 질문</span>
+          <span class="post-link-date">04/15</span>
+        </div>
+
+        <div class="year-row" onclick="nav('post')">
+          <span class="year-cell">2024</span>
+          <span class="post-link-title">Git flow, 팀마다 다른 이유</span>
+          <span class="post-link-date">01/08</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════ PAGE 2 — POST DETAIL ════ -->
+<div class="page" id="page-post">
+  <header>
+    <a class="site-name" onclick="nav('index')">Jiyeon.log</a>
+  </header>
+
+  <div class="post-outer">
+
+    <!-- TOC 사이드바 -->
+    <aside class="toc" id="toc">
+      <p class="toc-label">목차</p>
+      <button class="toc-item" onclick="scrollToId('h-intro')">들어가며</button>
+      <button class="toc-item" onclick="scrollToId('h-design')">초기 흐름 설계</button>
+      <button class="toc-item" onclick="scrollToId('h-prompting')">프롬프팅 기법으로 구조 다듬기</button>
+      <button class="toc-item" onclick="scrollToId('h-final')">최종 자동화 흐름</button>
+      <button class="toc-item" onclick="scrollToId('h-retro')">회고</button>
+      <button class="toc-item" onclick="scrollToId('h-ref')">참고자료</button>
+    </aside>
+
+    <!-- 본문 -->
+    <div class="post-wrap">
+      <div class="post-header">
+        <button class="back-btn" onclick="nav('index')">← Writing</button>
+        <div class="post-meta-line">
+          <span>2025년 7월 19일</span>
+          <span>15분</span>
+          <span>#AI</span>
+        </div>
+        <h1 class="post-title-main">프롬프팅으로 문서 자동화 흐름 설계하기</h1>
+        <p class="post-subtitle">
+          Storybook 문서화를 Cursor Rule로 자동화하면서, 무의식 중에 구성한 흐름이 알고 보니 여러 프롬프팅 기법과 닮아 있었다는 이야기.
+        </p>
+      </div>
+
+      <div class="post-body">
+
+        <h2 id="h-intro">들어가며</h2>
+
+        <p>재직 중인 회사의 프론트엔드팀에선 디자인 시스템을 직접 운영하고 있다. 공통 토큰과 컴포넌트 중심으로 UI를 구성하면서 component-driven development를 실무에 녹여낼 수 있었고, 팀의 생산성도 눈에 띄게 향상됐다.</p>
+
+        <p>다만 그 생산성을 유지하려면 피할 수 없는 루틴한 작업이 있었다. 바로 <strong>컴포넌트를 만들 때마다 storybook 문서 작성하기.</strong></p>
+
+        <p>컴포넌트마다 예제 코드, Props, Playground 등을 포함한 문서를 템플릿에 맞춰 작성해야 했다. 복잡하진 않지만 시간이 오래 걸리고, 귀찮고, 실수가 잦은 작업이었다. 이런 작업을 반복하다 보니 문득 <strong>이 문서를 꼭 사람이 써야 되나?</strong> 라는 생각이 들었다.</p>
+
+        <p>마침 우리 팀은 Cursor를 도입해 적극적으로 활용하고 있었고, 자동화에 대한 관심도 높은 편이었다. 이런 팀 분위기 덕분에 <strong>Storybook 문서화 같은 반복 작업도 Cursor로 자동화해볼 수 있지 않을까</strong> 란 생각이 들었고, 직접 Cursor rule을 설계해보는 계기가 됐다.</p>
+
+        <h2 id="h-design">초기 흐름 설계</h2>
+
+        <h3>흐름을 직접 그려보며 방향 잡기</h3>
+
+        <p>처음에는 프롬프팅 기법에 대한 지식이 거의 없었다. 다만, 구현하고자 하는 흐름만큼은 명확했다.</p>
+
+<pre><code>[특정 규칙에 의해 rule 실행]
+"{컴포넌트명} 스토리 작성해줘" 입력
+        │
+        ▼
+[필수 조건 확인]
+├── Figma 링크 있는가?
+│     ├─ O: 다음 단계 진행
+│     └─ X: "Figma 링크를 알려주세요" 응답 후 대기
+└── 기존 스토리 파일 있는가?
+      ├─ O: "리팩토링할까요?" → 컨펌 대기
+      └─ X: 신규 작성 흐름으로 진행
+        │
+        ▼
+[초안 설명]
+→ 어떤 스토리/문서가 생성될지 목차 위주로 브리핑
+→ 개발자의 피드백에 따라 수정
+        │
+        ▼
+[컨펌 요청]
+→ "진행할까요?" 질문 후 대기
+* 이 단계까지 어떠한 파일도 수정하지 않음
+        │
+        ▼
+[파일 생성 또는 수정]</code></pre>
+
+        <h3>설계 시 고려한 핵심 원칙</h3>
+
+        <ul>
+          <li><strong>명확한 트리거 설정하기</strong>
+            <ul>
+              <li>특정 규칙에 의해 rule이 실행되도록 했다. 의도된 조건이 아니면 작동하지 않는다.</li>
+            </ul>
+          </li>
+          <li><strong>필수 조건 선검사</strong>
+            <ul>
+              <li>Figma 링크나 기존 파일 존재 여부처럼 사전에 확인이 필요한 항목을 먼저 점검하고, 조건을 만족하지 않으면 다음 단계로 넘어가지 않도록 했다.</li>
+            </ul>
+          </li>
+          <li><strong>상호작용 기반 디벨롭</strong>
+            <ul>
+              <li>한 번의 요청으로 바로 문서가 완성되는 게 아니라, 초안 설명 → 피드백 반영 → 컨펌 구조로 문서를 함께 다듬어가는 흐름을 구성했다.</li>
+            </ul>
+          </li>
+          <li><strong>코드 수정은 항상 마지막에</strong>
+            <ul>
+              <li>cursor agent가 갑자기 여러 파일을 수정하는 상황을 방지하기 위해, 컨펌 이전엔 실제 파일을 절대 건드리지 않도록 제한했다.</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h2 id="h-prompting">프롬프팅 기법으로 구조 다듬기</h2>
+
+        <h3>1. 언제 실행시킬까 (Trigger Pattern)</h3>
+
+        <p>무분별한 실행은 혼란을 낳으니 <code>{컴포넌트명} 스토리 작성해줘</code>라는 구체적인 입력이 있어야만 rule이 작동하도록 구성했다. 이는 일반적인 <code>Trigger Pattern</code>의 정의와 일치한다. AI가 임의로 반응하지 않고, 특정 조건이 충족됐을 때만 동작을 개시하는 방식이다.</p>
+
+        <h3>2. 어떤 조건이 충족돼야 하나 (Guard Clause)</h3>
+
+        <p>필수 조건인 1) Figma 링크 존재 여부 2) 기존 스토리 파일 유무를 초기에 점검한다. 조건이 충족되지 않으면 흐름은 중단되거나 대기 상태에 들어간다.</p>
+
+        <p>이 방식은 소프트웨어 디자인 패턴 중 하나인 <code>Guard Clause</code>에서 따왔다. 핵심은 앞단에서 조건을 확인해 <strong>예외적인 경우를 조기에 차단하는 것</strong>이다.</p>
+
+        <blockquote>
+          The <strong>guard clause</strong> most commonly is added at the beginning of a procedure and is said to "guard" the rest of the procedure by handling edge cases upfront.<br>— Kent Beck
+        </blockquote>
+
+        <h3>3. 어떤 예시를 학습시킬 것인가 (Few-shot Prompting)</h3>
+
+        <p>AI가 문서 스타일과 코드 컨벤션을 학습할 수 있도록, 다양한 컴포넌트의 스토리 파일을 참조 예시로 제시했다. 이렇게 학습할 예제를 제공하는 방식은 <code>Few-shot Prompting</code> 기법에 해당한다.</p>
+
+        <blockquote>
+          Few-shot prompting can be used as a technique to enable in-context learning where we provide demonstrations in the prompt to steer the model to better performance.<br>— Prompt Engineering Guide
+        </blockquote>
+
+        <p>내 경우엔 다양한 예시를 가진 컴포넌트 총 4개를 예시로 지정했는데, 이러면 총 4-shot을 제공한 셈이다.</p>
+
+        <h3>4. 어떤 형식으로 출력돼야 하나 (Structured Prompting)</h3>
+
+        <p>문서 구조와 코드 스타일이 일관되도록 출력 양식을 미리 정의하고, 생성되는 문서가 정해진 틀을 따르도록 유도했다. 이런 방식은 <code>Structured Prompting</code>이라 불린다. <strong>AI가 출력할 구조를 미리 정의하거나 유도하여, 일관된 형식의 결과를 얻는 전략</strong>이다.</p>
+
+        <h3>5. 코드를 언제 수정할 것인가</h3>
+
+        <p>Cursor Agent를 처음 썼을 때 가장 당황했던 경험 중 하나는, 간단한 요청만 했는데 갑자기 여러 파일을 한꺼번에 수정해버린 일이었다. 이를 막기 위해 문서를 생성하기 전에 초안을 먼저 설명하고, 사용자로부터 "진행할까요?" 컨펌을 받아야만 실행되도록 했다. 이는 <strong>Chain-of-Thought</strong>의 중간 추론 설명 + <strong>Human-in-the-loop</strong>를 합친 형태다.</p>
+
+        <p>문서를 곧바로 생성하는 것이 아니라, 먼저 어떤 구성으로 문서를 생성하려는지 계획을 먼저 설명하게 한다.</p>
+
+<pre><code>이제 {componentName} 관련 파일들을 분석하고 초안을 작성하겠습니다.
+
+분석 결과:
+{componentName} Props:
+  ...
+생성할 StoryFn 목록:
+  ...
+{componentName}.mdx 파일 초안:
+  ...
+
+이렇게 진행할까요?</code></pre>
+
+        <p><strong>예상되는 산출물의 구성과 목적을 먼저 설명하게 하고</strong>, 사용자의 컨펌을 받은 뒤에야 문서를 생성한다.</p>
+
+        <h2 id="h-final">최종 자동화 흐름</h2>
+
+        <p>프롬프트 기법을 활용해 최종적으로 정리한 흐름은 아래와 같다.</p>
+
+<pre><code>────────────────────────────────────────
+1. 트리거 감지 (Trigger Pattern)
+────────────────────────────────────────
+  └─ "{컴포넌트명} 스토리 작성해줘" 입력 시 Rule 작동
+                  │
+                  ▼
+────────────────────────────────────────
+2. 필수 조건 확인 (Guard Clause)
+────────────────────────────────────────
+  ├─ 2-1. Figma 링크 확인
+  │     ├─ 있음 → 다음 단계 진행
+  │     └─ 없음 → "링크를 알려주세요" 응답 후 대기
+  └─ 2-2. 기존 스토리 파일 확인
+         ├─ 있음 → "리팩토링할까요?" 컨펌 후 진행
+         └─ 없음 → 다음 단계 진행
+                  │
+                  ▼
+────────────────────────────────────────
+3. 예제 기반 패턴 학습 (Few-shot Prompting)
+────────────────────────────────────────
+  ├─ 참조 스토리 분석: Button, Input 등
+  └─ 파일 구조 분석
+       ├─ 코드 파일 (.tsx, .types.ts)
+       └─ 문서 파일 (.mdx)
+                  │
+                  ▼
+────────────────────────────────────────
+4. 정해진 구조에 따른 초안 작성 (Structured Prompting)
+────────────────────────────────────────
+  ├─ 문서 구성 템플릿 적용
+  ├─ 문체 / 코드 스타일 통일
+  └─ 필수 StoryFn 생성 (Playground, Variant 등)
+                  │
+                  ▼
+────────────────────────────────────────
+5. 초안 설명 및 컨펌 (CoT + Human-in-the-loop)
+────────────────────────────────────────
+  └─ 사용자에게 분석 결과 및 생성 계획 제시
+       └─ "진행할까요?" → 컨펌 후에만 실행
+                  │
+                  ▼
+────────────────────────────────────────
+6. 문서 생성 및 리팩토링
+────────────────────────────────────────
+  └─ .mdx / .stories.tsx 파일 생성 또는 수정</code></pre>
+
+        <h2 id="h-retro">회고</h2>
+
+        <p>이 흐름과 cursor rule을 팀 회의에서 공유하고 시연했을 때, 편의성과 예측 가능성 면에서 긍정적인 피드백을 받았다.</p>
+
+        <ul>
+          <li>가장 먼저 나왔던 피드백은 <strong>귀찮은 문서화를 채팅처럼 처리할 수 있다는 점이 편하다</strong>는 말이었다. "스토리 작성해줘" 한 문장으로 시작할 수 있게 된 것이다.</li>
+          <li><strong>컨펌 없이는 코드가 수정되지 않는 구조가 마음에 든다</strong>는 의견도 있었다. 자동화의 주도권이 사람에게 있다는 점이 핵심이었다.</li>
+        </ul>
+
+        <p>처음에는 그냥 "문서화 좀 자동화할 수 없을까?"라는 생각으로 시작했지만, 설계 흐름을 구체화해 나가면서 <strong>AI를 도구로 활용하려면, 그 도구가 작동할 수 있는 맥락부터 먼저 설계해야 한다</strong>는 사실을 깨달았다.</p>
+
+        <div class="pull-quote" onclick="copyQuote(this)" data-text="AI는 명확한 문맥을 제공해 최선의 결과를 도출해내는 도구로 사용하고, 결과물의 주도권은 내게 있어야 한다.">
+          <p>"AI는 명확한 문맥을 제공해 최선의 결과를 도출해내는 도구로 사용하고, 결과물의 주도권은 내게 있어야 한다."</p>
+          <span class="copy-hint">클릭해서 복사</span>
+        </div>
+
+        <h2 id="h-ref">참고자료</h2>
+
+        <ul>
+          <li><a href="https://en.wikipedia.org/wiki/Guard_(computer_science)" target="_blank">Guard (computer science) — Wikipedia</a></li>
+          <li><a href="https://www.promptingguide.ai/techniques/fewshot" target="_blank">Few-shot Prompting — Prompt Engineering Guide</a></li>
+          <li><a href="https://www.promptingguide.ai/techniques/cot" target="_blank">Chain-of-Thought Prompting — Prompt Engineering Guide</a></li>
+          <li><a href="https://www.samsungsds.com/kr/insights/human_in_the_loop.html" target="_blank">Human in the Loop — Samsung SDS Insights</a></li>
+        </ul>
+
+      </div>
+
+      <div class="post-footer-nav">
+        <button class="footer-back" onclick="nav('index')">← All posts</button>
+        <span class="footer-date">2025년 7월 19일</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<script>
+  /* ── 페이지 전환 ── */
+  function nav(target) {
+    const from = document.querySelector('.page.active');
+    const to   = document.getElementById(target === 'post' ? 'page-post' : 'page-index');
+    if (from === to) return;
+    from.classList.add('exit');
+    setTimeout(() => {
+      from.classList.remove('active', 'exit');
+      to.classList.add('active');
+      window.scrollTo(0, 0);
+      updateProgress();
+    }, 150);
+  }
+
+  /* ── 읽기 진행 바 ── */
+  const bar = document.getElementById('progress-bar');
+  function updateProgress() {
+    const isPost = document.getElementById('page-post').classList.contains('active');
+    bar.style.opacity = isPost ? '1' : '0';
+  }
+  window.addEventListener('scroll', () => {
+    if (!document.getElementById('page-post').classList.contains('active')) return;
+    const el = document.getElementById('page-post');
+    const h  = el.scrollHeight - window.innerHeight;
+    bar.style.width = (h > 0 ? Math.min(100, (window.scrollY / h) * 100) : 0) + '%';
+    updateToc();
+  });
+
+  /* ── TOC 스크롤 & active ── */
+  const tocHeadingIds = ['h-intro','h-design','h-prompting','h-final','h-retro','h-ref'];
+
+  function scrollToId(id) {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function updateToc() {
+    const items = document.querySelectorAll('.toc-item');
+    let current = 0;
+    tocHeadingIds.forEach((id, i) => {
+      const el = document.getElementById(id);
+      if (el && window.scrollY >= el.offsetTop - 80) current = i;
+    });
+    items.forEach((item, i) => item.classList.toggle('active', i === current));
+  }
+
+  /* ── 풀쿼트 복사 ── */
+  function copyQuote(el) {
+    const hint = el.querySelector('.copy-hint');
+    navigator.clipboard.writeText(el.dataset.text).then(() => {
+      el.classList.add('copied');
+      hint.textContent = '복사됨';
+      setTimeout(() => { el.classList.remove('copied'); hint.textContent = '클릭해서 복사'; }, 1800);
+    }).catch(() => {
+      hint.textContent = '복사됨';
+      setTimeout(() => { hint.textContent = '클릭해서 복사'; }, 1800);
+    });
+  }
+
+  /* ── 연도 레이블 중복 제거 ── */
+  (function() {
+    let last = null;
+    document.querySelectorAll('.year-row').forEach(row => {
+      const cell = row.querySelector('.year-cell');
+      const yr   = cell.textContent.trim();
+      cell.style.visibility = yr === last ? 'hidden' : 'visible';
+      last = yr;
+    });
+  })();
+</script>
+
+</body>
+</html>

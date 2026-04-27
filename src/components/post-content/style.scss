@@ -1,10 +1,41 @@
 @use '../../styles/markdown-style'as *;
-@use 'prismjs/themes/prism-tomorrow'as *;
 
 .post-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   width: 100%;
   margin-bottom: 20px;
+}
+
+// ── 풀쿼트 ──
+.pull-quote {
+  padding: 24px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  margin: 32px 0;
+  cursor: pointer;
+  position: relative;
+
+  p {
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.5;
+    color: var(--fg);
+    margin: 0;
+    transition: color 0.2s;
+  }
+
+  .copy-hint {
+    position: absolute;
+    bottom: -1px;
+    right: 0;
+    font-size: 11px;
+    color: var(--faint);
+    opacity: 0;
+    transition: opacity 0.15s;
+    transform: translateY(100%);
+    padding-top: 4px;
+  }
+
+  &:hover .copy-hint { opacity: 1; }
+  &.copied p { color: var(--muted); }
 }

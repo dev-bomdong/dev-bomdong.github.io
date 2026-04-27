@@ -3,7 +3,7 @@
 @use '../styles/reset'as *;
 @use '../styles/colors'as *;
 
-* {
+*, *::before, *::after {
     box-sizing: border-box;
     appearance: none;
 }
@@ -12,36 +12,54 @@ html {
     width: 100%;
     height: 100%;
     overflow-y: scroll;
-    font-size: 14px;
+    font-size: 15px;
+    background: var(--bg);
 }
 
 body {
-    background-color: var(--background-color) !important;
+    background: var(--bg) !important;
+    background-color: var(--bg) !important;
+    color: var(--fg);
+    font-family: var(--font);
+    font-weight: 400;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-
 a {
-    color: var(--link-text-color);
+    color: var(--fg);
+    text-decoration: none;
+}
+
+// ── 페이지 전환 ──
+// 기본은 opacity:1 (transform 없음 → sticky 정상 동작)
+// 클래스 추가 시 fade-in 애니메이션 실행, 종료 후 클래스 제거해도 opacity:1 유지
+@keyframes pageFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.page-transition-wrapper {
+  opacity: 1;
+
+  &.page-entering {
+    animation: pageFadeIn 0.25s ease forwards;
+  }
 }
 
 .page-wrapper {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     width: 100%;
     min-height: 100vh;
     word-break: keep-all;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-family: $font-family;
-    color: var(--primary-text-color);
-    @include content-horizontal-padding;
 
     .page-content {
         display: flex;
         flex-direction: column;
         align-items: center;
-        @include content-max-width;
+        width: 100%;
     }
 }

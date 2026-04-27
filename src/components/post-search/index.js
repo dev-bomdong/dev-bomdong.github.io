@@ -29,9 +29,10 @@ function PostSearch({ posts }) {
             className="search-input"
             variant="standard"
             size="medium"
+            placeholder="Search"
             InputProps={{
               ...params.InputProps,
-              endAdornment: <SearchIcon className="search-icon" />,
+              endAdornment: null,
             }}
           />
         </div>

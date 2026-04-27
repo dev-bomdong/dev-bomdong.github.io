@@ -1,44 +1,45 @@
-import React, { useEffect, useState } from 'react';
-import { graphql } from 'gatsby';
+import React from 'react';
+import { graphql, navigate } from 'gatsby';
 import Layout from '../layout';
 import Seo from '../components/seo';
-import PostHeader from '../components/post-header';
-import PostNavigator from '../components/post-navigator';
 import Post from '../models/post';
 import PostContent from '../components/post-content';
+import PostNavigator from '../components/post-navigator';
 import Utterances from '../components/utterances';
+import TableOfContents from '../components/table-of-contents';
+import ReadingProgressBar from '../components/reading-progress-bar';
+import './blog-template.scss';
 
 function BlogTemplate({ data }) {
-  const [viewCount, setViewCount] = useState(null);
-
   const curPost = new Post(data.cur);
   const prevPost = data.prev && new Post(data.prev);
   const nextPost = data.next && new Post(data.next);
   const { siteUrl, comments } = data.site?.siteMetadata;
   const utterancesRepo = comments?.utterances?.repo;
-
-  useEffect(() => {
-    if (!siteUrl) return;
-    const namespace = siteUrl.replace(/(^\w+:|^)\/\//, '');
-    const key = curPost.slug.replace(/\//g, '');
-
-    // fetch(
-    //   `https://api.countapi.xyz/${
-    //     process.env.NODE_ENV === 'development' ? 'get' : 'hit'
-    //   }/${namespace}/${key}`,
-    // ).then(async (result) => {
-    //   const data = await result.json();
-    //   setViewCount(data.value);
-    // });
-  }, [siteUrl, curPost.slug]);
+  const headings = data.cur.headings || [];
 
   return (
     <Layout>
+      <ReadingProgressBar />
       <Seo title={curPost?.title} description={curPost?.excerpt} />
-      <PostHeader post={curPost} viewCount={viewCount} />
-      <PostContent html={curPost.html} />
-      <PostNavigator prevPost={prevPost} nextPost={nextPost} />
-      {utterancesRepo && <Utterances repo={utterancesRepo} path={curPost.slug} />}
+      <div className="post-outer">
+        <TableOfContents headings={headings} />
+        <div className="post-wrap">
+          <header className="post-header">
+            <button className="post-back-btn" onClick={() => navigate(-1)}>← Articles</button>
+            <div className="post-meta-line">
+              <span>{curPost.date}</span>
+              {curPost.categories?.filter(c => c !== 'featured').map((cat) => (
+                <span key={cat}>#{cat}</span>
+              ))}
+            </div>
+            <h1 className="post-title">{curPost.title}</h1>
+          </header>
+          <PostContent html={curPost.html} />
+          <PostNavigator prevPost={prevPost} nextPost={nextPost} />
+          {utterancesRepo && <Utterances repo={utterancesRepo} path={curPost.slug} />}
+        </div>
+      </div>
     </Layout>
   );
 }
@@ -51,8 +52,12 @@ export const pageQuery = graphql`
       id
       html
       excerpt(pruneLength: 500, truncate: true)
+      headings {
+        value
+        depth
+      }
       frontmatter {
-        date(formatString: "MMMM DD, YYYY")
+        date(formatString: "YYYY.MM.DD")
         title
         categories
         author
@@ -65,9 +70,8 @@ export const pageQuery = graphql`
 
     next: markdownRemark(fields: { slug: { eq: $nextSlug } }) {
       id
-      html
       frontmatter {
-        date(formatString: "MMMM DD, YYYY")
+        date(formatString: "YYYY.MM.DD")
         title
         categories
         author
@@ -80,9 +84,8 @@ export const pageQuery = graphql`
 
     prev: markdownRemark(fields: { slug: { eq: $prevSlug } }) {
       id
-      html
       frontmatter {
-        date(formatString: "MMMM DD, YYYY")
+        date(formatString: "YYYY.MM.DD")
         title
         categories
         author

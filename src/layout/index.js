@@ -2,7 +2,6 @@ import React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import PageHeader from '../components/page-header';
 import PageFooter from '../components/page-footer';
-import ThemeSwitch from '../components/theme-switch';
 import './style.scss';
 
 const Layout = ({ children }) => {
@@ -25,13 +24,12 @@ const Layout = ({ children }) => {
 
   return (
     <div className="page-wrapper">
-      <PageHeader siteTitle={title || `Title`} />
+      <PageHeader />
       <main className="page-content">{children}</main>
       <PageFooter
         author={'dev-bomdong'}
         githubUrl={author.social?.github || `https://www.github.com`}
       />
-      <ThemeSwitch />
     </div>
   );
 };
