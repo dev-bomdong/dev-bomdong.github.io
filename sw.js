@@ -27,33 +27,33 @@ workbox.core.clientsClaim();
  */
 self.__precacheManifest = [
   {
-    "url": "webpack-runtime-22c15fcd0da809e8970b.js"
+    "url": "webpack-runtime-0cf8f0928bd9eae0f407.js"
   },
   {
-    "url": "styles.a9a9637b6286d9d08d00.css"
+    "url": "styles.f0af02a6fc706b18925c.css"
   },
   {
-    "url": "framework-6311fb43802fa1f7615d.js"
+    "url": "framework-1316da37b53e6fe5668d.js"
   },
   {
-    "url": "app-abb4c476538ddb4d064a.js"
+    "url": "app-d26a28dcf72d716dd671.js"
   },
   {
     "url": "offline-plugin-app-shell-fallback/index.html",
-    "revision": "26ed661d08b135ad2706a8b2c0605be2"
+    "revision": "1cea62e8da82baf07a00f241f46f6081"
   },
   {
-    "url": "static/webfonts/s/roboto/v49/KFOMCnqEu92Fr1ME7kSn66aGLdTylUAMQXC89YmC2DPNWuaabVmUiAo.woff2"
+    "url": "static/webfonts/s/roboto/v51/KFOMCnqEu92Fr1ME7kSn66aGLdTylUAMQXC89YmC2DPNWuaabVmUiAo.woff2"
   },
   {
-    "url": "static/webfonts/s/roboto/v49/KFOMCnqEu92Fr1ME7kSn66aGLdTylUAMQXC89YmC2DPNWubEbVmUiAo.woff2"
+    "url": "static/webfonts/s/roboto/v51/KFOMCnqEu92Fr1ME7kSn66aGLdTylUAMQXC89YmC2DPNWubEbVmUiAo.woff2"
   },
   {
-    "url": "static/webfonts/s/roboto/v49/KFOMCnqEu92Fr1ME7kSn66aGLdTylUAMQXC89YmC2DPNWub2bVmUiAo.woff2"
+    "url": "static/webfonts/s/roboto/v51/KFOMCnqEu92Fr1ME7kSn66aGLdTylUAMQXC89YmC2DPNWub2bVmUiAo.woff2"
   },
   {
     "url": "manifest.webmanifest",
-    "revision": "836eaca91f5f2cf180026187742a1665"
+    "revision": "22f174fbb9d2e0f9cf98984643c55075"
   }
 ].concat(self.__precacheManifest || []);
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
@@ -163,7 +163,7 @@ const navigationRoute = new NavigationRoute(async ({ event }) => {
   // Check for resources + the app bundle
   // The latter may not exist if the SW is updating to a new version
   const resources = await idbKeyval.get(`resources:${pathname}`)
-  if (!resources || !(await caches.match(`/app-abb4c476538ddb4d064a.js`))) {
+  if (!resources || !(await caches.match(`/app-d26a28dcf72d716dd671.js`))) {
     return await fetch(event.request)
   }
 
