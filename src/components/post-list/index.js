@@ -10,8 +10,9 @@ function PostList({ posts }) {
       {posts.map((post) => {
         const dateObj = new Date(post.date);
         const year = dateObj.getFullYear();
-        const month = String(dateObj.getMonth() + 1).padStart(2, '0');
-        const day = String(dateObj.getDate()).padStart(2, '0');
+        const mm = String(dateObj.getMonth() + 1).padStart(2, '0');
+        const dd = String(dateObj.getDate()).padStart(2, '0');
+        const formattedDate = `${mm}.${dd}`;
         const showYear = year !== lastYear;
         lastYear = year;
 
@@ -28,7 +29,7 @@ function PostList({ posts }) {
               {year}
             </span>
             <span className="post-row__title">{post.title}</span>
-            <span className="post-row__date">{month}/{day}</span>
+            <span className="post-row__date">{formattedDate}</span>
           </div>
         );
       })}

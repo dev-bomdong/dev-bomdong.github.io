@@ -24,7 +24,7 @@ const Layout = ({ children }) => {
 
   return (
     <div className="page-wrapper">
-      <PageHeader siteTitle={title || `Title`} />
+      <PageHeader />
       <main className="page-content">{children}</main>
       <PageFooter
         author={'dev-bomdong'}

@@ -12,11 +12,11 @@ exports.wrapPageElement = ({ element }) => {
 exports.onRouteUpdate = () => {
   const wrapper = document.querySelector('.page-transition-wrapper');
   if (!wrapper) return;
-  wrapper.classList.remove('page-enter-active');
-  wrapper.classList.add('page-enter');
+
+  wrapper.classList.remove('page-entering');
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
-      wrapper.classList.add('page-enter-active');
+      wrapper.classList.add('page-entering');
     });
   });
 };

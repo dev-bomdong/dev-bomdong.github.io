@@ -8,16 +8,21 @@ import PostList from '../components/post-list';
 import './style.scss';
 
 function HomePage({ data }) {
-  const posts = data.allMarkdownRemark.edges.map(({ node }) => new Post(node));
+  const allPosts = data.allMarkdownRemark.edges.map(({ node }) => new Post(node));
   const { author } = data.site.siteMetadata;
+
+  const recentPosts = allPosts.filter((post) => {
+    const year = new Date(post.date).getFullYear();
+    return year >= 2025;
+  });
 
   return (
     <Layout>
-      <Seo title="Bomdong.log" />
+      <Seo title="Donghee Kim" />
       <div className="home-wrap">
         <Bio author={author} />
-        <p className="writing-label">Writing</p>
-        <PostList posts={posts} />
+        <p className="writing-label">Recent articles</p>
+        <PostList posts={recentPosts} />
       </div>
     </Layout>
   );

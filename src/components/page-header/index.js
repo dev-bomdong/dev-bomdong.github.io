@@ -4,7 +4,7 @@ import Post from '../../models/post';
 import PostSearch from '../post-search';
 import './style.scss';
 
-function PageHeader({ siteTitle }) {
+function PageHeader() {
   return (
     <StaticQuery
       query={graphql`
@@ -27,11 +27,17 @@ function PageHeader({ siteTitle }) {
       render={(data) => (
         <header className="page-header-wrapper">
           <div className="page-header">
-            <div className="front-section">
-              <Link className="link" to="/">
-                {siteTitle}
+            <nav className="page-nav">
+              <Link className="page-nav__link" to="/" activeClassName="active" exact>
+                Home
               </Link>
-            </div>
+              <Link className="page-nav__link" to="/articles" activeClassName="active">
+                Articles
+              </Link>
+              <Link className="page-nav__link" to="/about" activeClassName="active">
+                About
+              </Link>
+            </nav>
             <div className="trailing-section">
               <PostSearch
                 posts={data.allMarkdownRemark.edges.map(({ node }) => new Post(node, true))}

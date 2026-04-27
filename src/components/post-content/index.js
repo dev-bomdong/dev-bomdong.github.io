@@ -7,7 +7,36 @@ function PostContent({ html }) {
   useEffect(() => {
     if (!contentRef.current) return;
 
-    // blockquote 내 <p><strong>...</strong></p> 단독 패턴을 풀쿼트로 변환
+    // ── 코드블록 복사 버튼 주입 ──
+    const codeBlocks = contentRef.current.querySelectorAll('pre');
+    codeBlocks.forEach((pre) => {
+      if (pre.querySelector('.code-copy-btn')) return; // 중복 방지
+
+      const btn = document.createElement('button');
+      btn.className = 'code-copy-btn';
+      btn.setAttribute('aria-label', '코드 복사');
+      btn.innerHTML =
+        '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
+
+      btn.addEventListener('click', () => {
+        const code = pre.querySelector('code');
+        const text = code ? code.innerText : pre.innerText;
+        navigator.clipboard.writeText(text).catch(() => {});
+        btn.classList.add('copied');
+        btn.innerHTML =
+          '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML =
+            '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
+        }, 1800);
+      });
+
+      pre.style.position = 'relative';
+      pre.appendChild(btn);
+    });
+
+    // ── 풀쿼트 변환 ──
     const blockquotes = contentRef.current.querySelectorAll('blockquote');
     blockquotes.forEach((bq) => {
       const children = Array.from(bq.children);

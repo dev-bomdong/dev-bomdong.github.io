@@ -42,7 +42,6 @@ function TableOfContents({ headings }) {
 
   return (
     <aside className="toc">
-      <p className="toc__label">목차</p>
       {filteredHeadings.map((h) => {
         const id = h.value
           .toLowerCase()

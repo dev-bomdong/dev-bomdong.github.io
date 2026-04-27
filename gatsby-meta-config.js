@@ -1,5 +1,5 @@
 module.exports = {
-  title: `Bomdong.log`,
+  title: `Donghee Kim`,
   description: `일상 속 개발록`,
   language: `ko`, // `ko`, `en` => currently support versions for Korean and English
   siteUrl: `https://dev-bomdong.github.io/`,
@@ -11,10 +11,10 @@ module.exports = {
   },
   ga: 'G-ZZQWRB4MK9', //  Google Analytics Tracking ID
   author: {
-    name: `김동희`,
+    name: `Donghee Kim`,
     bio: {
       role: `프론트엔드 개발자`,
-      description: ['성실함을 중요시하는', '기록과 공유를 좋아하는', '함께 일하는 법을 고민하는'],
+      description: 'Product Manager with Frontend Development Background',
       thumbnail: 'profile.png', //'sample.png', // Path to the image in the 'asset' folder
     },
     social: {

@@ -4,14 +4,6 @@
 
 .bio-intro {
   padding: 52px 0 40px;
-  border-bottom: 1px solid var(--border);
-
-  &__label {
-    font-size: 12px;
-    color: var(--muted);
-    margin-bottom: 12px;
-    letter-spacing: 0.02em;
-  }
 
   &__name {
     font-size: 18px;
@@ -27,13 +19,24 @@
     color: var(--muted);
     line-height: 1.7;
     max-width: 400px;
+    margin-bottom: 16px;
   }
-}
 
-.writing-label {
-  font-size: 12px;
-  color: var(--muted);
-  margin-bottom: 4px;
-  letter-spacing: 0.02em;
-  padding-top: 36px;
+  &__social {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  &__icon-link {
+    display: flex;
+    align-items: center;
+    color: var(--faint);
+    text-decoration: none;
+    transition: color 0.15s;
+
+    &:hover {
+      color: var(--fg);
+    }
+  }
 }

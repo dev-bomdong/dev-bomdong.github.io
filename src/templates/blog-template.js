@@ -26,7 +26,7 @@ function BlogTemplate({ data }) {
         <TableOfContents headings={headings} />
         <div className="post-wrap">
           <header className="post-header">
-            <button className="post-back-btn" onClick={() => navigate(-1)}>← Writing</button>
+            <button className="post-back-btn" onClick={() => navigate(-1)}>← Articles</button>
             <div className="post-meta-line">
               <span>{curPost.date}</span>
               {curPost.categories?.filter(c => c !== 'featured').map((cat) => (
@@ -57,7 +57,7 @@ export const pageQuery = graphql`
         depth
       }
       frontmatter {
-        date(formatString: "YYYY년 MM월 DD일")
+        date(formatString: "YYYY.MM.DD")
         title
         categories
         author
@@ -71,7 +71,7 @@ export const pageQuery = graphql`
     next: markdownRemark(fields: { slug: { eq: $nextSlug } }) {
       id
       frontmatter {
-        date(formatString: "YYYY년 MM월 DD일")
+        date(formatString: "YYYY.MM.DD")
         title
         categories
         author
@@ -85,7 +85,7 @@ export const pageQuery = graphql`
     prev: markdownRemark(fields: { slug: { eq: $prevSlug } }) {
       id
       frontmatter {
-        date(formatString: "YYYY년 MM월 DD일")
+        date(formatString: "YYYY.MM.DD")
         title
         categories
         author
