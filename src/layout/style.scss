@@ -32,13 +32,8 @@ a {
     text-decoration: none;
 }
 
-// ── 페이지 전환 ──
-// JS(gatsby-browser.js)에서 inline style로 직접 제어
-// - 일반 이동: opacity 0 즉시 → transition으로 1까지 fade-in
-// - 뒤로가기(popstate/스와이프 백): 애니메이션 없이 즉시 opacity 1
 .page-transition-wrapper {
   opacity: 1;
-  will-change: opacity;
 }
 
 .page-wrapper {
