@@ -3,6 +3,8 @@
   max-width: 560px;
   margin: 0 auto;
   padding: 0 24px 80px;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 .writing-label {
@@ -143,6 +145,8 @@
     display: flex;
     flex-direction: column;
     gap: 1px;
+    min-width: 0;
+    overflow: hidden;
   }
 
   &__company {
@@ -170,9 +174,8 @@
       padding-left: 14px;
       position: relative;
       line-height: 1.6;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      word-break: normal;
+      overflow-wrap: anywhere;
 
       &::before {
         content: '·';
@@ -182,6 +185,31 @@
         font-size: 18px;
         line-height: 1.2;
       }
+    }
+  }
+
+  // ── 모바일 ──
+  @media (max-width: 480px) {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    &__left {
+      flex-direction: row;
+      align-items: baseline;
+      gap: 5px;
+    }
+
+    &__period {
+      white-space: normal;
+    }
+
+    &__company {
+      display: block;
+    }
+
+    &__role {
+      display: block;
     }
   }
 }

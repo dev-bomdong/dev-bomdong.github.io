@@ -41,12 +41,14 @@
     transition: color 0.15s;
   }
 
-  &:hover &__title {
-    transform: translateX(3px);
-    color: var(--hover-fg);
-  }
+  @media (hover: hover) {
+    &:hover &__title {
+      transform: translateX(3px);
+      color: var(--hover-fg);
+    }
 
-  &:hover &__date {
-    color: var(--fg);
+    &:hover &__date {
+      color: var(--fg);
+    }
   }
 }

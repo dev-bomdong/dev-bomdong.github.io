@@ -11,12 +11,14 @@
 html {
     width: 100%;
     height: 100%;
+    overflow-x: hidden;
     overflow-y: scroll;
     font-size: 15px;
     background: var(--bg);
 }
 
 body {
+    overflow-x: hidden;
     background: var(--bg) !important;
     background-color: var(--bg) !important;
     color: var(--fg);

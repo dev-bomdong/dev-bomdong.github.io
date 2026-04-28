@@ -1,3 +1,8 @@
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
 .bio-wrapper {
   width: 100%;
 }
@@ -20,6 +25,19 @@
     line-height: 1.7;
     max-width: 400px;
     margin-bottom: 16px;
+    min-height: calc(1.7em * 2);
+
+    @media (max-width: 480px) {
+      min-height: calc(1.7em * 3); // 모바일에서 줄바꿈 여유 확보
+    }
+  }
+
+  &__cursor {
+    display: inline-block;
+    color: var(--muted);
+    font-weight: 300;
+    margin-left: 1px;
+    animation: cursorBlink 0.7s ease infinite;
   }
 
   &__social {

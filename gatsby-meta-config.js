@@ -1,9 +1,9 @@
 module.exports = {
-  title: `Donghee Kim`,
-  description: `일상 속 개발록`,
+  title: `dong.log`,
+  description: `Product Manager with Frontend Development Background`,
   language: `ko`, // `ko`, `en` => currently support versions for Korean and English
   siteUrl: `https://dev-bomdong.github.io/`,
-  ogImage: `/blog-thumbnail.png`, // Path to your in the 'static' folder
+  ogImage: `/og-image.png`, // Path to your in the 'static' folder
   comments: {
     utterances: {
       repo: `dev-bomdong/dev-bomdong.github.io`, // `zoomkoding/zoomkoding-gatsby-blog`,
