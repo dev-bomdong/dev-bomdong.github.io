@@ -31,10 +31,11 @@ const contacts = [
 const career = [
   {
     period: '2026.01 — present',
-    duration: '4개월',
     company: 'Shopl & Company',
     role: 'Product Manager',
-    bullets: [],
+    bullets: [
+      '현장직 인사 관리 및 협업을 지원하는 B2B SaaS 서비스(SHOPL) 업무 기능 (보고서, 할 일, 게시판, 전자문서, 채팅 등) 담당',
+    ],
   },
   {
     period: '2022.08 — 2025.12',
@@ -83,7 +84,7 @@ function AboutPage() {
               <div key={`${c.company}-${c.role}`} className="about-career-row">
                 <div className="about-career-row__left">
                   <span className="about-career-row__period">{c.period}</span>
-                  <span className="about-career-row__duration">({c.duration})</span>
+                  {c.duration && <span className="about-career-row__duration">({c.duration})</span>}
                 </div>
                 <div className="about-career-row__info">
                   <span className="about-career-row__company">{c.company}</span>
