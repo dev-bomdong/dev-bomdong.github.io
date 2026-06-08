@@ -31,6 +31,7 @@ const contacts = [
 const career = [
   {
     period: '2026.01 — present',
+    duration: '6개월',
     company: 'Shopl & Company',
     role: 'Product Manager',
     bullets: [
