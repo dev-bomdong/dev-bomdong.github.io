@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Layout from '../layout';
 import Seo from '../components/seo';
 import './style.scss';
@@ -31,7 +31,7 @@ const contacts = [
 const career = [
   {
     period: '2026.01 — present',
-    duration: '6개월',
+    since: '2026-01',
     company: 'Shopl & Company',
     role: 'Product Manager',
     bullets: [
@@ -40,7 +40,7 @@ const career = [
   },
   {
     period: '2022.08 — 2025.12',
-    duration: '3년 4개월',
+    duration: '3년 5개월',
     company: 'Shopl & Company',
     role: 'Frontend Engineer',
     bullets: [
@@ -59,7 +59,7 @@ const career = [
   },
   {
     period: '2018.05 — 2021.07',
-    duration: '3년 2개월',
+    duration: '3년 3개월',
     company: '김앤장 법률사무소',
     role: '비서 (비개발 직군)',
     bullets: [
@@ -69,7 +69,18 @@ const career = [
   },
 ];
 
+const formatDuration = (since, now) => {
+  const [y, m] = since.split('-').map(Number);
+  const total = (now.getFullYear() - y) * 12 + (now.getMonth() + 1 - m) + 1;
+  const years = Math.floor(total / 12);
+  const months = total % 12;
+  return [years > 0 && `${years}년`, months > 0 && `${months}개월`].filter(Boolean).join(' ');
+};
+
 function AboutPage() {
+  const [now, setNow] = useState(null);
+  useEffect(() => setNow(new Date()), []);
+
   return (
     <Layout>
       <Seo title="About — Donghee Kim" />
@@ -81,11 +92,13 @@ function AboutPage() {
         <div className="about-section">
           <p className="about-section__title">Experience</p>
           <div className="about-career">
-            {career.map((c) => (
+            {career.map((c) => {
+              const duration = c.since ? (now ? formatDuration(c.since, now) : '') : c.duration;
+              return (
               <div key={`${c.company}-${c.role}`} className="about-career-row">
                 <div className="about-career-row__left">
                   <span className="about-career-row__period">{c.period}</span>
-                  {c.duration && <span className="about-career-row__duration">({c.duration})</span>}
+                  {duration && <span className="about-career-row__duration">({duration})</span>}
                 </div>
                 <div className="about-career-row__info">
                   <span className="about-career-row__company">{c.company}</span>
@@ -99,7 +112,8 @@ function AboutPage() {
                   )}
                 </div>
               </div>
-            ))}
+              );
+            })}
           </div>
         </div>
 
