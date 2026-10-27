@@ -1,7 +1,7 @@
 ---
 emoji: 📓
 title: 1st Release Note
-date: '2026-10-27'
+date: '2026-10-01'
 author: Bomdong
 tags: journal
 categories: '#회고'
